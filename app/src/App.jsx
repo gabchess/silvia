@@ -143,6 +143,7 @@ export default function App() {
         orderId: rehearsal.orderId,
         token: rehearsal.confirmationToken,
         senderPhoneHash: rehearsal.senderPhoneHash,
+        source: "dashboard_rehearsal",
       });
       setConfirmationMessage(
         response.data.kind === "ordered"

@@ -1,9 +1,24 @@
 # Silvia Assisted Ordering — Design Specification
 
 Date: 2026-07-27
-Status: Approved design, pending written-spec review
+Status: Shipped contest scope
 Primary event: Base44 Dev Build-Off 2026
-Submission deadline: 2026-07-28 23:59 PDT / 2026-07-29 03:59 BRT
+Submission window: July 21–28, 2026; the official page does not publish an
+exact cutoff time or time zone.
+
+## 0. Shipped scope
+
+This section supersedes any conflicting target or roadmap statement below.
+
+- The reliable judge path is an authenticated Base44 dashboard rehearsal with
+  a deterministic catalog and a receipt marked `demo_ordered`.
+- Meta WhatsApp and ElevenLabs adapters are deployed and tested, but the public
+  proof does not claim an account-credentialed WhatsApp exchange.
+- No live iFood connector is deployed. Silvia cannot buy food or charge money.
+- A real WhatsApp confirmation must come from the same sender. The dashboard
+  confirmation endpoint accepts only a caregiver-owned, demo-mode rehearsal.
+- Voice text is used for order interpretation but is not copied into order
+  entities.
 
 ## 1. Product thesis
 
@@ -59,16 +74,15 @@ surface backed by domain-specific actions and hard approval gates.
 
 ### Done when
 
-1. A Portuguese WhatsApp voice note reaches a validated order draft end to end.
+1. The deployed dashboard creates a validated Portuguese demo order draft.
 2. The caregiver dashboard shows the conversation and order state through a
    Base44 real-time subscription.
-3. Silvia sends a complete read-back with `Confirmar pedido` and `Alterar`
-   actions.
+3. Silvia produces a complete read-back and bound confirmation action.
 4. A forged, stale, duplicated, expired, or cart-mismatched confirmation cannot
    call checkout.
 5. A valid confirmation can call the selected connector exactly once.
-6. Live iFood search or cart failure switches visibly to the deterministic demo
-   connector without breaking the demo.
+6. The deterministic demo connector is the only deployed commerce connector
+   and never performs a real purchase.
 7. Focused tests, the full test suite, lint, and the production build pass.
 8. A clean browser session can use the deployed dashboard.
 9. The repository contains no secrets and includes every required license and
@@ -90,13 +104,13 @@ surface backed by domain-specific actions and hard approval gates.
 
 ## 4. Chosen approach
 
-Silvia uses a hybrid connector architecture:
+Silvia ships a deterministic connector architecture:
 
-- The real path uses WhatsApp voice messages and the live iFood adapter.
-- The stable path uses the same application interfaces with deterministic
-  transcript, catalog, cart, and checkout fixtures.
-- The UI always labels the active connector as `live` or `demo`.
-- Connector fallback never converts into a real checkout.
+- The deployed path uses deterministic transcript, catalog, cart, and checkout
+  fixtures behind the production connector interface.
+- The UI and spoken read-back label the connector as `demo`.
+- The Meta and ElevenLabs adapters remain credential-ready without widening
+  the commerce boundary.
 
 This approach preserves the strongest judge-visible flow while preventing an
 unofficial private API from becoming a single point of demo failure.
@@ -106,8 +120,8 @@ Rejected alternatives:
 - A fully live iFood build has more spectacle but can fail because of token
   expiry, private API changes, bot detection, merchant payment support, or
   network latency.
-- A concierge-only mock is reliable but does not prove a meaningful commerce
-  integration.
+- A thin visual-only mock would be reliable but would not prove the state,
+  confirmation, or checkout boundaries that the shipped demo exercises.
 
 ## 5. System architecture
 
@@ -119,7 +133,6 @@ WhatsApp user
   -> ElevenLabs transcription
   -> Base44 order interpreter
   -> connector selection
-     -> live iFood adapter
      -> deterministic demo adapter
   -> immutable order draft
   -> WhatsApp read-back and signed actions
@@ -194,17 +207,14 @@ buildDraft(candidate, intent, profile) -> priced draft
 checkout(confirmedDraft, idempotencyKey) -> receipt
 ```
 
-The live adapter uses the separately deployed HTTP transport from
-`AriOliv/ifood-mcp`. Base44 stores only an opaque connection identifier. iFood
-tokens remain in the adapter's in-memory token store.
-
 The deterministic adapter uses a small, local catalog and produces a
 clearly-labelled demo receipt. It never contacts iFood and never charges or
 orders anything.
 
-The orchestrator may fall back from `live.search` or `live.buildDraft` to the
-demo connector. It may never fall back from a failed live checkout to any
-checkout. Checkout failure requires human review.
+The repository records the reviewed `AriOliv/ifood-mcp` source and its license
+as roadmap research only. Shipping a live connector requires an authorized
+API, separate security review, and explicit approval. Checkout failure still
+requires human review and never retries automatically.
 
 ### 5.5 Order draft and read-back
 
@@ -250,10 +260,9 @@ A valid confirmation must also satisfy:
 - connector mode has not changed;
 - idempotency key has not been spent.
 
-Live checkout defaults to disabled. It can be enabled only after its focused
-negative tests and a low-value manual rehearsal pass. Payment is limited to a
-merchant-supported pay-on-delivery method; otherwise Silvia hands the user to
-the official iFood checkout instead of handling payment credentials.
+Live checkout is not deployed. A future authorized connector would remain
+disabled until focused negative tests, provider approval, and a low-value
+manual rehearsal pass. Silvia never handles payment credentials.
 
 ### 5.7 Caregiver dashboard
 
@@ -364,7 +373,7 @@ Invariants:
 | Transcription timeout | Retry once, then use fixture only in explicit demo mode |
 | Low-confidence or invalid interpretation | Ask one concise clarification |
 | No merchant or item match | Offer up to three alternatives |
-| iFood search/cart failure | Switch visibly to demo mode before confirmation |
+| Commerce connector unavailable | Remain in labelled demo mode; expose no live checkout |
 | Draft changed after read-back | Invalidate confirmation and send a new summary |
 | Expired or forged action | Explain that the order changed or expired |
 | Spend cap exceeded | Move to `needs_help`; do not expose checkout |
@@ -379,7 +388,7 @@ Invariants:
 - Validate all AI output against an allowlisted schema.
 - Hash phone numbers in product entities and redact them in logs.
 - Keep API keys in Base44 secrets or the adapter host's secret store.
-- Keep iFood tokens outside Base44 and never print them.
+- Do not collect or store iFood tokens in the shipped build.
 - Store no card, CVV, banking, or OTP data.
 - Use constant-time comparison for confirmation token hashes where supported.
 - Apply bounded payload sizes and request timeouts at external boundaries.
@@ -409,14 +418,17 @@ Invariants:
 - Valid confirmation to exactly one demo checkout
 - Duplicate webhook to no duplicate draft
 - Forged, stale, expired, edited, or mismatched confirmation to zero checkout
-- Live connector failure to visibly labelled demo fallback
-- Live checkout failure to no retry
+- Caregiver confirmation to succeed only for the caregiver's own labelled
+  rehearsal
+- Concurrent Meta deliveries to create at most one draft
+- Oversized webhook or untrusted media URL to fail before transcription
 
 ### Runtime proofs
 
-- Real WhatsApp test-number voice message
-- Real Portuguese transcription
-- Live iFood search and cart when credentials and the private API are healthy
+- Credential-ready Meta webhook and ElevenLabs adapter deployed without
+  credentials in source control
+- Deterministic Portuguese rehearsal through the production Base44 functions
+- No live iFood connector or purchase claim
 - Realtime authenticated caregiver dashboard
 - Deployed clean-browser check with no material console errors
 - Two-to-three-minute recorded demo using a rehearsed deterministic script
@@ -440,10 +452,11 @@ Invariants:
 - License: MIT
 - Permitted use: standalone optional adapter or selected adapted code with the
   copyright and license notice retained.
-- Existing capability: iFood OTP login, search, catalogs, carts, and checkout.
-- Silvia's original delta: WhatsApp voice UX, Base44 orchestration, immutable
-  draft and confirmation protocol, caregiver console, fallback connector,
-  state machine, and safety evidence.
+- Existing capability reviewed: iFood OTP login, search, catalogs, carts, and
+  checkout.
+- Silvia's original work: WhatsApp voice UX, Base44 orchestration, immutable
+  draft and confirmation protocol, caregiver console, deterministic connector,
+  state machine, and safety evidence. No adapter code is deployed.
 - Material limit: unofficial consumer API; private endpoints can change and may
   trigger bot detection.
 
@@ -470,9 +483,9 @@ capabilities from Silvia's work.
 | Base44 criterion | Silvia evidence |
 | --- | --- |
 | Backend depth and technical execution | Entities, row rules, Deno functions, AI agent, real-time subscriptions, auth, storage, and external integrations |
-| Frontend creativity and surface | WhatsApp is the primary client; the web UI is a caregiver console |
+| Frontend creativity and surface | The web UI is a caregiver console and a reliable rehearsal surface for the WhatsApp interaction |
 | Real-world usefulness | Older adults use an interface they already know and retain purchase authority |
-| Polish and completeness | End-to-end voice flow, explicit errors, fallback mode, live dashboard, and rehearsed demo |
+| Polish and completeness | Complete deterministic order flow, explicit errors, live dashboard, and rehearsed demo |
 | Write-up and documentation | Architecture, source ledger, safety invariants, proof map, and honest limitations |
 
 ## 13. Delivery and authority

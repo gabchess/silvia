@@ -11,6 +11,23 @@ export class ConfirmationFailure extends Error {
   }
 }
 
+export function isCaregiverRehearsal(
+  order: {
+    caregiver_user_id?: string;
+    connector_mode?: string;
+    meta_message_id?: string;
+  },
+  caregiverUserId: string,
+  source?: string,
+): boolean {
+  return (
+    source === "dashboard_rehearsal" &&
+    order.caregiver_user_id === caregiverUserId &&
+    order.connector_mode === "demo" &&
+    order.meta_message_id?.startsWith("rehearsal:") === true
+  );
+}
+
 function fail(code: string, status = 409): never {
   throw new ConfirmationFailure(code, status);
 }
@@ -22,6 +39,7 @@ export async function processOrderAction(input: {
   token: string;
   senderPhoneHash: string;
   caregiverUserId?: string;
+  source?: "dashboard_rehearsal";
   confirmationPepper: string;
   enableLiveCheckout: boolean;
 }) {
@@ -30,7 +48,11 @@ export async function processOrderAction(input: {
   if (!order) fail("order_not_found", 404);
   if (
     input.caregiverUserId &&
-    order.caregiver_user_id !== input.caregiverUserId
+    !isCaregiverRehearsal(
+      order,
+      input.caregiverUserId,
+      input.source,
+    )
   ) {
     fail("order_not_found", 404);
   }

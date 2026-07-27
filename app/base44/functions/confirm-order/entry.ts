@@ -9,6 +9,7 @@ function validBody(value: unknown): value is {
   orderId: string;
   token: string;
   senderPhoneHash: string;
+  source: "dashboard_rehearsal";
 } {
   if (!value || typeof value !== "object" || Array.isArray(value)) {
     return false;
@@ -19,6 +20,7 @@ function validBody(value: unknown): value is {
     "orderId",
     "token",
     "senderPhoneHash",
+    "source",
   ]);
   return (
     Object.keys(body).every((key) => allowed.has(key)) &&
@@ -27,8 +29,9 @@ function validBody(value: unknown): value is {
     body.orderId.length > 0 &&
     typeof body.token === "string" &&
     body.token.length > 0 &&
-    typeof body.senderPhoneHash === "string" &&
-    body.senderPhoneHash.length === 64
+      typeof body.senderPhoneHash === "string" &&
+      body.senderPhoneHash.length === 64 &&
+      body.source === "dashboard_rehearsal"
   );
 }
 

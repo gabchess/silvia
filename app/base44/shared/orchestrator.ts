@@ -57,6 +57,14 @@ export async function prepareOrder(input: {
         }`,
     )
     .join("; ");
+  const paymentSummary =
+    draft.paymentMode === "cash_on_delivery"
+      ? "pagamento na entrega"
+      : "pagamento no app parceiro";
+  const modeSummary =
+    draft.connectorMode === "demo"
+      ? "Esta é uma demonstração segura e nenhum pedido real será enviado. "
+      : "";
 
   return {
     kind: "draft" as const,
@@ -67,7 +75,8 @@ export async function prepareOrder(input: {
       `Seu pedido na ${draft.merchant.name}: ${itemSummary}. ` +
       `Taxa ${money.format(draft.feeCents / 100)}. ` +
       `Total ${money.format(draft.totalCents / 100)}. ` +
-      `Entrega em ${draft.addressLabel}, pagamento na entrega. ` +
+      `Entrega em ${draft.addressLabel}, ${paymentSummary}. ` +
+      modeSummary +
       "Confira e toque em Confirmar pedido ou Alterar.",
   };
 }

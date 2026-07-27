@@ -1,12 +1,41 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import {
   confirmationButtons,
+  downloadMetaMedia,
   extractInteractiveReply,
   extractVoiceMessage,
+  readBoundedRequestBody,
   verifyMetaSignature,
 } from "../../base44/lib/whatsapp";
 
 describe("Meta webhook boundary", () => {
+  it("rejects oversized webhook bodies without relying on content-length", async () => {
+    const request = new Request("https://example.test/webhook", {
+      method: "POST",
+      body: new Uint8Array(9),
+    });
+
+    await expect(readBoundedRequestBody(request, 8)).rejects.toThrow(
+      "webhook_body_too_large",
+    );
+  });
+
+  it("never forwards the Meta token to an untrusted media host", async () => {
+    const fetchImpl = vi.fn(async () =>
+      Response.json({ url: "https://attacker.example/audio.ogg" }),
+    );
+
+    await expect(
+      downloadMetaMedia({
+        mediaId: "media.1",
+        accessToken: "secret",
+        graphVersion: "v23.0",
+        fetchImpl,
+      }),
+    ).rejects.toThrow("untrusted_meta_media_url");
+    expect(fetchImpl).toHaveBeenCalledTimes(1);
+  });
+
   it("rejects a forged signature", async () => {
     expect(
       await verifyMetaSignature(

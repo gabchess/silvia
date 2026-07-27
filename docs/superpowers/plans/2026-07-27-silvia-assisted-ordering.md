@@ -1,5 +1,10 @@
 # Silvia Assisted Ordering Implementation Plan
 
+> **Historical plan:** The implementation diverged where the live iFood path
+> could not be shipped honestly. The repository README, proof map, and design
+> specification describe the verified contest scope. No live iFood connector
+> is deployed, and all commerce in the public proof is labelled demo.
+>
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Ship a Base44-backed WhatsApp assistant that converts a Portuguese voice note into a priced food-order draft, requires a signed order-specific confirmation, and shows the complete state in a real-time caregiver dashboard.

@@ -13,6 +13,10 @@
 | Caregiver access | Google auth plus caregiver-scoped entity RLS | Verified live |
 | Real-time audit | Base44 subscriptions update ordered state and timeline | Verified live |
 | Meta authenticity | HMAC test plus deployed `meta-webhook` | Passed and deployed |
+| Safe webhook ingress | 256 KB streaming cap, 10 MB media cap, and trusted Meta media-host tests | Passed |
+| Delivery deduplication | Atomic per-profile claim, stale-lock recovery, and concurrent-delivery test | Passed |
+| Confirmation authority | Meta sender binding plus caregiver-owned, demo-only rehearsal gate | Passed |
+| Transcript minimization | Voice text is interpreted but not copied into order entities | Passed |
 | Runtime compatibility | Deno check for all function entries | Passed |
 | Frontend quality | Vitest, ESLint, Vite build, browser visual check | Passed |
 | Live iFood claim | Explicitly cut; fallback fails closed; license preserved | Honest non-claim |
@@ -21,8 +25,8 @@
 
 ```text
 npm test
-  10 files passed
-  28 tests passed
+  11 files passed
+  32 tests passed
 
 npm run lint
   exit 0

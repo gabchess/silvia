@@ -1,7 +1,33 @@
 import { describe, expect, it, vi } from "vitest";
 import { confirmAndCheckout } from "../../base44/lib/checkout";
+import { isCaregiverRehearsal } from "../../base44/shared/confirmation-service";
 
 describe("confirmAndCheckout", () => {
+  it("allows caregivers to confirm only their own labelled demo rehearsal", () => {
+    expect(
+      isCaregiverRehearsal(
+        {
+          caregiver_user_id: "caregiver-1",
+          connector_mode: "demo",
+          meta_message_id: "rehearsal:one",
+        },
+        "caregiver-1",
+        "dashboard_rehearsal",
+      ),
+    ).toBe(true);
+    expect(
+      isCaregiverRehearsal(
+        {
+          caregiver_user_id: "caregiver-1",
+          connector_mode: "demo",
+          meta_message_id: "wamid.real",
+        },
+        "caregiver-1",
+        "dashboard_rehearsal",
+      ),
+    ).toBe(false);
+  });
+
   it("calls checkout once when two confirmations race", async () => {
     let claimed = false;
     const repo = {

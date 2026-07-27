@@ -7,12 +7,17 @@ import {
 import type { OrderIntent } from "../../shared/contracts.ts";
 import { DemoConnector } from "../../shared/demo-connector.ts";
 import { orderIntentSchema } from "../../shared/intent-schema.ts";
+import {
+  claimMetaMessage,
+  finishMetaMessage,
+} from "../../shared/meta-dedupe.ts";
 import { prepareOrder } from "../../shared/orchestrator.ts";
 import { transcribePtBr } from "../../shared/transcription.ts";
 import {
   downloadMetaMedia,
   extractInteractiveReply,
   extractVoiceMessage,
+  readBoundedRequestBody,
   sendInteractiveReadBack,
   sendTextMessage,
   verifyMetaSignature,
@@ -39,12 +44,6 @@ function environment(): Environment | null {
     confirmationPepper: Deno.env.get("CONFIRMATION_PEPPER") ?? "",
   };
   return Object.values(values).every(Boolean) ? values : null;
-}
-
-function redactedTranscript(value: string): string {
-  return value
-    .replace(/\b\d{4,}\b/g, "[número removido]")
-    .slice(0, 3000);
 }
 
 function parseAgentContent(content: unknown): unknown {
@@ -100,14 +99,12 @@ async function persistNeedsHelp(input: {
   entities: any;
   profile: any;
   messageId: string;
-  transcript: string;
 }): Promise<void> {
   const now = new Date();
   const order = await input.entities.OrderDraft.create({
     meta_message_id: input.messageId,
     profile_id: input.profile.id,
     caregiver_user_id: input.profile.caregiver_user_id,
-    transcript_redacted: redactedTranscript(input.transcript),
     normalized_items: [],
     merchant: { name: "Não definido" },
     pricing: {
@@ -158,16 +155,29 @@ async function handleVoice(
   const profile = profiles[0];
   if (!profile) return Response.json({ ok: true, ignored: true });
 
-  const existing = await entities.OrderDraft.filter(
-    { meta_message_id: voice.messageId },
-    "-created_date",
-    1,
-  );
-  if (existing.length) {
+  const claim = await claimMetaMessage({
+    profiles: entities.SeniorProfile,
+    profileId: profile.id,
+    messageId: voice.messageId,
+  });
+  if (claim.kind === "duplicate") {
     return Response.json({ ok: true, duplicate: true });
   }
+  if (claim.kind === "busy") {
+    return Response.json({ error: "profile_webhook_busy" }, { status: 503 });
+  }
 
-  let transcript = "";
+  const complete = async (response: Response) => {
+    await finishMetaMessage({
+      profiles: entities.SeniorProfile,
+      profileId: profile.id,
+      messageId: voice.messageId,
+      claimToken: claim.claimToken,
+      processedMessageIds: claim.processedMessageIds,
+    });
+    return response;
+  };
+
   try {
     const audio = await downloadMetaMedia({
       mediaId: voice.mediaId,
@@ -179,7 +189,6 @@ async function handleVoice(
       mimeType: voice.mimeType,
       apiKey: env.elevenLabsApiKey,
     });
-    transcript = transcription.text;
     const intent = await interpretOrder(
       base44,
       transcription.text,
@@ -207,14 +216,13 @@ async function handleVoice(
         phoneNumberId: env.phoneNumberId,
         graphVersion: env.graphVersion,
       });
-      return Response.json({ ok: true, clarification: true });
+      return complete(Response.json({ ok: true, clarification: true }));
     }
 
     const order = await entities.OrderDraft.create({
       meta_message_id: voice.messageId,
       profile_id: profile.id,
       caregiver_user_id: profile.caregiver_user_id,
-      transcript_redacted: redactedTranscript(transcription.text),
       normalized_items: prepared.draft.items,
       merchant: prepared.draft.merchant,
       pricing: {
@@ -272,13 +280,12 @@ async function handleVoice(
       phoneNumberId: env.phoneNumberId,
       graphVersion: env.graphVersion,
     });
-    return Response.json({ ok: true, order_id: order.id });
+    return complete(Response.json({ ok: true, order_id: order.id }));
   } catch {
     await persistNeedsHelp({
       entities,
       profile,
       messageId: voice.messageId,
-      transcript,
     }).catch(() => {});
     await sendTextMessage({
       to: voice.sender,
@@ -287,7 +294,7 @@ async function handleVoice(
       phoneNumberId: env.phoneNumberId,
       graphVersion: env.graphVersion,
     }).catch(() => {});
-    return Response.json({ ok: true, needs_help: true });
+    return complete(Response.json({ ok: true, needs_help: true }));
   }
 }
 
@@ -381,7 +388,18 @@ export async function handleMetaWebhook(req: Request): Promise<Response> {
     );
   }
 
-  const rawBody = new Uint8Array(await req.arrayBuffer());
+  let rawBody: Uint8Array;
+  try {
+    rawBody = await readBoundedRequestBody(req);
+  } catch (error) {
+    if (
+      error instanceof Error &&
+      error.message === "webhook_body_too_large"
+    ) {
+      return Response.json({ error: error.message }, { status: 413 });
+    }
+    return Response.json({ error: "invalid_body" }, { status: 400 });
+  }
   const validSignature = await verifyMetaSignature(
     rawBody,
     req.headers.get("x-hub-signature-256"),

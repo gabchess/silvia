@@ -32,6 +32,7 @@ describe("prepareOrder", () => {
     expect(result.draftHash).toHaveLength(64);
     expect(result.confirmation.binding.draftHash).toBe(result.draftHash);
     expect(result.readBack).toMatch(/Confirmar pedido/);
+    expect(result.readBack).toMatch(/demonstração segura/i);
     expect(Object.isFrozen(result.draft)).toBe(true);
   });
 

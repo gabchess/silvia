@@ -1,41 +1,31 @@
-# Todo App
+# Silvia application
 
-A simple todo list app built with React and Base44 backend.
+React frontend and Base44 backend for Silvia's safe food-order rehearsal.
 
-## Structure
-
-```
-base44/               # Backend configuration
-├── config.jsonc      # Project settings
-└── entities/         # Data schemas
-    └── task.jsonc    # Task entity
-
-src/                  # Frontend code
-├── App.jsx           # Main todo app
-├── api/              # Base44 client
-├── components/ui/    # UI components
-└── lib/              # Utilities
-```
+The public contest path is deliberately a demonstration: it uses a fictional
+restaurant, cash on delivery, and a receipt marked `demo_ordered`. The Meta
+WhatsApp and ElevenLabs adapters require the owner's authorized credentials.
+No live iFood connector is deployed.
 
 ## Development
 
-```bash
-npm install
-npm run dev
-```
-
-## Commands
-
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start dev server |
-| `npm run build` | Build for production |
-| `npm run preview` | Preview production build |
-
-## Base44 CLI
+Requirements: Node 20.19+, Socket CLI, Deno, and a linked Base44 app.
 
 ```bash
-base44 login          # Authenticate
-base44 entities push  # Push entity schemas
-base44 deploy         # Deploy backend + hosting
+socket npm ci
+npm test
+npm run lint
+npm run build
+deno check base44/functions/*/entry.ts
 ```
+
+Copy `.env.example` only for local configuration. Never commit secret values.
+
+## Deployment
+
+```bash
+npx base44@latest deploy -y
+```
+
+See the repository root README for architecture, safety boundaries, proof, and
+the judge walkthrough.

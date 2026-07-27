@@ -43,6 +43,10 @@ describe("Base44 resources", () => {
     expect(resource("base44/entities/SeniorProfile.jsonc").rls.update).toEqual({
       user_condition: { role: "admin" },
     });
+    expect(
+      resource("base44/entities/SeniorProfile.jsonc").properties
+        .webhook_inflight.default,
+    ).toBe(false);
     expect(resource("base44/entities/OrderDraft.jsonc").rls.update).toEqual({
       user_condition: { role: "admin" },
     });

@@ -18,10 +18,14 @@ Silvia turns this flow into a chat:
 3. A commerce connector builds a priced, immutable draft.
 4. Silvia reads back every item, fee, total, delivery address, and payment
    method.
-5. The person or caregiver confirms that exact draft.
+5. The same WhatsApp sender confirms that exact draft.
 6. One valid confirmation permits one checkout attempt.
 
 The language model never receives a checkout tool.
+
+The caregiver dashboard includes a separate, clearly labelled rehearsal. A
+signed-in caregiver can confirm only a demo order they created in that
+rehearsal; they cannot approve a real WhatsApp order for the older adult.
 
 ## Try the deployed demo
 
@@ -57,6 +61,12 @@ The app ID remains in the CLI-managed, ignored `.app.jsonc` file.
 - **Changed means invalid:** Any changed field produces a different draft hash.
 - **Exactly one attempt:** A compare-and-set state claim moves one request from
   `confirmed` to `checkout_in_progress`.
+- **Serialized delivery:** An atomic per-profile claim prevents concurrent Meta
+  deliveries from creating two drafts for one message.
+- **Bounded ingress:** Webhook bodies stop at 256 KB and voice media stops at
+  10 MB.
+- **Scoped media token:** Silvia forwards the Meta bearer token only to
+  HTTPS URLs on Meta-controlled hosts.
 - **No automatic retry:** A checkout failure is terminal.
 - **Spend cap:** The order must fit the senior profile's caregiver-set limit.
 - **No payment secrets:** Silvia stores no card number, CVV, bank credential,
@@ -67,9 +77,11 @@ The app ID remains in the CLI-managed, ignored `.app.jsonc` file.
 ## WhatsApp status
 
 The Meta webhook path is implemented and deployed. It verifies
-`X-Hub-Signature-256`, deduplicates Meta message IDs, limits audio to 10 MB,
-uses ElevenLabs Scribe v2 for Portuguese, validates agent output with Zod, and
-sends bound WhatsApp buttons.
+`X-Hub-Signature-256`, caps request bodies, serializes message processing per
+senior, deduplicates Meta message IDs, limits audio to 10 MB, scopes media
+downloads to Meta-controlled hosts, uses ElevenLabs Scribe v2 for Portuguese,
+validates agent output with Zod, and sends bound WhatsApp buttons. Voice
+transcripts are used for interpretation but are not copied into order records.
 
 Meta and ElevenLabs account credentials are not included in this repository or
 the public demo. The browser rehearsal is the contest proof path.
@@ -88,7 +100,7 @@ WhatsApp voice note                Caregiver web rehearsal
                           |
                 signed confirmation record
                           |
-              confirm-order / Meta button
+      rehearsal endpoint / Meta confirmation button
                           |
                atomic checkout state claim
                           |
@@ -124,7 +136,7 @@ Secret names are documented in `app/.env.example`. Never commit their values.
 
 ## Current proof
 
-- 28 tests pass across 10 files.
+- 32 tests pass across 11 files.
 - ESLint passes.
 - The Vite production build passes.
 - Deno checks all three backend functions.

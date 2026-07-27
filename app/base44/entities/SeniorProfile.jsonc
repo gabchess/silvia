@@ -36,6 +36,25 @@
     "sender_allowlisted": {
       "type": "boolean",
       "default": false
+    },
+    "webhook_inflight": {
+      "type": "boolean",
+      "default": false
+    },
+    "webhook_claim_token": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "webhook_claim_expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "processed_meta_message_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 200
+      }
     }
   },
   "required": [

@@ -14,7 +14,8 @@ every charge back, and waits for an exact confirmation.
 Silvia turns food ordering into a conversation an older adult already knows.
 Send a Portuguese voice note, hear the items, fee, total, address, and payment
 method, then confirm that exact draft. A caregiver sees the full state and
-audit trail in real time.
+audit trail in real time. In the real WhatsApp path, only the same sender can
+confirm. The caregiver can drive a separate, clearly labelled demo rehearsal.
 
 The model can interpret an order but cannot buy anything. Confirmation is
 signed to the sender, draft hash, total, connector mode, and expiry. A
@@ -30,7 +31,10 @@ retry.
 - `rehearse-order`, `meta-webhook`, and `confirm-order` Base44 functions
 - A Base44 AI agent that returns strict Portuguese order JSON and has no tools
 - Real-time Base44 subscriptions for order state and audit events
-- Meta webhook verification, bounded media download, and WhatsApp buttons
+- Meta webhook verification, a 256 KB request cap, bounded media download, and
+  WhatsApp buttons
+- Atomic per-senior delivery claims and Meta message-ID deduplication
+- Bearer-token forwarding restricted to HTTPS URLs on Meta-controlled hosts
 - ElevenLabs Scribe v2 integration for Portuguese voice notes
 - An immutable order draft, bound confirmation token, spend cap, and
   exactly-once demo checkout
@@ -62,6 +66,7 @@ credentials before a WhatsApp number can go live.
   <https://app.base44.com/apps/6a67c3c8b80c051fdec7df73/editor/workspace/overview>
 - Technical proof: `docs/proof-map.md`
 - Demo script: `docs/demo-script.md`
+- Public repository: added after publication
 
 ## Judge walkthrough
 

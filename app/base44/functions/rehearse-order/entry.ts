@@ -81,6 +81,10 @@ export async function handleRehearsal(req: Request): Promise<Response> {
       caregiver_user_id: caregiver.id,
       spend_cap_brl: 80,
       sender_allowlisted: true,
+      webhook_inflight: false,
+      webhook_claim_token: "",
+      webhook_claim_expires_at: new Date(0).toISOString(),
+      processed_meta_message_ids: [],
     }));
 
   const prepared = await prepareOrder({
@@ -103,7 +107,7 @@ export async function handleRehearsal(req: Request): Promise<Response> {
     meta_message_id: `rehearsal:${crypto.randomUUID()}`,
     profile_id: profile.id,
     caregiver_user_id: caregiver.id,
-    transcript_redacted: transcript,
+    transcript_redacted: "Frase fixa de demonstração",
     normalized_items: prepared.draft.items,
     merchant: prepared.draft.merchant,
     pricing: {

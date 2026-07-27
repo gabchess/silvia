@@ -1,4 +1,5 @@
 const maxAudioBytes = 10 * 1024 * 1024;
+export const maxWebhookBytes = 256 * 1024;
 
 function record(value: unknown): Record<string, unknown> | null {
   return value && typeof value === "object" && !Array.isArray(value)
@@ -143,14 +144,73 @@ function graphUrl(graphVersion: string, path: string): string {
   return `https://graph.facebook.com/${graphVersion}/${path}`;
 }
 
+function trustedMetaMediaUrl(value: string): URL {
+  const url = new URL(value);
+  const trustedDomains = [
+    "facebook.com",
+    "fbsbx.com",
+    "fbcdn.net",
+    "whatsapp.net",
+  ];
+  const trustedHost = trustedDomains.some(
+    (domain) =>
+      url.hostname === domain || url.hostname.endsWith(`.${domain}`),
+  );
+  if (
+    url.protocol !== "https:" ||
+    url.username ||
+    url.password ||
+    (url.port && url.port !== "443") ||
+    !trustedHost
+  ) {
+    throw new Error("untrusted_meta_media_url");
+  }
+  return url;
+}
+
+export async function readBoundedRequestBody(
+  request: Request,
+  maxBytes = maxWebhookBytes,
+): Promise<Uint8Array> {
+  const declaredBytes = Number(request.headers.get("content-length"));
+  if (Number.isFinite(declaredBytes) && declaredBytes > maxBytes) {
+    throw new Error("webhook_body_too_large");
+  }
+  if (!request.body) return new Uint8Array();
+
+  const reader = request.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let totalBytes = 0;
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    totalBytes += value.byteLength;
+    if (totalBytes > maxBytes) {
+      await reader.cancel();
+      throw new Error("webhook_body_too_large");
+    }
+    chunks.push(value);
+  }
+
+  const body = new Uint8Array(totalBytes);
+  let offset = 0;
+  for (const chunk of chunks) {
+    body.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return body;
+}
+
 export async function downloadMetaMedia(input: {
   mediaId: string;
   accessToken: string;
   graphVersion: string;
   timeoutMs?: number;
+  fetchImpl?: typeof fetch;
 }): Promise<Uint8Array> {
+  const fetchImpl = input.fetchImpl ?? fetch;
   const headers = { Authorization: `Bearer ${input.accessToken}` };
-  const metadataResponse = await fetch(
+  const metadataResponse = await fetchImpl(
     graphUrl(input.graphVersion, encodeURIComponent(input.mediaId)),
     {
       headers,
@@ -165,7 +225,8 @@ export async function downloadMetaMedia(input: {
     throw new Error("meta_media_url_missing");
   }
 
-  const mediaResponse = await fetch(metadata.url, {
+  const mediaUrl = trustedMetaMediaUrl(metadata.url);
+  const mediaResponse = await fetchImpl(mediaUrl, {
     headers,
     signal: AbortSignal.timeout(input.timeoutMs ?? 10_000),
   });
