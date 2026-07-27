@@ -66,7 +66,8 @@ credentials before a WhatsApp number can go live.
   <https://app.base44.com/apps/6a67c3c8b80c051fdec7df73/editor/workspace/overview>
 - Technical proof: `docs/proof-map.md`
 - Demo script: `docs/demo-script.md`
-- Public repository: added after publication
+- Public repository:
+  <https://github.com/gabchess/silvia-whatsapp-assistant>
 
 ## Judge walkthrough
 

@@ -45,6 +45,7 @@ deno check base44/functions/rehearse-order/entry.ts
 - Dashboard:
   <https://app.base44.com/apps/6a67c3c8b80c051fdec7df73/editor/workspace/overview>
 - Public app: <https://silvia-dec7df73.base44.app>
+- Public source: <https://github.com/gabchess/silvia-whatsapp-assistant>
 - Deployed resources: four entities, three functions, one agent, auth config,
   public visibility, and the built site
 - Smoke test: Google sign-in, rehearsal, read-back, confirmation, ordered
