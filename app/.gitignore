@@ -1,0 +1,23 @@
+# Dependencies
+node_modules
+
+# Build
+dist
+
+# Environment
+.env
+.env.*
+*.local
+
+# Editor
+.vscode
+.idea
+.DS_Store
+*.swp
+
+# Base44
+.app.json*
+.types/
+
+# Local coding-agent helpers installed by the Base44 CLI
+.agents/
