@@ -26,4 +26,28 @@ describe("Base44 resources", () => {
     expect(agent.tool_configs).toEqual([]);
     expect(agent.instructions).toMatch(/JSON/);
   });
+
+  it("allows backend service-role writes without exposing them to caregivers", () => {
+    for (const name of [
+      "SeniorProfile",
+      "OrderDraft",
+      "Confirmation",
+      "AuditEvent",
+    ]) {
+      const entity = resource(`base44/entities/${name}.jsonc`);
+      expect(entity.rls.create).toEqual({
+        user_condition: { role: "admin" },
+      });
+    }
+
+    expect(resource("base44/entities/SeniorProfile.jsonc").rls.update).toEqual({
+      user_condition: { role: "admin" },
+    });
+    expect(resource("base44/entities/OrderDraft.jsonc").rls.update).toEqual({
+      user_condition: { role: "admin" },
+    });
+    expect(resource("base44/entities/Confirmation.jsonc").rls.update).toEqual({
+      user_condition: { role: "admin" },
+    });
+  });
 });

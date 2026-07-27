@@ -37,9 +37,22 @@
     "occurred_at"
   ],
   "rls": {
-    "create": false,
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
     "read": {
-      "data.caregiver_user_id": "{{user.id}}"
+      "$or": [
+        {
+          "data.caregiver_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
     },
     "update": false,
     "delete": false

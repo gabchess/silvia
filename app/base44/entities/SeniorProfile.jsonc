@@ -49,12 +49,27 @@
     "sender_allowlisted"
   ],
   "rls": {
-    "create": false,
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
     "read": {
-      "data.caregiver_user_id": "{{user.id}}"
+      "$or": [
+        {
+          "data.caregiver_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
     },
     "update": {
-      "data.caregiver_user_id": "{{user.id}}"
+      "user_condition": {
+        "role": "admin"
+      }
     },
     "delete": false
   }
