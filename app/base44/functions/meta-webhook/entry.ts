@@ -1,5 +1,9 @@
 import { createClientFromRequest } from "npm:@base44/sdk";
 import { sha256Hex } from "../../shared/canonical.ts";
+import {
+  ConfirmationFailure,
+  processOrderAction,
+} from "../../shared/confirmation-service.ts";
 import type { OrderIntent } from "../../shared/contracts.ts";
 import { DemoConnector } from "../../shared/demo-connector.ts";
 import { orderIntentSchema } from "../../shared/intent-schema.ts";
@@ -7,6 +11,7 @@ import { prepareOrder } from "../../shared/orchestrator.ts";
 import { transcribePtBr } from "../../shared/transcription.ts";
 import {
   downloadMetaMedia,
+  extractInteractiveReply,
   extractVoiceMessage,
   sendInteractiveReadBack,
   sendTextMessage,
@@ -130,26 +135,16 @@ async function persistNeedsHelp(input: {
   });
 }
 
-async function handleVoice(req: Request, env: Environment): Promise<Response> {
-  const rawBody = new Uint8Array(await req.arrayBuffer());
-  const validSignature = await verifyMetaSignature(
-    rawBody,
-    req.headers.get("x-hub-signature-256"),
-    env.appSecret,
-  );
-  if (!validSignature) {
-    return Response.json({ error: "invalid_signature" }, { status: 401 });
-  }
-
-  let payload: unknown;
-  try {
-    payload = JSON.parse(new TextDecoder().decode(rawBody));
-  } catch {
-    return Response.json({ error: "invalid_json" }, { status: 400 });
-  }
-  const voice = extractVoiceMessage(payload);
-  if (!voice) return Response.json({ ok: true, ignored: true });
-
+async function handleVoice(
+  req: Request,
+  env: Environment,
+  voice: {
+    messageId: string;
+    sender: string;
+    mediaId: string;
+    mimeType: string;
+  },
+): Promise<Response> {
   const base44 = createClientFromRequest(req);
   const entities = base44.asServiceRole.entities;
   const phoneHash = await sha256Hex(
@@ -296,6 +291,69 @@ async function handleVoice(req: Request, env: Environment): Promise<Response> {
   }
 }
 
+async function handleInteractive(
+  req: Request,
+  env: Environment,
+  reply: {
+    action: "confirm" | "edit";
+    messageId: string;
+    orderId: string;
+    sender: string;
+    token: string;
+  },
+): Promise<Response> {
+  const base44 = createClientFromRequest(req);
+  const senderPhoneHash = await sha256Hex(
+    `${env.confirmationPepper}:phone:${reply.sender}`,
+  );
+
+  try {
+    const result = await processOrderAction({
+      base44,
+      action: reply.action,
+      orderId: reply.orderId,
+      token: reply.token,
+      senderPhoneHash,
+      confirmationPepper: env.confirmationPepper,
+      enableLiveCheckout:
+        Deno.env.get("ENABLE_LIVE_CHECKOUT") === "true",
+    });
+    const text =
+      result.kind === "editing"
+        ? "Tudo bem. Me diga o que você quer mudar."
+        : result.kind === "ordered"
+          ? "Pedido de demonstração confirmado. Nenhum pedido real foi enviado."
+          : result.kind === "duplicate"
+            ? "Esse pedido já foi processado."
+            : "Não consegui concluir. Não vou tentar de novo sem uma nova confirmação.";
+    await sendTextMessage({
+      to: reply.sender,
+      text,
+      accessToken: env.accessToken,
+      phoneNumberId: env.phoneNumberId,
+      graphVersion: env.graphVersion,
+    });
+    return Response.json({
+      ok: true,
+      result: result.kind,
+      message_id: reply.messageId,
+    });
+  } catch (error) {
+    const code =
+      error instanceof ConfirmationFailure
+        ? error.code
+        : "confirmation_failed";
+    await sendTextMessage({
+      to: reply.sender,
+      text: "Essa confirmação não vale mais. Vou esperar um novo pedido.",
+      accessToken: env.accessToken,
+      phoneNumberId: env.phoneNumberId,
+      graphVersion: env.graphVersion,
+    }).catch(() => {});
+    return Response.json({ ok: true, rejected: code });
+  }
+}
+
 export async function handleMetaWebhook(req: Request): Promise<Response> {
   const url = new URL(req.url);
   if (req.method === "GET") {
@@ -322,7 +380,28 @@ export async function handleMetaWebhook(req: Request): Promise<Response> {
       { status: 503 },
     );
   }
-  return handleVoice(req, env);
+
+  const rawBody = new Uint8Array(await req.arrayBuffer());
+  const validSignature = await verifyMetaSignature(
+    rawBody,
+    req.headers.get("x-hub-signature-256"),
+    env.appSecret,
+  );
+  if (!validSignature) {
+    return Response.json({ error: "invalid_signature" }, { status: 401 });
+  }
+
+  let payload: unknown;
+  try {
+    payload = JSON.parse(new TextDecoder().decode(rawBody));
+  } catch {
+    return Response.json({ error: "invalid_json" }, { status: 400 });
+  }
+  const voice = extractVoiceMessage(payload);
+  if (voice) return handleVoice(req, env, voice);
+  const interactive = extractInteractiveReply(payload);
+  if (interactive) return handleInteractive(req, env, interactive);
+  return Response.json({ ok: true, ignored: true });
 }
 
 Deno.serve(handleMetaWebhook);

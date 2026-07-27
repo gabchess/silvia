@@ -109,6 +109,7 @@ describe("Silvia caregiver app", () => {
         orderId: "order-2",
         readBack: "Seu pedido está pronto para conferir.",
         confirmationToken: "token",
+        senderPhoneHash: "a".repeat(64),
         connectorMode: "demo",
       },
     });

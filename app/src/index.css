@@ -670,6 +670,42 @@ a:focus-visible {
   font-size: 0.68rem;
 }
 
+.confirm-order-action {
+  width: 100%;
+  min-height: 3.25rem;
+  margin-top: 1rem;
+  border: 0;
+  border-radius: 0.85rem;
+  color: #fffdf8;
+  background: #1d6d4e;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.confirm-order-action:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.confirmation-boundary {
+  margin: 0.75rem 0 0;
+  color: #737d76;
+  font-size: 0.67rem;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.confirmation-result {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border: 1px solid #d6e5db;
+  border-radius: 1rem;
+  color: #285d46;
+  background: #f1f8f3;
+  font-size: 0.8rem;
+  font-weight: 750;
+}
+
 .timeline-panel {
   padding: 1.25rem 1.5rem;
 }

@@ -1,6 +1,11 @@
 import { formatMoney, statusLabel } from "../lib/presentation";
 
-export default function OrderCard({ order }) {
+export default function OrderCard({
+  order,
+  canConfirm,
+  confirming,
+  onConfirm,
+}) {
   if (!order) {
     return (
       <section className="order-card empty-card" aria-labelledby="order-title">
@@ -82,6 +87,23 @@ export default function OrderCard({ order }) {
           </small>
         </div>
       </div>
+
+      {canConfirm ? (
+        <button
+          className="confirm-order-action"
+          type="button"
+          onClick={onConfirm}
+          disabled={confirming}
+        >
+          {confirming
+            ? "Confirmando uma única vez…"
+            : "Confirmar pedido de demonstração"}
+        </button>
+      ) : null}
+      <p className="confirmation-boundary">
+        A Silvia nunca confirma por você. Qualquer mudança no pedido exige uma
+        nova confirmação.
+      </p>
     </section>
   );
 }

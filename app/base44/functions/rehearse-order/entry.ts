@@ -158,6 +158,7 @@ export async function handleRehearsal(req: Request): Promise<Response> {
     draftHash: prepared.draftHash,
     readBack: prepared.readBack,
     confirmationToken: prepared.confirmation.token,
+    senderPhoneHash: prepared.draft.senderPhoneHash,
     connectorMode: prepared.draft.connectorMode,
   });
 }

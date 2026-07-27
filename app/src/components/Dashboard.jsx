@@ -8,7 +8,10 @@ export default function Dashboard({
   busy,
   error,
   rehearsal,
+  confirmationMessage,
+  confirming,
   onRehearse,
+  onConfirm,
   onLogout,
 }) {
   const currentOrder = orders[0] ?? null;
@@ -103,7 +106,21 @@ export default function Dashboard({
         </section>
 
         <div className="dashboard-side">
-          <OrderCard order={currentOrder} />
+          <OrderCard
+            order={currentOrder}
+            canConfirm={
+              currentOrder?.status === "awaiting_confirmation" &&
+              rehearsal?.orderId === currentOrder.id &&
+              Boolean(rehearsal?.confirmationToken)
+            }
+            confirming={confirming}
+            onConfirm={onConfirm}
+          />
+          {confirmationMessage ? (
+            <p className="confirmation-result" role="status">
+              {confirmationMessage}
+            </p>
+          ) : null}
           <Timeline events={currentEvents} />
         </div>
       </div>

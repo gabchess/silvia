@@ -82,6 +82,41 @@ export function extractVoiceMessage(payload: unknown): {
   };
 }
 
+export function extractInteractiveReply(payload: unknown): {
+  action: "confirm" | "edit";
+  messageId: string;
+  orderId: string;
+  sender: string;
+  token: string;
+} | null {
+  const entry = firstRecord(record(payload)?.entry);
+  const change = firstRecord(entry?.changes);
+  const value = record(change?.value);
+  const message = firstRecord(value?.messages);
+  const interactive = record(message?.interactive);
+  const reply = record(interactive?.button_reply);
+  if (
+    message?.type !== "interactive" ||
+    interactive?.type !== "button_reply" ||
+    typeof message.id !== "string" ||
+    typeof message.from !== "string" ||
+    typeof reply?.id !== "string"
+  ) {
+    return null;
+  }
+  const match = /^(confirm|edit):([^:]+):([A-Za-z0-9_-]+)$/.exec(
+    reply.id,
+  );
+  if (!match) return null;
+  return {
+    action: match[1] as "confirm" | "edit",
+    messageId: message.id,
+    orderId: match[2],
+    sender: message.from,
+    token: match[3],
+  };
+}
+
 export function confirmationButtons(orderId: string, token: string) {
   return [
     {

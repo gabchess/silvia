@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   confirmationButtons,
+  extractInteractiveReply,
   extractVoiceMessage,
   verifyMetaSignature,
 } from "../../base44/lib/whatsapp";
@@ -94,5 +95,42 @@ describe("Meta webhook boundary", () => {
     const buttons = confirmationButtons("order-1", "token-1");
     expect(buttons[0].reply.id).toBe("confirm:order-1:token-1");
     expect(buttons[1].reply.id).toBe("edit:order-1:token-1");
+  });
+
+  it("extracts only a bound interactive reply", () => {
+    expect(
+      extractInteractiveReply({
+        entry: [
+          {
+            changes: [
+              {
+                value: {
+                  messages: [
+                    {
+                      id: "wamid.reply",
+                      from: "5511999990000",
+                      type: "interactive",
+                      interactive: {
+                        type: "button_reply",
+                        button_reply: {
+                          id: "confirm:order-1:token-1",
+                          title: "Confirmar pedido",
+                        },
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+        ],
+      }),
+    ).toEqual({
+      action: "confirm",
+      messageId: "wamid.reply",
+      orderId: "order-1",
+      sender: "5511999990000",
+      token: "token-1",
+    });
   });
 });

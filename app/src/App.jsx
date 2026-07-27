@@ -51,8 +51,10 @@ export default function App() {
   const [orders, setOrders] = useState([]);
   const [events, setEvents] = useState([]);
   const [busy, setBusy] = useState(false);
+  const [confirming, setConfirming] = useState(false);
   const [error, setError] = useState("");
   const [rehearsal, setRehearsal] = useState(null);
+  const [confirmationMessage, setConfirmationMessage] = useState("");
 
   async function loadDashboard() {
     const [nextOrders, nextEvents] = await Promise.all([
@@ -111,6 +113,7 @@ export default function App() {
         transcript: rehearsalTranscript,
       });
       setRehearsal(response.data);
+      setConfirmationMessage("");
       await loadDashboard();
     } catch (caught) {
       const code = caught?.response?.data?.error;
@@ -124,6 +127,38 @@ export default function App() {
     }
   }
 
+  async function confirm() {
+    if (
+      !rehearsal?.orderId ||
+      !rehearsal?.confirmationToken ||
+      !rehearsal?.senderPhoneHash
+    ) {
+      return;
+    }
+    setConfirming(true);
+    setError("");
+    try {
+      const response = await base44.functions.invoke("confirm-order", {
+        action: "confirm",
+        orderId: rehearsal.orderId,
+        token: rehearsal.confirmationToken,
+        senderPhoneHash: rehearsal.senderPhoneHash,
+      });
+      setConfirmationMessage(
+        response.data.kind === "ordered"
+          ? "Demonstração concluída. Nenhum pedido real foi enviado."
+          : "Esse pedido já tinha sido processado.",
+      );
+      await loadDashboard();
+    } catch {
+      setError(
+        "A confirmação não foi aceita. Nenhum pedido foi enviado ou repetido.",
+      );
+    } finally {
+      setConfirming(false);
+    }
+  }
+
   if (!user) return <Login checking={checking} />;
 
   return (
@@ -134,7 +169,10 @@ export default function App() {
       busy={busy}
       error={error}
       rehearsal={rehearsal}
+      confirmationMessage={confirmationMessage}
+      confirming={confirming}
       onRehearse={rehearse}
+      onConfirm={confirm}
       onLogout={() => base44.auth.logout(window.location.href)}
     />
   );
