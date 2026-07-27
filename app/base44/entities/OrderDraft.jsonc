@@ -1,0 +1,109 @@
+{
+  "name": "OrderDraft",
+  "type": "object",
+  "properties": {
+    "meta_message_id": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "profile_id": {
+      "type": "string"
+    },
+    "caregiver_user_id": {
+      "type": "string"
+    },
+    "transcript_redacted": {
+      "type": "string",
+      "maxLength": 3000
+    },
+    "normalized_items": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "merchant": {
+      "type": "object"
+    },
+    "pricing": {
+      "type": "object"
+    },
+    "address_label": {
+      "type": "string",
+      "maxLength": 240
+    },
+    "payment_mode": {
+      "type": "string",
+      "enum": ["cash_on_delivery", "handoff"]
+    },
+    "connector_mode": {
+      "type": "string",
+      "enum": ["demo", "live"]
+    },
+    "draft_hash": {
+      "type": "string",
+      "minLength": 64,
+      "maxLength": 64
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "received",
+        "transcribing",
+        "interpreting",
+        "clarifying",
+        "preparing",
+        "awaiting_confirmation",
+        "editing",
+        "expired",
+        "confirmed",
+        "checkout_in_progress",
+        "ordered",
+        "checkout_failed",
+        "needs_help",
+        "cancelled"
+      ]
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "confirmed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "checkout_attempted_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "receipt": {
+      "type": "object"
+    },
+    "failure_code": {
+      "type": "string",
+      "maxLength": 120
+    }
+  },
+  "required": [
+    "meta_message_id",
+    "profile_id",
+    "caregiver_user_id",
+    "normalized_items",
+    "merchant",
+    "pricing",
+    "address_label",
+    "payment_mode",
+    "connector_mode",
+    "draft_hash",
+    "status",
+    "expires_at"
+  ],
+  "rls": {
+    "create": false,
+    "read": {
+      "data.caregiver_user_id": "{{user.id}}"
+    },
+    "update": false,
+    "delete": false
+  }
+}

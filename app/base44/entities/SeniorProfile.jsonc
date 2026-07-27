@@ -1,0 +1,61 @@
+{
+  "name": "SeniorProfile",
+  "type": "object",
+  "properties": {
+    "display_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "phone_hash": {
+      "type": "string",
+      "minLength": 64,
+      "maxLength": 64
+    },
+    "locale": {
+      "type": "string",
+      "enum": ["pt-BR"],
+      "default": "pt-BR"
+    },
+    "saved_address_id": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "saved_address_label": {
+      "type": "string",
+      "maxLength": 240
+    },
+    "caregiver_user_id": {
+      "type": "string"
+    },
+    "spend_cap_brl": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 500
+    },
+    "sender_allowlisted": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "display_name",
+    "phone_hash",
+    "locale",
+    "saved_address_id",
+    "saved_address_label",
+    "caregiver_user_id",
+    "spend_cap_brl",
+    "sender_allowlisted"
+  ],
+  "rls": {
+    "create": false,
+    "read": {
+      "data.caregiver_user_id": "{{user.id}}"
+    },
+    "update": {
+      "data.caregiver_user_id": "{{user.id}}"
+    },
+    "delete": false
+  }
+}

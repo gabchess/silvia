@@ -1,0 +1,63 @@
+{
+  "name": "Confirmation",
+  "type": "object",
+  "properties": {
+    "order_draft_id": {
+      "type": "string"
+    },
+    "caregiver_user_id": {
+      "type": "string"
+    },
+    "token_hash": {
+      "type": "string",
+      "minLength": 64,
+      "maxLength": 64
+    },
+    "bound_draft_hash": {
+      "type": "string",
+      "minLength": 64,
+      "maxLength": 64
+    },
+    "sender_phone_hash": {
+      "type": "string",
+      "minLength": 64,
+      "maxLength": 64
+    },
+    "total_cents": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "connector_mode": {
+      "type": "string",
+      "enum": ["demo", "live"]
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "used_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "invalidated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "order_draft_id",
+    "caregiver_user_id",
+    "token_hash",
+    "bound_draft_hash",
+    "sender_phone_hash",
+    "total_cents",
+    "connector_mode",
+    "expires_at"
+  ],
+  "rls": {
+    "create": false,
+    "read": false,
+    "update": false,
+    "delete": false
+  }
+}

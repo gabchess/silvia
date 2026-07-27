@@ -1,0 +1,47 @@
+{
+  "name": "AuditEvent",
+  "type": "object",
+  "properties": {
+    "order_draft_id": {
+      "type": "string"
+    },
+    "caregiver_user_id": {
+      "type": "string"
+    },
+    "event_type": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "actor_type": {
+      "type": "string",
+      "enum": ["senior", "caregiver", "system", "connector"]
+    },
+    "connector_mode": {
+      "type": "string",
+      "enum": ["demo", "live"]
+    },
+    "redacted_metadata": {
+      "type": "object"
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "order_draft_id",
+    "caregiver_user_id",
+    "event_type",
+    "actor_type",
+    "connector_mode",
+    "occurred_at"
+  ],
+  "rls": {
+    "create": false,
+    "read": {
+      "data.caregiver_user_id": "{{user.id}}"
+    },
+    "update": false,
+    "delete": false
+  }
+}
