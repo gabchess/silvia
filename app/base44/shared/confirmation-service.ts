@@ -39,15 +39,14 @@ export async function processOrderAction(input: {
   }
 
   const confirmations = await entities.Confirmation.filter(
-    {
-      order_draft_id: order.id,
-      used_at: { $exists: false },
-      invalidated_at: { $exists: false },
-    },
+    { order_draft_id: order.id },
     "-created_date",
-    1,
+    10,
   );
-  const confirmation = confirmations[0];
+  const confirmation = confirmations.find(
+    (candidate: any) =>
+      !candidate.used_at && !candidate.invalidated_at,
+  );
   if (!confirmation) fail("confirmation_not_found", 404);
 
   const profile = await entities.SeniorProfile.get(order.profile_id);
@@ -120,7 +119,6 @@ export async function processOrderAction(input: {
       id: order.id,
       status: "awaiting_confirmation",
       draft_hash: order.draft_hash,
-      checkout_attempted_at: { $exists: false },
     },
     {
       $set: {
@@ -139,7 +137,6 @@ export async function processOrderAction(input: {
         {
           id: orderId,
           status: "confirmed",
-          checkout_attempted_at: { $exists: false },
         },
         {
           $set: {

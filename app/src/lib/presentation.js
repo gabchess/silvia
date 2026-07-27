@@ -24,6 +24,7 @@ const eventLabels = {
   confirmation_received: "Confirmação recebida",
   checkout_claimed: "Envio iniciado uma única vez",
   demo_ordered: "Demonstração concluída",
+  ordered: "Demonstração concluída",
 };
 
 export function formatMoney(cents = 0) {
