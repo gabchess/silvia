@@ -1,17 +1,141 @@
-export default function App() {
+import { useEffect, useState } from "react";
+import { base44 } from "./api/base44Client";
+import Dashboard from "./components/Dashboard";
+import { rehearsalTranscript } from "./lib/presentation";
+
+function Login({ checking }) {
   return (
-    <main lang="pt-BR" className="min-h-screen bg-[#f4efe5] px-6 py-16">
-      <section className="mx-auto max-w-3xl rounded-[2rem] border border-[#d8d0c0] bg-[#fffdf8] p-8 shadow-xl sm:p-12">
-        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#176b4d]">
-          Sua assistente no WhatsApp
-        </p>
-        <h1 className="mt-4 text-5xl font-semibold tracking-tight text-[#1f2a24] sm:text-7xl">
-          Silvia
-        </h1>
-        <p className="mt-6 max-w-xl text-xl leading-relaxed text-[#48564d]">
+    <main className="login-shell" lang="pt-BR">
+      <div className="login-orb orb-one" />
+      <div className="login-orb orb-two" />
+      <section className="login-card">
+        <div className="brand-mark large" aria-hidden="true">
+          S
+        </div>
+        <p className="eyebrow">Sua assistente no WhatsApp</p>
+        <h1>Silvia</h1>
+        <p className="login-promise">
           Peça por voz. A Silvia só faz o pedido quando você confirma.
         </p>
+        <div className="boundary-card">
+          <span aria-hidden="true">✓</span>
+          <p>
+            <strong>Você mantém o controle.</strong>
+            Ela lê itens, taxas e total antes de qualquer ação.
+          </p>
+        </div>
+        <button
+          className="primary-action login-action"
+          type="button"
+          disabled={checking}
+          onClick={() =>
+            base44.auth.loginWithProvider("google", window.location.href)
+          }
+        >
+          <span className="google-g" aria-hidden="true">
+            G
+          </span>
+          {checking ? "Verificando acesso…" : "Entrar com Google"}
+        </button>
+        <small className="privacy-note">
+          Área reservada para familiares e cuidadores.
+        </small>
       </section>
     </main>
+  );
+}
+
+export default function App() {
+  const [checking, setChecking] = useState(true);
+  const [user, setUser] = useState(null);
+  const [orders, setOrders] = useState([]);
+  const [events, setEvents] = useState([]);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+  const [rehearsal, setRehearsal] = useState(null);
+
+  async function loadDashboard() {
+    const [nextOrders, nextEvents] = await Promise.all([
+      base44.entities.OrderDraft.list("-created_date", 20),
+      base44.entities.AuditEvent.list("-occurred_at", 50),
+    ]);
+    setOrders(nextOrders);
+    setEvents(nextEvents);
+  }
+
+  useEffect(() => {
+    let disposed = false;
+    let unsubscribeOrders = () => {};
+    let unsubscribeEvents = () => {};
+
+    async function boot() {
+      try {
+        const authenticated = await base44.auth.isAuthenticated();
+        if (!authenticated) {
+          if (!disposed) setChecking(false);
+          return;
+        }
+
+        const caregiver = await base44.auth.me();
+        await loadDashboard();
+        if (disposed) return;
+        setUser(caregiver);
+        setChecking(false);
+        unsubscribeOrders = base44.entities.OrderDraft.subscribe(() => {
+          void loadDashboard();
+        });
+        unsubscribeEvents = base44.entities.AuditEvent.subscribe(() => {
+          void loadDashboard();
+        });
+      } catch {
+        if (!disposed) {
+          setError("Não foi possível carregar a área da família.");
+          setChecking(false);
+        }
+      }
+    }
+
+    void boot();
+    return () => {
+      disposed = true;
+      unsubscribeOrders();
+      unsubscribeEvents();
+    };
+  }, []);
+
+  async function rehearse() {
+    setBusy(true);
+    setError("");
+    try {
+      const response = await base44.functions.invoke("rehearse-order", {
+        transcript: rehearsalTranscript,
+      });
+      setRehearsal(response.data);
+      await loadDashboard();
+    } catch (caught) {
+      const code = caught?.response?.data?.error;
+      setError(
+        code === "confirmation_not_configured"
+          ? "A proteção de confirmação ainda não foi ativada no ambiente."
+          : "O ensaio não terminou. Nada foi pedido ou cobrado.",
+      );
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  if (!user) return <Login checking={checking} />;
+
+  return (
+    <Dashboard
+      user={user}
+      orders={orders}
+      events={events}
+      busy={busy}
+      error={error}
+      rehearsal={rehearsal}
+      onRehearse={rehearse}
+      onLogout={() => base44.auth.logout(window.location.href)}
+    />
   );
 }
