@@ -4,11 +4,11 @@
   "entries": [
     {
       "tool": "Higgsfield MCP",
-      "purpose": "cast, location, Portuguese and English voice takes, continuity frames, and six source shots",
+      "purpose": "cast, location, Portuguese and English voice takes, continuity frames, source shots, and the final S4 threshold repair",
       "mode": "paid generation",
       "credits_approved": 180.0,
-      "credits_used": 154.22,
-      "credits_unused": 25.78,
+      "credits_used": 176.22,
+      "credits_unused": 3.78,
       "status": "complete",
       "evidence": [
         "04-source/source-manifest.json",
@@ -40,10 +40,10 @@
       "tool": "Gemini video review",
       "purpose": "full-motion source-shot review",
       "mode": "local CLI",
-      "status": "all source shots passed; master v2 result rejected because it described footage and dialogue absent from the supplied file",
+      "status": "source shots passed; master v2 result rejected because it described footage and dialogue absent from the supplied file; v3 master uses local encoded-file QA plus human review",
       "evidence": [
         "04-source/review",
-        "08-qa/master-v2-contact.jpg"
+        "08-qa/master-v3-contact.jpg"
       ]
     },
     {

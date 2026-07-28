@@ -19,8 +19,8 @@
   "publication_policy": "human-only",
   "paid_generation_approved": true,
   "approved_checkpoint": "2026-07-28-approved-180-credit-ceiling",
-  "rendered_at": "2026-07-28T20:04:04Z",
-  "revision": "v2-english-introduction-and-yellow-captions",
+  "rendered_at": "2026-07-28T20:39:28Z",
+  "revision": "v3-correct-threshold-and-dev-build-off-outro",
   "human_review_required": true,
   "audio_targets": {
     "integrated_lufs": -14.0,

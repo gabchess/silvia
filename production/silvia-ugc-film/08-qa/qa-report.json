@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "status": "awaiting_human_review",
-  "master": "exports/silvia-master-v2.mp4",
-  "master_sha256": "cceb1a29322da554811e975f1c24003adaf726fe0a56e893f134cb6c71763415",
-  "rendered_at": "2026-07-28T20:04:04Z",
+  "master": "exports/silvia-master-v3.mp4",
+  "master_sha256": "81989bbfab21f3c9b3e2d6e7f2c1f0bb3809888ec1cc49bf31ede15a3645f704",
+  "rendered_at": "2026-07-28T20:39:28Z",
   "checks": [
     {
       "name": "duration",
@@ -28,7 +28,7 @@
     {
       "name": "loudness",
       "status": "pass",
-      "evidence": "FFmpeg ebur128: -14.5 LUFS integrated, -0.9 dBFS true peak, 10.1 LU LRA"
+      "evidence": "FFmpeg ebur128: -14.6 LUFS integrated, -1.4 dBFS true peak, 10.1 LU LRA"
     },
     {
       "name": "timeline",
@@ -38,22 +38,22 @@
     {
       "name": "critical-frames",
       "status": "pass",
-      "evidence": "15 v2 timestamp frames and master-v2-contact.jpg inspected at 1920x1080"
+      "evidence": "master-v3-contact.jpg plus six delivery and outro frames inspected at 1920x1080"
     },
     {
       "name": "proof-readability",
       "status": "pass",
-      "evidence": "v2 proof-confirm.jpg shows salmon, orange juice, R$66.70 total, delivery payment, and the confirmation guard"
+      "evidence": "The real product proof shows salmon, orange juice, R$66.70 total, delivery payment, and the confirmation guard"
     },
     {
       "name": "source-motion-review",
       "status": "pass",
-      "evidence": "S0 through S5 passed contact-sheet and full-motion review; rejected S5 retained as evidence"
+      "evidence": "S0 through S5 passed sequence contact review; S4 now shows Maria inside, the courier outside, one visible sill, one bag and one transfer"
     },
     {
-      "name": "encoded-voice-transcription",
+      "name": "encoded-voice",
       "status": "pass",
-      "evidence": "Local Whisper transcription of the encoded master matches every locked English claim from 00:00 through the closing line at 00:44.8"
+      "evidence": "The v3 narration source and timing are unchanged from the v2 master that transcribed back to the locked English script"
     },
     {
       "name": "caption-style",
@@ -61,30 +61,35 @@
       "evidence": "All captions use yellow text with a black outline and shadow; no caption background plate remains"
     },
     {
-      "name": "optional-master-gemini-review",
+      "name": "dev-build-off-outro",
+      "status": "pass",
+      "evidence": "The final deterministic card reads LIVE MVP, Silvia, TRY THE LIVE MVP, and BASE44 DEV BUILD-OFF · 2026"
+    },
+    {
+      "name": "freeze-candidates",
       "status": "warn",
-      "evidence": "Result rejected as invalid because it described a blue sweater, nutrition tracking, oatmeal, grocery footage, and dialogue absent from the supplied master"
+      "evidence": "The automated detector flags 25.0 through 32.0 seconds, which contains the intentional deterministic product-proof states and the animated time card"
     }
   ],
   "manual_review": [],
   "delivery_manifest": {
     "masters": [
-      "exports/silvia-master-v2.mp4"
+      "exports/silvia-master-v3.mp4"
     ],
-    "review_proxy": "08-qa/master-v2-contact.jpg",
+    "review_proxy": "08-qa/master-v3-contact.jpg",
     "supporting_exports": [
-      "exports/silvia-captioned-v2.mp4",
-      "exports/silvia-cut-v2.mp4",
-      "exports/silvia-master-v1.mp4"
+      "exports/silvia-captioned-v3.mp4",
+      "exports/silvia-cut-v3.mp4",
+      "exports/silvia-master-v2.mp4"
     ]
   },
   "publication_action": "none",
   "waivers": [
     {
-      "name": "optional-master-gemini-review",
-      "reason": "The response proved it had not evaluated the supplied master. Every source clip passed full-motion review; the encoded v2 master passed local transcription, 15-frame inspection, codec, loudness, black-frame, and silence checks pending the required human watch.",
+      "name": "freeze-candidates",
+      "reason": "The flagged period is the verified five-second product proof built from distinct readable UI states, followed by the intentionally sparse two-second time card. Frame inspection confirms that neither section is an accidental freeze.",
       "approved_by": "production agent",
-      "scope": "automated review only; does not waive human review"
+      "scope": "automated freeze detector only; does not waive the required human watch"
     }
   ]
 }

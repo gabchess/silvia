@@ -253,6 +253,58 @@
         "job_id": "1bbb4d88-c76d-4fa7-b148-700d4e6c0580",
         "review": "33.073 seconds; final encoded master transcribed back to the locked English script"
       }
+    },
+    {
+      "id": "start-frame-S4-threshold-rejected-01",
+      "path": "04-source/start-frames/S4-threshold-rejected-01.png",
+      "sha256": "a7f88b02172fddaec20ddba334a71ac68e3f46df6c824fc52d42b81b5ad1fbcb",
+      "rights": "synthetic Higgsfield image retained as rejected evidence",
+      "paid_operation_id": "HF-S4-V3-REPAIR-01",
+      "provenance": {
+        "kind": "generated",
+        "model": "Nano Banana 2",
+        "job_id": "8a485bb3-234b-4655-b307-af62f3859127",
+        "review": "rejected; courier still stood on the apartment floor"
+      }
+    },
+    {
+      "id": "start-frame-S4-threshold-rejected-02",
+      "path": "04-source/start-frames/S4-threshold-rejected-02.png",
+      "sha256": "24370698c83bfaacd47bc5bb2246206d0ba7af389583750bdf83fe787cc0a256",
+      "rights": "synthetic Higgsfield image retained as rejected evidence",
+      "paid_operation_id": "HF-S4-V3-REPAIR-01",
+      "provenance": {
+        "kind": "generated",
+        "model": "Nano Banana 2",
+        "job_id": "f27a80c5-0eec-40cc-a5be-ac7e83129bdf",
+        "review": "rejected; threshold geography passed but the bag duplicated"
+      }
+    },
+    {
+      "id": "start-frame-S4-threshold-corrected",
+      "path": "04-source/start-frames/S4-threshold-corrected.png",
+      "sha256": "87b68f777f46949870b7aca10c11d38558871654b7d6ade9af22b9b3939e4bed",
+      "rights": "synthetic Higgsfield image for this production",
+      "paid_operation_id": "HF-S4-V3-REPAIR-01",
+      "provenance": {
+        "kind": "generated",
+        "model": "Nano Banana 2",
+        "job_id": "916b60c2-d3e4-4853-9d30-53f84eba1c71",
+        "review": "selected; visible sill, Maria inside, courier outside, exactly one bag"
+      }
+    },
+    {
+      "id": "shot-S4-threshold-corrected",
+      "path": "04-source/shots/S4-threshold-corrected.mp4",
+      "sha256": "0aead5d6d93492dc21b2f9ff8701562b400a5aeebd4b829e29e757422367663f",
+      "rights": "synthetic Higgsfield video for this production",
+      "paid_operation_id": "HF-S4-V3-REPAIR-01",
+      "provenance": {
+        "kind": "generated",
+        "model": "Seedance 2.0",
+        "job_id": "c73b6a12-2c58-4cdf-acc3-9d960bfb924e",
+        "review": "selected; full-sequence contact review confirms one transfer with both people staying on the correct side of the sill"
+      }
     }
   ],
   "paid_operations": [
@@ -353,9 +405,21 @@
       "approver": "Gabe",
       "approval_checkpoint": "2026-07-28-approved-180-credit-ceiling",
       "status": "completed"
+    },
+    {
+      "id": "HF-S4-V3-REPAIR-01",
+      "model": "Nano Banana 2 and Seedance 2.0",
+      "purpose": "correct the delivery threshold so Maria remains inside and the courier remains outside",
+      "count": 4,
+      "quoted_initial_credits": 19.0,
+      "actual_credits": 22.0,
+      "approved": true,
+      "approver": "Gabe",
+      "approval_checkpoint": "2026-07-28-approved-180-credit-ceiling",
+      "status": "completed-with-two-rejected-start-frames"
     }
   ],
   "immutable_sources_hashed": true,
   "spend_ceiling_credits": 180.0,
-  "spent_credits": 154.22
+  "spent_credits": 176.22
 }

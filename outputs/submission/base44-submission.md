@@ -1,87 +1,144 @@
-# Base44 hackathon submission draft
+# Base44 Dev Build-Off submission
 
-## Project name
+Submission portal: <https://backendcompetition.base44.app/submit>
+
+Portal cutoff: July 29, 2026 at 00:00 Pacific, which is July 29 at 04:00
+in São Paulo.
+
+## Section 1: Your submission
+
+### Full name
+
+`[YOUR FULL LEGAL NAME]`
+
+### Email
+
+`[YOUR BEST CONTACT EMAIL]`
+
+### Project title
 
 Silvia
 
-## One-line pitch
+### One-line pitch
 
-A trusted WhatsApp assistant that helps older adults order food by voice, reads
-every charge back, and waits for an exact confirmation.
+A trusted voice assistant that helps older adults order food, reads every
+charge back, and waits for their exact confirmation.
 
-## Short description
+### Surface type
 
-Silvia turns food ordering into a conversation an older adult already knows.
-Send a Portuguese voice note, hear the items, fee, total, address, and payment
-method, then confirm that exact draft. A caregiver sees the full state and
-audit trail in real time. In the real WhatsApp path, only the same sender can
-confirm. The caregiver can drive a separate, clearly labelled demo rehearsal.
+Web app
 
-The model can interpret an order but cannot buy anything. Confirmation is
-signed to the sender, draft hash, total, connector mode, and expiry. A
-compare-and-set state claim permits one checkout attempt and no automatic
-retry.
+### Live URL
 
-## What we built
+<https://silvia-dec7df73.base44.app>
 
-- A responsive React caregiver experience deployed on Base44
-- Google authentication for family access
-- `SeniorProfile`, `OrderDraft`, `Confirmation`, and `AuditEvent` entities
-  with row-level access rules
-- `rehearse-order`, `meta-webhook`, and `confirm-order` Base44 functions
-- A Base44 AI agent that returns strict Portuguese order JSON and has no tools
-- Real-time Base44 subscriptions for order state and audit events
-- Meta webhook verification, a 256 KB request cap, bounded media download, and
-  WhatsApp buttons
-- Atomic per-senior delivery claims and Meta message-ID deduplication
-- Bearer-token forwarding restricted to HTTPS URLs on Meta-controlled hosts
-- ElevenLabs Scribe v2 integration for Portuguese voice notes
-- An immutable order draft, bound confirmation token, spend cap, and
-  exactly-once demo checkout
+### GitHub repo
 
-## Why it matters
+<https://github.com/gabchess/silvia-whatsapp-assistant>
 
-Delivery apps make many older adults adapt to small type, changing screens, and
-payment flows. Silvia adapts the interface to them. Conversation lowers the
-learning burden, while read-back and caregiver visibility keep the person in
-control.
+### Access instructions
 
-## Base44 features used
+Open the live URL and sign in with Google. Select **Ensaiar pedido por voz**,
+review the fictional salmon-and-orange-juice order, then select **Confirmar
+pedido de demonstração**. The order state and audit timeline update in real
+time. This is a safe rehearsal and does not place a real order or charge money.
 
-Hosting, CLI project creation, Google auth, entities, row-level security,
-secrets, Deno functions, AI agents, real-time subscriptions, and public
-deployment.
+### Demo video URL
 
-## Demo disclosure
+Paste the public X post URL after publishing the 45-second video.
 
-The contest flow uses a fictional restaurant and a receipt marked
-`demo_ordered`. It does not buy food or claim a live iFood integration. The
-Meta and ElevenLabs paths are deployed but need the owner's authorized account
-credentials before a WhatsApp number can go live.
+### Project write-up
 
-## Links
+Silvia helps older adults prepare and confirm a food order through a voice
+conversation instead of learning another delivery app. A person describes the
+meal in Portuguese. Silvia interprets the request, reads back the merchant,
+items, fee, total, address, and payment method, then waits. The AI model cannot
+buy anything.
 
-- Live app: <https://silvia-dec7df73.base44.app>
-- Base44 dashboard:
-  <https://app.base44.com/apps/6a67c3c8b80c051fdec7df73/editor/workspace/overview>
-- Technical proof: `docs/proof-map.md`
-- Demo script: `docs/demo-script.md`
-- Public repository:
-  <https://github.com/gabchess/silvia-whatsapp-assistant>
+Base44 is the operational backend. Silvia uses Google authentication, four
+entities with caregiver-scoped row access, three Deno functions, a tool-free AI
+agent, secrets, real-time subscriptions, hosting, and a public React app. Each
+confirmation is signed to the sender, immutable draft hash, total, connector
+mode, and expiry. A compare-and-set state claim permits one checkout attempt.
 
-## Judge walkthrough
+The contest flow uses a fictional catalog and produces a receipt marked
+`demo_ordered`. It does not contact iFood or charge money. The Meta WhatsApp
+and ElevenLabs transcription paths are deployed and tested, but need the
+owner's authorized account credentials before a WhatsApp number can go live.
 
-1. Open the live app and sign in with Google.
-2. Select **Ensaiar pedido por voz**.
-3. Check the items, R$6,90 fee, R$51,70 total, address, payment method, and
-   demo label.
-4. Select **Confirmar pedido de demonstração**.
-5. Watch the ordered state and audit timeline update.
+### Agentic IDE used
 
-## Suggested categories
+Codex
 
-AI agents, accessibility, consumer, social impact, commerce, and family care.
+### Base44 App ID
 
-## Team note
+`6a67c3c8b80c051fdec7df73`
 
-Built in Brazil for older adults and the family members who help them.
+### Social post URL
+
+Paste the public X post URL. This field is required, and the post must tag
+`@base44`.
+
+## Section 2: Backend features used
+
+Select these five:
+
+- Authentication & user management
+- Database / entities
+- Backend functions (Deno)
+- AI / LLM / agents
+- Real-time subscriptions
+
+Do not select **File & media storage**. The submitted build does not depend on
+Base44 storage.
+
+## Section 3: BaaS feedback
+
+### What worked well?
+
+The strongest part was keeping auth, entities, row access, functions, the AI
+agent, real-time updates, secrets, and hosting in one backend. The CLI and
+file-based resources also made the architecture easy to inspect and test from
+an agentic IDE.
+
+### Where did you get stuck?
+
+The device login code expired once during setup, and it was not always obvious
+which resource state was live versus only local. Clearer deploy status,
+resource diffs, and function logs in the CLI would shorten that feedback loop.
+
+### What was missing?
+
+A first-party local emulator for functions and real-time subscriptions would
+make safety and failure-path testing faster. A one-command environment
+diagnostic and official messaging connector templates would also help.
+
+### Bugs or rough edges
+
+The device authentication code expired during setup. Relinking fixed it, and
+no launch-blocking issue remained.
+
+### Anything else
+
+Base44 works well with an agentic IDE because the backend resources are
+reviewable files rather than hidden configuration. That made it practical to
+put the confirmation and exactly-once rules at the backend boundary.
+
+### Likelihood to keep using Base44 Backend
+
+Recommended score: **8 / 10**
+
+Leave the follow-up checkbox enabled if you are happy for Base44 to contact
+you.
+
+## Final check before Submit
+
+- The live app opens in a private browser window.
+- The public GitHub repo opens without a login.
+- The X post is public, includes the video, and tags `@base44`.
+- The social post URL is pasted into both the social field and the optional
+  demo video field.
+- The five backend features above are selected.
+- The first three feedback answers are complete.
+- The review screen shows the correct app ID and links.
+- Save a screenshot of the success screen after submitting.

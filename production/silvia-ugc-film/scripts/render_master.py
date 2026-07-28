@@ -34,6 +34,7 @@ GREEN = (70, 132, 92)
 GREEN_LIGHT = (153, 201, 163)
 CREAM = (247, 239, 224)
 COCOA = (48, 36, 31)
+BASE44_BLUE = (57, 80, 230)
 WHITE = (255, 255, 255)
 
 
@@ -58,6 +59,11 @@ def zoomed(image: Image.Image, progress: float, amount: float) -> Image.Image:
     return image.crop((left, top, left + crop_w, top + crop_h)).resize(
         (image.width, image.height), Image.Resampling.LANCZOS
     )
+
+
+def smoothstep(start: float, end: float, value: float) -> float:
+    progress = max(0.0, min(1.0, (value - start) / (end - start)))
+    return progress * progress * (3.0 - 2.0 * progress)
 
 
 def encode_frames(path: Path, duration: float, frame_fn) -> None:
@@ -213,7 +219,8 @@ def final_frame(background: Image.Image, index: int, count: int) -> Image.Image:
     frame = Image.alpha_composite(frame, gradient)
     draw = ImageDraw.Draw(frame)
     fade = min(1.0, progress / 0.18)
-    alpha = round(255 * fade)
+    story_fade = 1.0 - smoothstep(0.32, 0.52, progress)
+    alpha = round(255 * fade * story_fade)
     draw.text((150, 330), "Silvia", font=font(FONT_BOLD, 118), fill=(*GREEN_LIGHT, alpha))
     draw.text(
         (155, 485),
@@ -226,6 +233,74 @@ def final_frame(background: Image.Image, index: int, count: int) -> Image.Image:
         "Maria decide.",
         font=font(FONT_BOLD, 52),
         fill=(*WHITE, alpha),
+    )
+
+    panel_progress = smoothstep(0.34, 0.68, progress)
+    panel_left = round(-900 + panel_progress * 1010)
+    panel_top = 128
+    panel_right = panel_left + 880
+    panel_bottom = 792
+    panel_alpha = round(248 * panel_progress)
+
+    draw.rounded_rectangle(
+        (panel_left + 18, panel_top + 20, panel_right + 18, panel_bottom + 20),
+        radius=48,
+        fill=(16, 22, 18, round(105 * panel_progress)),
+    )
+    draw.rounded_rectangle(
+        (panel_left, panel_top, panel_right, panel_bottom),
+        radius=48,
+        fill=(*CREAM, panel_alpha),
+        outline=(*WHITE, round(65 * panel_progress)),
+        width=2,
+    )
+
+    icon_left = panel_left + 64
+    icon_top = panel_top + 64
+    draw.rounded_rectangle(
+        (icon_left, icon_top, icon_left + 150, icon_top + 150),
+        radius=42,
+        fill=(*GREEN, panel_alpha),
+    )
+    draw.text(
+        (icon_left + 42, icon_top + 15),
+        "S",
+        font=font(FONT_BOLD, 100),
+        fill=(*CREAM, panel_alpha),
+    )
+    draw.rounded_rectangle(
+        (panel_left + 255, panel_top + 86, panel_left + 530, panel_top + 145),
+        radius=30,
+        fill=(*BASE44_BLUE, panel_alpha),
+    )
+    draw.text(
+        (panel_left + 300, panel_top + 99),
+        "LIVE MVP",
+        font=font(FONT_BOLD, 29),
+        fill=(*WHITE, panel_alpha),
+    )
+    draw.text(
+        (panel_left + 64, panel_top + 270),
+        "Silvia",
+        font=font(FONT_BOLD, 116),
+        fill=(*COCOA, panel_alpha),
+    )
+    draw.text(
+        (panel_left + 70, panel_top + 420),
+        "TRY THE LIVE MVP",
+        font=font(FONT_BOLD, 44),
+        fill=(*GREEN, panel_alpha),
+    )
+    draw.line(
+        (panel_left + 70, panel_top + 486, panel_right - 70, panel_top + 486),
+        fill=(*GREEN, round(90 * panel_progress)),
+        width=2,
+    )
+    draw.text(
+        (panel_left + 70, panel_top + 524),
+        "BASE44 DEV BUILD-OFF  ·  2026",
+        font=font(FONT_BOLD, 29),
+        fill=(*COCOA, panel_alpha),
     )
     return frame.convert("RGB")
 
@@ -325,6 +400,7 @@ def synthesize_sfx(output: Path) -> None:
     tone(31.98, 0.58, (494, 740), 0.14)
     tone(35.25, 0.24, (82, 116), 0.14)
     tone(37.42, 0.20, (2250, 3100), 0.09)
+    tone(43.18, 0.42, (523, 659, 784), 0.11)
 
     with wave.open(str(output), "wb") as target:
         target.setnchannels(2)
@@ -351,7 +427,7 @@ def main() -> None:
         ("02-S2.mp4", SOURCE / "shots/S2.mp4", 9.0),
         ("04-S3.mp4", SOURCE / "shots/S3.mp4", 4.0),
         ("05-proof.mp4", SOURCE / "real-product-proof.mp4", 5.0),
-        ("07-S4.mp4", SOURCE / "shots/S4.mp4", 5.0),
+        ("07-S4.mp4", SOURCE / "shots/S4-threshold-corrected.mp4", 5.0),
         ("08-S5.mp4", SOURCE / "shots/S5.mp4", 5.0),
     ]
     for name, source, duration in normalized:
@@ -401,7 +477,7 @@ def main() -> None:
     ]
     concat_file = WORK / "concat.txt"
     concat_file.write_text("".join(f"file '{WORK / item}'\n" for item in sequence))
-    cut_only = EXPORTS / "silvia-cut-v2.mp4"
+    cut_only = EXPORTS / "silvia-cut-v3.mp4"
     run(
         "ffmpeg",
         "-y",
@@ -433,41 +509,41 @@ def main() -> None:
     )
 
     captions = [
-        ("caption-v2-01.png", "I'm Maria. I'm 72, and I live in Brazil.", 0.15, 3.90),
+        ("caption-v3-01.png", "I'm Maria. I'm 72, and I live in Brazil.", 0.15, 3.90),
         (
-            "caption-v2-02.png",
+            "caption-v3-02.png",
             "I just got home from work, and I'm exhausted.",
             4.10,
             7.25,
         ),
         (
-            "caption-v2-03.png",
+            "caption-v3-03.png",
             "My daughter knows how to order food on those apps, but she's not home.",
             9.05,
             13.50,
         ),
         (
-            "caption-v2-04.png",
+            "caption-v3-04.png",
             "I just want to order dinner without having to ask her for help.",
             13.70,
             17.10,
         ),
-        ("caption-v2-05.png", "That's when I found Silvia.", 18.10, 19.70),
-        ("caption-v2-06.png", "So I send her a voice note.", 20.00, 21.35),
+        ("caption-v3-05.png", "That's when I found Silvia.", 18.10, 19.70),
+        ("caption-v3-06.png", "So I send her a voice note.", 20.00, 21.35),
         (
-            "caption-v2-07.png",
+            "caption-v3-07.png",
             "Silvia, I'd like grilled salmon with vegetables and an orange juice.",
             21.35,
             25.95,
         ),
         (
-            "caption-v2-08.png",
+            "caption-v3-08.png",
             "She reads my order back, shows me the total, and waits for me to say yes.",
             25.95,
             30.10,
         ),
-        ("caption-v2-09.png", "Yes.", 30.20, 30.95),
-        ("caption-v2-10.png", "She talks. I decide.", 42.15, 44.90),
+        ("caption-v3-09.png", "Yes.", 30.20, 30.95),
+        ("caption-v3-10.png", "She talks. I decide.", 42.15, 44.90),
     ]
     overlay_paths: list[Path] = []
     for name, text, _, _ in captions:
@@ -495,7 +571,7 @@ def main() -> None:
         f"[{previous}][{label_input}:v]overlay=0:0:enable='between(t,32.0,37.0)'[vout]"
     )
 
-    captioned = EXPORTS / "silvia-captioned-v2.mp4"
+    captioned = EXPORTS / "silvia-captioned-v3.mp4"
     run(
         *inputs,
         "-filter_complex",
@@ -522,12 +598,12 @@ def main() -> None:
         str(captioned),
     )
 
-    sfx = AUDIO / "generated-sfx/silvia-first-party-sound-bed-v2.wav"
+    sfx = AUDIO / "generated-sfx/silvia-first-party-sound-bed-v3.wav"
     synthesize_sfx(sfx)
 
     narration = AUDIO / "maria-narration-en.wav"
     music = AUDIO / "music/classical-6-jonny-s.mp3"
-    master = EXPORTS / "silvia-master-v2.mp4"
+    master = EXPORTS / "silvia-master-v3.mp4"
     audio_filter = """
 [1:a]asplit=10[n1][n2][n3][n4][n5][n6][n7][n8][n9][n10];
 [n1]atrim=start=0:end=3.700,asetpts=PTS-STARTPTS,adelay=150|150[a1];
@@ -547,7 +623,7 @@ aformat=sample_rates=48000:channel_layouts=stereo,asplit=2[voice-sidechain][voic
 afade=t=in:st=0:d=1.2,afade=t=out:st=41.5:d=3.5,volume=0.12[music];
 [music][voice-sidechain]sidechaincompress=threshold=0.015:ratio=8:attack=18:release=280[ducked];
 [ducked][voice-mix][3:a]amix=inputs=3:normalize=0:duration=longest:dropout_transition=0,
-atrim=0:45,alimiter=limit=0.891,loudnorm=I=-14:TP=-1:LRA=7[aout]
+atrim=0:45,alimiter=limit=0.841,loudnorm=I=-14:TP=-1.5:LRA=7[aout]
 """.replace("\n", "")
     run(
         "ffmpeg",
