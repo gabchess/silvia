@@ -1,5 +1,79 @@
 {
   "schema_version": 1,
   "fps": 30,
-  "segments": []
+  "duration_frames": 1230,
+  "segments": [
+    {
+      "id": "arrival",
+      "source_id": "shot-S1",
+      "source_in_frame": 0,
+      "source_out_frame": 150,
+      "output_in_frame": 0,
+      "output_out_frame": 150
+    },
+    {
+      "id": "dependence",
+      "source_id": "shot-S2",
+      "source_in_frame": 0,
+      "source_out_frame": 270,
+      "output_in_frame": 150,
+      "output_out_frame": 420
+    },
+    {
+      "id": "meet-silvia",
+      "source_id": "generated-title-card",
+      "source_in_frame": 0,
+      "source_out_frame": 90,
+      "output_in_frame": 420,
+      "output_out_frame": 510
+    },
+    {
+      "id": "voice-request",
+      "source_id": "shot-S3",
+      "source_in_frame": 0,
+      "source_out_frame": 120,
+      "output_in_frame": 510,
+      "output_out_frame": 630
+    },
+    {
+      "id": "real-product-proof",
+      "source_id": "real-product-proof",
+      "source_in_frame": 0,
+      "source_out_frame": 150,
+      "output_in_frame": 630,
+      "output_out_frame": 780
+    },
+    {
+      "id": "few-minutes-later",
+      "source_id": "generated-time-card",
+      "source_in_frame": 0,
+      "source_out_frame": 60,
+      "output_in_frame": 780,
+      "output_out_frame": 840
+    },
+    {
+      "id": "product-vision-delivery",
+      "source_id": "shot-S4",
+      "source_in_frame": 0,
+      "source_out_frame": 150,
+      "output_in_frame": 840,
+      "output_out_frame": 990
+    },
+    {
+      "id": "relief",
+      "source_id": "shot-S5",
+      "source_in_frame": 0,
+      "source_out_frame": 150,
+      "output_in_frame": 990,
+      "output_out_frame": 1140
+    },
+    {
+      "id": "final-emotional-hold",
+      "source_id": "shot-S5-final-frame",
+      "source_in_frame": 0,
+      "source_out_frame": 90,
+      "output_in_frame": 1140,
+      "output_out_frame": 1230
+    }
+  ]
 }

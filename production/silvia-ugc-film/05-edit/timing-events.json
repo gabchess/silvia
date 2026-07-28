@@ -1,5 +1,83 @@
 {
   "schema_version": 1,
   "fps": 30,
-  "events": []
+  "events": [
+    {
+      "id": "narration-arrival",
+      "time_seconds": 0.2,
+      "frame": 6,
+      "type": "voice",
+      "text_pt": "Acabei de chegar em casa cansada do trabalho."
+    },
+    {
+      "id": "narration-daughter",
+      "time_seconds": 4.75,
+      "frame": 143,
+      "type": "voice",
+      "text_pt": "Minha filha, que sabe mexer nesses aplicativos, não está em casa."
+    },
+    {
+      "id": "narration-independence",
+      "time_seconds": 10.0,
+      "frame": 300,
+      "type": "voice",
+      "text_pt": "Eu só queria pedir a janta sem depender de ninguém."
+    },
+    {
+      "id": "meet-silvia",
+      "time_seconds": 14.0,
+      "frame": 420,
+      "type": "graphic",
+      "text_pt": "Conheça a Silvia"
+    },
+    {
+      "id": "narration-turn",
+      "time_seconds": 14.35,
+      "frame": 431,
+      "type": "voice",
+      "text_pt": "Foi aí que eu conheci a Silvia."
+    },
+    {
+      "id": "voice-request",
+      "time_seconds": 16.9,
+      "frame": 507,
+      "type": "voice",
+      "text_pt": "Silvia, quero um salmão grelhado com legumes e um suco de laranja."
+    },
+    {
+      "id": "proof-readback",
+      "time_seconds": 21.55,
+      "frame": 647,
+      "type": "voice",
+      "text_pt": "A Silvia lê tudo de volta, mostra o total e espera eu dizer sim."
+    },
+    {
+      "id": "confirmation",
+      "time_seconds": 26.25,
+      "frame": 788,
+      "type": "voice",
+      "text_pt": "Sim."
+    },
+    {
+      "id": "few-minutes-later",
+      "time_seconds": 26.0,
+      "frame": 780,
+      "type": "graphic",
+      "text_pt": "Alguns minutos depois"
+    },
+    {
+      "id": "product-vision-label",
+      "time_seconds": 28.0,
+      "frame": 840,
+      "type": "disclosure",
+      "text_pt": "Visão do produto"
+    },
+    {
+      "id": "final-line",
+      "time_seconds": 38.4,
+      "frame": 1152,
+      "type": "voice",
+      "text_pt": "Ela conversa. Eu decido."
+    }
+  ]
 }

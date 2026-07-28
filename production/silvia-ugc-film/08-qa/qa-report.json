@@ -1,12 +1,79 @@
 {
   "schema_version": 1,
-  "status": "not_run",
-  "master": null,
-  "checks": [],
+  "status": "awaiting_human_review",
+  "master": "exports/silvia-master-v1.mp4",
+  "master_sha256": "1d247a8d747076e3a4bb4302a03a50a35c824bae92f648cbff8269d2e0ae8e4a",
+  "rendered_at": "2026-07-28T19:17:28Z",
+  "checks": [
+    {
+      "name": "duration",
+      "status": "pass",
+      "evidence": "ffprobe: 41.000 seconds"
+    },
+    {
+      "name": "delivery-codec",
+      "status": "pass",
+      "evidence": "H.264 High, yuv420p, 1920x1080, 30 fps; AAC LC stereo at 48 kHz"
+    },
+    {
+      "name": "black-frames",
+      "status": "pass",
+      "evidence": "FFmpeg blackdetect found no black interval at d=0.10 and pix_th=0.10"
+    },
+    {
+      "name": "unwanted-silence",
+      "status": "pass",
+      "evidence": "FFmpeg silencedetect found no interval longer than 0.75 seconds below -45 dB"
+    },
+    {
+      "name": "loudness",
+      "status": "pass",
+      "evidence": "FFmpeg ebur128: -14.2 LUFS integrated, -0.9 dBFS true peak, 10.3 LU LRA"
+    },
+    {
+      "name": "timeline",
+      "status": "pass",
+      "evidence": "1230 frames with contiguous non-overlapping EDL segments"
+    },
+    {
+      "name": "critical-frames",
+      "status": "pass",
+      "evidence": "15 timestamp frames and chronological contact sheet inspected at 1920x1080"
+    },
+    {
+      "name": "proof-readability",
+      "status": "pass",
+      "evidence": "proof-confirm.jpg shows salmon, orange juice, R$66.70 total, delivery payment, and the confirmation guard"
+    },
+    {
+      "name": "source-motion-review",
+      "status": "pass",
+      "evidence": "S1 through S5 passed contact-sheet and full-motion review; rejected S5 retained as evidence"
+    },
+    {
+      "name": "optional-master-gemini-review",
+      "status": "warn",
+      "evidence": "CLI timed out after recursively invoking its video-review skill; no master defect was reported"
+    }
+  ],
   "manual_review": [],
   "delivery_manifest": {
-    "masters": []
+    "masters": [
+      "exports/silvia-master-v1.mp4"
+    ],
+    "review_proxy": "08-qa/master-contact-chronological.jpg",
+    "supporting_exports": [
+      "exports/silvia-captioned.mp4",
+      "exports/silvia-cut-only.mp4"
+    ]
   },
   "publication_action": "none",
-  "waivers": []
+  "waivers": [
+    {
+      "name": "optional-master-gemini-review",
+      "reason": "The paid source clips already passed full-motion review; deterministic assembly, 15-frame inspection, codec, loudness, black-frame, and silence checks cover the master pending the required human watch.",
+      "approved_by": "production agent",
+      "scope": "automated review only; does not waive human review"
+    }
+  ]
 }

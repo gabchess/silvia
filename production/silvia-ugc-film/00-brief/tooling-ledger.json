@@ -1,5 +1,54 @@
 {
   "schema_version": 1,
   "cleanup_policy": "human-confirmed-after-backup",
-  "entries": []
+  "entries": [
+    {
+      "tool": "Higgsfield MCP",
+      "purpose": "cast, location, Portuguese voice, continuity frames, and five source shots",
+      "mode": "paid generation",
+      "credits_approved": 180.0,
+      "credits_used": 135.72,
+      "credits_unused": 44.28,
+      "status": "complete",
+      "evidence": [
+        "04-source/source-manifest.json",
+        "04-source/generation-ledger.jsonl"
+      ]
+    },
+    {
+      "tool": "Base44",
+      "purpose": "first-party working-product proof",
+      "mode": "live browser capture",
+      "status": "complete",
+      "evidence": "04-source/real-product-proof.mp4"
+    },
+    {
+      "tool": "FFmpeg 8.0.1",
+      "purpose": "deterministic edit, captions, audio mix, encoding, and conformance checks",
+      "mode": "local",
+      "status": "complete",
+      "evidence": "scripts/render_master.py"
+    },
+    {
+      "tool": "Pillow",
+      "purpose": "caption plates, transition cards, product-vision label, and final title",
+      "mode": "local",
+      "status": "complete",
+      "evidence": "06-motion/overlays"
+    },
+    {
+      "tool": "Gemini video review",
+      "purpose": "full-motion source-shot review",
+      "mode": "local CLI",
+      "status": "source-shots-complete; optional master pass timed out",
+      "evidence": "04-source/review"
+    },
+    {
+      "tool": "Mixkit",
+      "purpose": "licensed score: Classical 6 by Jonny S.",
+      "mode": "free stock license",
+      "status": "complete",
+      "evidence": "07-audio/music/classical-6-jonny-s.mp3"
+    }
+  ]
 }

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project_name": "Silvia — Ela conversa. Maria decide.",
-  "status": "previs-approved",
+  "status": "sound-approved",
   "created_at": "2026-07-28T17:35:46.535173+00:00",
   "primary_channel": "youtube",
   "timeline": {
@@ -19,6 +19,8 @@
   "publication_policy": "human-only",
   "paid_generation_approved": true,
   "approved_checkpoint": "2026-07-28-approved-180-credit-ceiling",
+  "rendered_at": "2026-07-28T19:17:28Z",
+  "human_review_required": true,
   "audio_targets": {
     "integrated_lufs": -14.0,
     "tolerance_lu": 2.0,

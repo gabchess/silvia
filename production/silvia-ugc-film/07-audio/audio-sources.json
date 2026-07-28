@@ -41,9 +41,58 @@
       "channels": 1
     }
   ],
-  "music": [],
-  "ambience": [],
-  "sfx": [],
-  "cues": [],
-  "mix": {}
+  "music": [
+    {
+      "id": "classical-6-jonny-s",
+      "path": "07-audio/music/classical-6-jonny-s.mp3",
+      "sha256": "bab06e33401d9db7d750c932cd08901331ee374338245bb83d1aecfa7fa9a2c8",
+      "title": "Classical 6",
+      "artist": "Jonny S.",
+      "source_url": "https://assets.mixkit.co/music/713/713.mp3",
+      "catalog_url": "https://mixkit.co/free-stock-music/mood/emotional/",
+      "license_url": "https://mixkit.co/license/#musicFree",
+      "rights": "Mixkit Free License",
+      "attribution_required": false,
+      "status": "selected"
+    }
+  ],
+  "ambience": [
+    {
+      "id": "first-party-room-tone",
+      "path": "07-audio/generated-sfx/silvia-first-party-sound-bed.wav",
+      "sha256": "7a000a2a5262938590da3c105fbc5b5388c7d347d1dde98c8a0a3e9001143301",
+      "rights": "first-party deterministic synthesis",
+      "status": "selected"
+    }
+  ],
+  "sfx": [
+    {
+      "id": "first-party-cues",
+      "path": "07-audio/generated-sfx/silvia-first-party-sound-bed.wav",
+      "sha256": "7a000a2a5262938590da3c105fbc5b5388c7d347d1dde98c8a0a3e9001143301",
+      "rights": "first-party deterministic synthesis",
+      "status": "selected"
+    }
+  ],
+  "cues": [
+    {"time_seconds": 4.2, "name": "keys"},
+    {"time_seconds": 17.15, "name": "voice-note-start"},
+    {"time_seconds": 20.65, "name": "request-sent"},
+    {"time_seconds": 24.3, "name": "confirmation-ready"},
+    {"time_seconds": 27.52, "name": "order-confirmed"},
+    {"time_seconds": 27.98, "name": "doorbell"},
+    {"time_seconds": 31.25, "name": "delivery-bag"},
+    {"time_seconds": 33.42, "name": "cutlery"}
+  ],
+  "mix": {
+    "voice": "high-pass 75 Hz, low-pass 12.5 kHz, gain 1.12",
+    "music": "gain 0.12 with voice side-chain ducking",
+    "limiter": "-1.0 dBFS target",
+    "loudness_target_lufs": -14.0,
+    "measured_integrated_lufs": -14.2,
+    "measured_true_peak_dbfs": -0.9,
+    "measured_lra_lu": 10.3,
+    "sample_rate_hz": 48000,
+    "channels": 2
+  }
 }
