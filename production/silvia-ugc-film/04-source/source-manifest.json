@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "assets": [],
+  "paid_operations": [
+    {
+      "id": "HF-CAST-01",
+      "model": "Soul Cast",
+      "purpose": "resolve Maria casting",
+      "count": 4,
+      "quoted_credits": 0.12,
+      "approved": true,
+      "approver": "Gabe",
+      "approval_checkpoint": "2026-07-28-approved-180-credit-ceiling",
+      "status": "quoted"
+    },
+    {
+      "id": "HF-VOICE-AUDITIONS-01",
+      "model": "Qwen Audio 3.0 TTS Flash",
+      "purpose": "compare Ines, Marisol and Mabel",
+      "count": 3,
+      "quoted_credits": 0.09,
+      "approved": true,
+      "approver": "Gabe",
+      "approval_checkpoint": "2026-07-28-approved-180-credit-ceiling",
+      "status": "quoted"
+    },
+    {
+      "id": "HF-SOURCE-PASS-01",
+      "model": "Seedance 2.0",
+      "purpose": "one 720p fast prototype for each of S1 through S5",
+      "count": 5,
+      "quoted_credits": 105.0,
+      "approved": true,
+      "approver": "Gabe",
+      "approval_checkpoint": "2026-07-28-approved-180-credit-ceiling",
+      "status": "quoted"
+    }
+  ],
+  "immutable_sources_hashed": false,
+  "spend_ceiling_credits": 180.0,
+  "spent_credits": 0.0
+}

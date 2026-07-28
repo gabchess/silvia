@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "project_name": "Silvia — Ela conversa. Maria decide.",
+  "status": "previs-approved",
+  "created_at": "2026-07-28T17:35:46.535173+00:00",
+  "primary_channel": "youtube",
+  "timeline": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30
+  },
+  "duration_mode": "social",
+  "duration_seconds": {
+    "minimum": 40,
+    "maximum": 45
+  },
+  "format": "ugc-ad",
+  "language": "pt-BR",
+  "publication_policy": "human-only",
+  "paid_generation_approved": true,
+  "approved_checkpoint": "2026-07-28-approved-180-credit-ceiling",
+  "audio_targets": {
+    "integrated_lufs": -14.0,
+    "tolerance_lu": 2.0,
+    "true_peak_max_dbfs": -1.0
+  }
+}

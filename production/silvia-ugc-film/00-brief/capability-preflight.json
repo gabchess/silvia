@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-28T17:36:00Z",
+  "higgsfield_mcp": "connected",
+  "workspace": {
+    "kind": "private",
+    "plan": "plus",
+    "available_credits": 495.92
+  },
+  "capabilities": [
+    {
+      "name": "Soul Cast",
+      "use": "four Maria candidates",
+      "aspect_ratio": "16:9",
+      "count": 4,
+      "exact_cost_credits": 0.12
+    },
+    {
+      "name": "Qwen Audio 3.0 TTS Flash",
+      "use": "Portuguese voice auditions and locked narration",
+      "format": "wav",
+      "sample_rate_hz": 48000,
+      "audition_cost_each_credits": 0.03,
+      "full_narration_cost_credits": 0.15
+    },
+    {
+      "name": "Seedance 2.0",
+      "use": "identity-consistent source motion",
+      "aspect_ratio": "16:9",
+      "resolution": "720p",
+      "mode": "fast",
+      "generate_audio": false,
+      "five_second_cost_credits": 17.5,
+      "ten_second_cost_credits": 35.0
+    },
+    {
+      "name": "FFmpeg",
+      "version": "8.1.2",
+      "use": "conformance, captions, mix, encode, hashes and QA"
+    },
+    {
+      "name": "Node.js",
+      "version": "25.8.1",
+      "use": "Silvia application build and browser proof"
+    }
+  ],
+  "fallbacks": [
+    {
+      "missing_capability": "Higgsfield standalone music and general SFX",
+      "route": "licensed local audio with source and rights ledger"
+    },
+    {
+      "missing_capability": "automatic English translation captions",
+      "route": "approved manual translation burned with FFmpeg"
+    },
+    {
+      "risk": "provider-generated text or UI",
+      "route": "real Base44 proof and deterministic overlays only"
+    }
+  ],
+  "spend_contract": {
+    "initial_source_pass_credits": 105.0,
+    "retry_reserve_credits": 70.0,
+    "casting_and_voice_allowance_credits": 1.0,
+    "hard_ceiling_credits": 180.0,
+    "heygen_credits": 0,
+    "chatcut_credits": 0
+  }
+}

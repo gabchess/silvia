@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "cleanup_policy": "human-confirmed-after-backup",
+  "entries": []
+}

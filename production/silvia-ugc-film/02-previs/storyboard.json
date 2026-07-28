@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "panels": [
+    {
+      "id": "P1",
+      "beat_id": "arrival",
+      "frame": "Maria enters the apartment and drops keys on wood",
+      "composition": "medium-wide handheld follow, cool evening negative space"
+    },
+    {
+      "id": "P2",
+      "beat_id": "dependence",
+      "frame": "Maria looks from an unreadable phone to the stove",
+      "composition": "slow push from medium to close, face dominant"
+    },
+    {
+      "id": "P3",
+      "beat_id": "silvia-turn",
+      "frame": "warm waveform bridge then Maria records a voice note",
+      "composition": "phone-side warmth, screen turned away"
+    },
+    {
+      "id": "P4",
+      "beat_id": "real-proof",
+      "frame": "real Base44 request, priced order, confirmation, completed demo",
+      "composition": "stable orthogonal product capture"
+    },
+    {
+      "id": "P5",
+      "beat_id": "product-vision",
+      "frame": "unbranded bag transfers to Maria at the doorway",
+      "composition": "locked three-quarter frame with bilingual vision label"
+    },
+    {
+      "id": "P6",
+      "beat_id": "relief",
+      "frame": "Maria takes one bite and exhales",
+      "composition": "warm lateral move ending on her face"
+    }
+  ],
+  "approved": true,
+  "approved_at": "2026-07-28T17:36:00Z",
+  "approver": "Gabe"
+}

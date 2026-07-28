@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "beats": [
+    {
+      "id": "arrival",
+      "time": "00:00-00:05",
+      "want": "rest after work",
+      "event": "Maria enters and drops her keys"
+    },
+    {
+      "id": "dependence",
+      "time": "00:05-00:14",
+      "want": "order dinner without help",
+      "event": "Maria weighs the phone against the stove"
+    },
+    {
+      "id": "silvia-turn",
+      "time": "00:14-00:21",
+      "want": "act in her own words",
+      "event": "Silvia is introduced and Maria records the request"
+    },
+    {
+      "id": "real-proof",
+      "time": "00:21-00:26",
+      "want": "retain control",
+      "event": "The real MVP prices the order and waits for confirmation"
+    },
+    {
+      "id": "product-vision",
+      "time": "00:26-00:34",
+      "want": "receive dinner",
+      "event": "A labelled future delivery reaches Maria"
+    },
+    {
+      "id": "relief",
+      "time": "00:34-00:43",
+      "want": "eat and settle",
+      "event": "Maria takes a bite and claims the decision"
+    }
+  ]
+}

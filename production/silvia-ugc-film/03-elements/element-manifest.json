@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "elements": [
+    {
+      "id": "maria",
+      "kind": "actor",
+      "reference": "generation-contract:maria-face-anchor",
+      "continuity_lock": "Brazilian woman 68–74, realistic age detail, muted-guava work blouse, dark trousers, practical shoes, no jewellery",
+      "rights": "synthetic Higgsfield character for this production"
+    },
+    {
+      "id": "maria-wardrobe",
+      "kind": "wardrobe",
+      "reference": "generation-contract:maria-work-clothes",
+      "continuity_lock": "simple warm-toned blouse, dark trousers, practical shoes, no logos or ornate fasteners",
+      "rights": "synthetic unbranded wardrobe"
+    },
+    {
+      "id": "apartment",
+      "kind": "location",
+      "reference": "generation-contract:apartment-three-quarter",
+      "continuity_lock": "one modest cared-for Brazilian apartment with entrance, small kitchen and dining area",
+      "rights": "synthetic Higgsfield location"
+    },
+    {
+      "id": "phone",
+      "kind": "prop",
+      "reference": "generation-contract:plain-smartphone",
+      "continuity_lock": "one unbranded phone with generated screen unreadable or turned away",
+      "rights": "synthetic unbranded prop"
+    },
+    {
+      "id": "courier",
+      "kind": "actor",
+      "reference": "generation-contract:soft-focus-courier",
+      "continuity_lock": "neutral clothing, face outside focal plane",
+      "rights": "synthetic Higgsfield character"
+    },
+    {
+      "id": "delivery-bag",
+      "kind": "prop",
+      "reference": "generation-contract:unbranded-delivery-bag",
+      "continuity_lock": "one plain insulated bag with no third-party marks",
+      "rights": "synthetic unbranded prop"
+    },
+    {
+      "id": "salmon-meal",
+      "kind": "prop",
+      "reference": "generation-contract:salmon-vegetables-orange-juice",
+      "continuity_lock": "one salmon-and-vegetable plate and one orange juice",
+      "rights": "synthetic unbranded food presentation"
+    }
+  ]
+}

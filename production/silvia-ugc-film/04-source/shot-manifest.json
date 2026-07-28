@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "shots": [
+    {
+      "id": "S1",
+      "beat_id": "arrival",
+      "purpose": "show the weight of Maria arriving home",
+      "start_state": "front door closed; Maria outside with keys and work bag",
+      "end_state": "Maria inside; keys resting on the table",
+      "subject_action": "Maria enters and drops one set of keys",
+      "camera_move": "gentle handheld follow",
+      "focal_point": "Maria's tired arrival and the keys",
+      "duration_seconds": 5,
+      "element_ids": ["maria", "maria-wardrobe", "apartment"]
+    },
+    {
+      "id": "S2",
+      "beat_id": "dependence",
+      "purpose": "make the unwanted choice visible",
+      "start_state": "Maria stands between the kitchen and dining area with phone lowered",
+      "end_state": "Maria holds the phone and settles into a resigned look",
+      "subject_action": "Maria looks from the phone to the stove",
+      "camera_move": "slow push from medium to close",
+      "focal_point": "Maria's face",
+      "duration_seconds": 10,
+      "element_ids": ["maria", "maria-wardrobe", "apartment", "phone"]
+    },
+    {
+      "id": "S3",
+      "beat_id": "silvia-turn",
+      "purpose": "show Maria choosing voice action",
+      "start_state": "phone lowered with screen turned away",
+      "end_state": "voice note recorded and phone held steady",
+      "subject_action": "Maria raises the phone and records one voice note",
+      "camera_move": "restrained over-shoulder drift",
+      "focal_point": "Maria's deliberate action",
+      "duration_seconds": 5,
+      "element_ids": ["maria", "maria-wardrobe", "apartment", "phone"]
+    },
+    {
+      "id": "S4",
+      "beat_id": "product-vision",
+      "purpose": "show the future delivery outcome without implying current commerce",
+      "start_state": "apartment door closed; courier outside with one bag",
+      "end_state": "one bag transferred to Maria",
+      "subject_action": "Maria accepts one unbranded delivery bag",
+      "camera_move": "locked three-quarter doorway",
+      "focal_point": "the handoff, not the courier",
+      "duration_seconds": 5,
+      "element_ids": ["maria", "maria-wardrobe", "apartment", "courier", "delivery-bag"]
+    },
+    {
+      "id": "S5",
+      "beat_id": "relief",
+      "purpose": "land Maria's regained control",
+      "start_state": "meal untouched; Maria seated",
+      "end_state": "Maria finishes one bite and exhales",
+      "subject_action": "Maria takes one bite of salmon",
+      "camera_move": "slow lateral move",
+      "focal_point": "relief in Maria's face",
+      "duration_seconds": 5,
+      "element_ids": ["maria", "maria-wardrobe", "apartment", "salmon-meal"]
+    }
+  ]
+}
