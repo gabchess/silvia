@@ -35,10 +35,25 @@
       "model": "Qwen Audio 3.0 TTS Flash",
       "voice": "Ines",
       "rights": "synthetic Higgsfield voice for this production",
-      "status": "selected",
+      "status": "superseded-by-english-v2",
       "duration_seconds": 30.175875,
       "sample_rate_hz": 48000,
       "channels": 1
+    },
+    {
+      "id": "maria-narration-en",
+      "path": "07-audio/maria-narration-en.wav",
+      "sha256": "4d0f6215fe67cfbce78618cc9a21c9d3df7e112ccd28960104619e940c642416",
+      "model": "Seed Audio 1.0",
+      "voice": "Ines",
+      "voice_id": "023ebf5e-1970-40d8-825c-a5ef6a1dd4ff",
+      "job_id": "1bbb4d88-c76d-4fa7-b148-700d4e6c0580",
+      "rights": "synthetic Higgsfield voice for this production",
+      "status": "selected-v2",
+      "duration_seconds": 33.073188,
+      "sample_rate_hz": 48000,
+      "channels": 2,
+      "verification": "local Whisper transcription of both the source take and encoded master matches the locked English script"
     }
   ],
   "music": [
@@ -59,8 +74,8 @@
   "ambience": [
     {
       "id": "first-party-room-tone",
-      "path": "07-audio/generated-sfx/silvia-first-party-sound-bed.wav",
-      "sha256": "7a000a2a5262938590da3c105fbc5b5388c7d347d1dde98c8a0a3e9001143301",
+      "path": "07-audio/generated-sfx/silvia-first-party-sound-bed-v2.wav",
+      "sha256": "5b7a5f3b2edba6484c3c6dbf744f88025585118edbf440350dc3977be862e093",
       "rights": "first-party deterministic synthesis",
       "status": "selected"
     }
@@ -68,30 +83,30 @@
   "sfx": [
     {
       "id": "first-party-cues",
-      "path": "07-audio/generated-sfx/silvia-first-party-sound-bed.wav",
-      "sha256": "7a000a2a5262938590da3c105fbc5b5388c7d347d1dde98c8a0a3e9001143301",
+      "path": "07-audio/generated-sfx/silvia-first-party-sound-bed-v2.wav",
+      "sha256": "5b7a5f3b2edba6484c3c6dbf744f88025585118edbf440350dc3977be862e093",
       "rights": "first-party deterministic synthesis",
       "status": "selected"
     }
   ],
   "cues": [
-    {"time_seconds": 4.2, "name": "keys"},
-    {"time_seconds": 17.15, "name": "voice-note-start"},
-    {"time_seconds": 20.65, "name": "request-sent"},
-    {"time_seconds": 24.3, "name": "confirmation-ready"},
-    {"time_seconds": 27.52, "name": "order-confirmed"},
-    {"time_seconds": 27.98, "name": "doorbell"},
-    {"time_seconds": 31.25, "name": "delivery-bag"},
-    {"time_seconds": 33.42, "name": "cutlery"}
+    {"time_seconds": 8.2, "name": "keys"},
+    {"time_seconds": 21.15, "name": "voice-note-start"},
+    {"time_seconds": 24.65, "name": "request-sent"},
+    {"time_seconds": 28.3, "name": "confirmation-ready"},
+    {"time_seconds": 31.52, "name": "order-confirmed"},
+    {"time_seconds": 31.98, "name": "doorbell"},
+    {"time_seconds": 35.25, "name": "delivery-bag"},
+    {"time_seconds": 37.42, "name": "cutlery"}
   ],
   "mix": {
     "voice": "high-pass 75 Hz, low-pass 12.5 kHz, gain 1.12",
     "music": "gain 0.12 with voice side-chain ducking",
     "limiter": "-1.0 dBFS target",
     "loudness_target_lufs": -14.0,
-    "measured_integrated_lufs": -14.2,
+    "measured_integrated_lufs": -14.5,
     "measured_true_peak_dbfs": -0.9,
-    "measured_lra_lu": 10.3,
+    "measured_lra_lu": 10.1,
     "sample_rate_hz": 48000,
     "channels": 2
   }

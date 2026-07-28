@@ -213,6 +213,46 @@
         "job_id": "dab23adb-0938-4059-8a64-c1f7eaf48d86",
         "review": "selected; single fork and emotional ending full-motion review pass"
       }
+    },
+    {
+      "id": "start-frame-S0-walking-home",
+      "path": "04-source/start-frames/S0-walking-home.png",
+      "sha256": "e509bf3e3a7bd70e7958de6ecdd21de10793403b7d787768ac106223b58dfe7a",
+      "rights": "synthetic Higgsfield image for this production",
+      "paid_operation_id": "HF-V2-REVISION-01",
+      "provenance": {
+        "kind": "generated",
+        "model": "Nano Banana 2",
+        "job_id": "187c365c-f838-48fa-8b82-84cebce7f089",
+        "review": "selected first pass; Maria, work bag, wardrobe, Brazilian street, and dusk continuity pass"
+      }
+    },
+    {
+      "id": "shot-S0-walking-home",
+      "path": "04-source/shots/S0-walking-home.mp4",
+      "sha256": "3aee9236b6c2c803459c2c21770ea6909db1c076563ab4a9f18c21a73c01a85c",
+      "rights": "synthetic Higgsfield video for this production",
+      "paid_operation_id": "HF-V2-REVISION-01",
+      "provenance": {
+        "kind": "generated",
+        "model": "Seedance 2.0",
+        "job_id": "990112ad-b097-41ac-bd66-7f7fc7232275",
+        "review": "selected first pass; contact sheet, freeze/black checks, and complete Gemini motion review pass"
+      }
+    },
+    {
+      "id": "maria-narration-en",
+      "path": "07-audio/maria-narration-en.wav",
+      "sha256": "4d0f6215fe67cfbce78618cc9a21c9d3df7e112ccd28960104619e940c642416",
+      "rights": "synthetic Higgsfield voice generated for this production",
+      "paid_operation_id": "HF-V2-REVISION-01",
+      "provenance": {
+        "kind": "generated",
+        "model": "Seed Audio 1.0",
+        "voice": "Ines",
+        "job_id": "1bbb4d88-c76d-4fa7-b148-700d4e6c0580",
+        "review": "33.073 seconds; final encoded master transcribed back to the locked English script"
+      }
     }
   ],
   "paid_operations": [
@@ -301,9 +341,21 @@
       "approver": "Gabe",
       "approval_checkpoint": "2026-07-28-approved-180-credit-ceiling",
       "status": "completed"
+    },
+    {
+      "id": "HF-V2-REVISION-01",
+      "model": "Nano Banana 2, Seedance 2.0, and Seed Audio 1.0",
+      "purpose": "add Maria's walking-home introduction and replace the narration with the locked English performance",
+      "count": 3,
+      "quoted_credits": 18.5,
+      "actual_credits": 18.5,
+      "approved": true,
+      "approver": "Gabe",
+      "approval_checkpoint": "2026-07-28-approved-180-credit-ceiling",
+      "status": "completed"
     }
   ],
   "immutable_sources_hashed": true,
   "spend_ceiling_credits": 180.0,
-  "spent_credits": 135.72
+  "spent_credits": 154.22
 }

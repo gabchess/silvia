@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "asset": "04-source/shots/S0-walking-home.mp4",
+  "reviewer": "Gemini CLI video review",
+  "coverage_start": "00:00",
+  "coverage_end": "00:04",
+  "verdict": "pass",
+  "findings": [
+    {
+      "timestamp": "00:00",
+      "note": "Maria's identity, coral blouse, and shoulder bag establish cleanly under consistent street lighting."
+    },
+    {
+      "timestamp": "00:01",
+      "note": "Her walking gait is natural; the street, parked cars, and overhead wires remain stable."
+    },
+    {
+      "timestamp": "00:02",
+      "note": "Face, skin, garment texture, hands, and bag show no morphing or temporal flicker."
+    },
+    {
+      "timestamp": "00:03",
+      "note": "The backward tracking move stays smooth with no late-frame degradation."
+    }
+  ],
+  "production_note": "Temporal stability, walking physics, lighting, identity, wardrobe, and prop continuity pass."
+}

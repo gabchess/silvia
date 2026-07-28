@@ -4,11 +4,11 @@
   "entries": [
     {
       "tool": "Higgsfield MCP",
-      "purpose": "cast, location, Portuguese voice, continuity frames, and five source shots",
+      "purpose": "cast, location, Portuguese and English voice takes, continuity frames, and six source shots",
       "mode": "paid generation",
       "credits_approved": 180.0,
-      "credits_used": 135.72,
-      "credits_unused": 44.28,
+      "credits_used": 154.22,
+      "credits_unused": 25.78,
       "status": "complete",
       "evidence": [
         "04-source/source-manifest.json",
@@ -40,8 +40,11 @@
       "tool": "Gemini video review",
       "purpose": "full-motion source-shot review",
       "mode": "local CLI",
-      "status": "source-shots-complete; optional master pass timed out",
-      "evidence": "04-source/review"
+      "status": "all source shots passed; master v2 result rejected because it described footage and dialogue absent from the supplied file",
+      "evidence": [
+        "04-source/review",
+        "08-qa/master-v2-contact.jpg"
+      ]
     },
     {
       "tool": "Mixkit",

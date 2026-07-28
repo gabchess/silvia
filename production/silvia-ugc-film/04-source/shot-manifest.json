@@ -2,6 +2,20 @@
   "schema_version": 1,
   "shots": [
     {
+      "id": "S0",
+      "beat_id": "arrival",
+      "purpose": "introduce Maria before the pain point",
+      "start_state": "Maria is walking home from work on a Brazilian residential street at dusk",
+      "end_state": "Maria is closer to camera and still walking steadily toward home",
+      "subject_action": "Maria walks home carrying one brown work bag",
+      "camera_move": "gentle handheld backward track",
+      "focal_point": "Maria's face, age, and tired but capable presence",
+      "duration_seconds": 4,
+      "start_frame_asset_id": "start-frame-S0-walking-home",
+      "start_frame_job_id": "187c365c-f838-48fa-8b82-84cebce7f089",
+      "element_ids": ["maria", "maria-wardrobe"]
+    },
+    {
       "id": "S1",
       "beat_id": "arrival",
       "purpose": "show the weight of Maria arriving home",

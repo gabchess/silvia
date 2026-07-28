@@ -9,8 +9,11 @@
       "bottom": 150
     },
     "caption_font": "Arial Bold",
-    "caption_size_px": 50,
-    "caption_plate": "rgba(16,16,16,0.80)",
+    "caption_size_px": 54,
+    "caption_fill": "#F7D154",
+    "caption_stroke": "3 px black",
+    "caption_shadow": "3 px black at 73 percent opacity",
+    "caption_plate": "none",
     "brand_green": "#46845C",
     "brand_green_light": "#99C9A3",
     "brand_cream": "#F7EFE0",
@@ -19,22 +22,22 @@
   "scenes": [
     {
       "id": "meet-silvia",
-      "frames": [420, 510],
+      "frames": [540, 630],
       "motion": "1.8 percent push-in with a three-cycle reactive waveform and eased title fade"
     },
     {
       "id": "few-minutes-later",
-      "frames": [780, 840],
+      "frames": [900, 960],
       "motion": "animated three-dot progress cue on a warm cocoa-to-green field"
     },
     {
       "id": "product-vision",
-      "frames": [840, 990],
+      "frames": [960, 1110],
       "motion": "static bilingual disclosure badge in the upper-right safe area"
     },
     {
       "id": "final-emotional-hold",
-      "frames": [1140, 1230],
+      "frames": [1260, 1350],
       "motion": "2.6 percent slow push-in with title fade over Maria's smile"
     }
   ]

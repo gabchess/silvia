@@ -25,7 +25,7 @@ WORK = EDIT / "render-work"
 WIDTH = 1920
 HEIGHT = 1080
 FPS = 30
-DURATION = 41.0
+DURATION = 45.0
 
 FONT_REGULAR = Path("/System/Library/Fonts/Supplemental/Arial.ttf")
 FONT_BOLD = Path("/System/Library/Fonts/Supplemental/Arial Bold.ttf")
@@ -147,7 +147,7 @@ def title_frame(background: Image.Image, index: int, count: int) -> Image.Image:
     fade = min(1.0, progress / 0.18, (1.0 - progress) / 0.12)
     alpha = max(0, min(255, round(255 * fade)))
     draw.rounded_rectangle((190, 280, 1050, 760), radius=42, fill=(21, 29, 24, 185))
-    draw.text((260, 342), "CONHEÇA A", font=font(FONT_BOLD, 52), fill=(*CREAM, alpha))
+    draw.text((260, 342), "MEET", font=font(FONT_BOLD, 52), fill=(*CREAM, alpha))
     draw.text((255, 410), "SILVIA", font=font(FONT_BOLD, 132), fill=(*GREEN_LIGHT, alpha))
 
     baseline = 650
@@ -176,8 +176,8 @@ def timecard_frame(index: int, count: int) -> Image.Image:
         )
         background_draw.line((0, y, WIDTH, y), fill=row)
     draw = ImageDraw.Draw(frame)
-    title = "ALGUNS MINUTOS DEPOIS"
-    sub = "A FEW MINUTES LATER"
+    title = "A FEW MINUTES LATER"
+    sub = "ALGUNS MINUTOS DEPOIS"
     title_font = font(FONT_BOLD, 78)
     sub_font = font(FONT_REGULAR, 34)
     title_box = draw.textbbox((0, 0), title, font=title_font)
@@ -234,11 +234,10 @@ def render_text_plate(
     output: Path,
     text: str,
     *,
-    y: int = 820,
-    size: int = 50,
-    width: int = 1420,
+    y: int = 865,
+    size: int = 54,
+    width: int = 1500,
     align: str = "center",
-    background: tuple[int, int, int, int] = (16, 16, 16, 205),
 ) -> None:
     image = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
     draw = ImageDraw.Draw(image)
@@ -259,21 +258,26 @@ def render_text_plate(
         lines.append(current)
 
     line_height = size + 15
-    plate_height = len(lines) * line_height + 44
     left = (WIDTH - width - 80) // 2
-    right = WIDTH - left
-    draw.rounded_rectangle((left, y, right, y + plate_height), radius=26, fill=background)
     for line_index, line in enumerate(lines):
         box = draw.textbbox((0, 0), line, font=selected_font)
         text_width = box[2] - box[0]
         x = (WIDTH - text_width) // 2 if align == "center" else left + 40
         draw.text(
-            (x, y + 20 + line_index * line_height),
+            (x + 3, y + 3 + line_index * line_height),
             line,
             font=selected_font,
-            fill=WHITE,
-            stroke_width=1,
+            fill=(0, 0, 0, 185),
+            stroke_width=4,
             stroke_fill=(0, 0, 0),
+        )
+        draw.text(
+            (x, y + line_index * line_height),
+            line,
+            font=selected_font,
+            fill=(247, 209, 84, 255),
+            stroke_width=3,
+            stroke_fill=(0, 0, 0, 240),
         )
     image.save(output)
 
@@ -313,14 +317,14 @@ def synthesize_sfx(output: Path) -> None:
             if index < total:
                 samples[index] += gain * envelope * value
 
-    tone(4.20, 0.34, (2700, 3550), 0.16)
-    tone(17.15, 0.16, (620, 780), 0.10)
-    tone(20.65, 0.22, (780, 1040), 0.11)
-    tone(24.30, 0.30, (660, 880, 1100), 0.12)
-    tone(27.52, 0.38, (660, 990), 0.16)
-    tone(27.98, 0.58, (494, 740), 0.14)
-    tone(31.25, 0.24, (82, 116), 0.14)
-    tone(33.42, 0.20, (2250, 3100), 0.09)
+    tone(8.20, 0.34, (2700, 3550), 0.16)
+    tone(21.15, 0.16, (620, 780), 0.10)
+    tone(24.65, 0.22, (780, 1040), 0.11)
+    tone(28.30, 0.30, (660, 880, 1100), 0.12)
+    tone(31.52, 0.38, (660, 990), 0.16)
+    tone(31.98, 0.58, (494, 740), 0.14)
+    tone(35.25, 0.24, (82, 116), 0.14)
+    tone(37.42, 0.20, (2250, 3100), 0.09)
 
     with wave.open(str(output), "wb") as target:
         target.setnchannels(2)
@@ -342,6 +346,7 @@ def main() -> None:
     (AUDIO / "generated-sfx").mkdir(parents=True, exist_ok=True)
 
     normalized = [
+        ("00-S0.mp4", SOURCE / "shots/S0-walking-home.mp4", 4.0),
         ("01-S1.mp4", SOURCE / "shots/S1.mp4", 5.0),
         ("02-S2.mp4", SOURCE / "shots/S2.mp4", 9.0),
         ("04-S3.mp4", SOURCE / "shots/S3.mp4", 4.0),
@@ -383,6 +388,7 @@ def main() -> None:
     )
 
     sequence = [
+        "00-S0.mp4",
         "01-S1.mp4",
         "02-S2.mp4",
         "03-title.mp4",
@@ -395,7 +401,7 @@ def main() -> None:
     ]
     concat_file = WORK / "concat.txt"
     concat_file.write_text("".join(f"file '{WORK / item}'\n" for item in sequence))
-    cut_only = EXPORTS / "silvia-cut-only.mp4"
+    cut_only = EXPORTS / "silvia-cut-v2.mp4"
     run(
         "ffmpeg",
         "-y",
@@ -427,33 +433,41 @@ def main() -> None:
     )
 
     captions = [
-        ("caption-01.png", "I just got home exhausted from work.", 0.15, 2.30),
+        ("caption-v2-01.png", "I'm Maria. I'm 72, and I live in Brazil.", 0.15, 3.90),
         (
-            "caption-02.png",
-            "My daughter, the one who knows these apps, isn't home.",
-            4.75,
-            9.90,
+            "caption-v2-02.png",
+            "I just got home from work, and I'm exhausted.",
+            4.10,
+            7.25,
         ),
         (
-            "caption-03.png",
-            "I just wanted dinner without relying on anyone.",
-            10.00,
-            13.80,
-        ),
-        ("caption-04.png", "That's when I met Silvia.", 14.25, 16.60),
-        (
-            "caption-05.png",
-            "Silvia, grilled salmon with vegetables and an orange juice.",
-            16.90,
-            21.75,
+            "caption-v2-03.png",
+            "My daughter knows how to order food on those apps, but she's not home.",
+            9.05,
+            13.50,
         ),
         (
-            "caption-06.png",
-            "Silvia reads it back, shows the total, and waits for yes.",
-            21.55,
-            26.15,
+            "caption-v2-04.png",
+            "I just want to order dinner without having to ask her for help.",
+            13.70,
+            17.10,
         ),
-        ("caption-08.png", "She talks. I decide.", 38.40, 40.95),
+        ("caption-v2-05.png", "That's when I found Silvia.", 18.10, 19.70),
+        ("caption-v2-06.png", "So I send her a voice note.", 20.00, 21.35),
+        (
+            "caption-v2-07.png",
+            "Silvia, I'd like grilled salmon with vegetables and an orange juice.",
+            21.35,
+            25.95,
+        ),
+        (
+            "caption-v2-08.png",
+            "She reads my order back, shows me the total, and waits for me to say yes.",
+            25.95,
+            30.10,
+        ),
+        ("caption-v2-09.png", "Yes.", 30.20, 30.95),
+        ("caption-v2-10.png", "She talks. I decide.", 42.15, 44.90),
     ]
     overlay_paths: list[Path] = []
     for name, text, _, _ in captions:
@@ -478,10 +492,10 @@ def main() -> None:
         previous = output
     label_input = len(captions) + 1
     filters.append(
-        f"[{previous}][{label_input}:v]overlay=0:0:enable='between(t,28.0,33.0)'[vout]"
+        f"[{previous}][{label_input}:v]overlay=0:0:enable='between(t,32.0,37.0)'[vout]"
     )
 
-    captioned = EXPORTS / "silvia-captioned.mp4"
+    captioned = EXPORTS / "silvia-captioned-v2.mp4"
     run(
         *inputs,
         "-filter_complex",
@@ -508,30 +522,32 @@ def main() -> None:
         str(captioned),
     )
 
-    sfx = AUDIO / "generated-sfx/silvia-first-party-sound-bed.wav"
+    sfx = AUDIO / "generated-sfx/silvia-first-party-sound-bed-v2.wav"
     synthesize_sfx(sfx)
 
-    narration = AUDIO / "maria-narration.wav"
+    narration = AUDIO / "maria-narration-en.wav"
     music = AUDIO / "music/classical-6-jonny-s.mp3"
-    master = EXPORTS / "silvia-master-v1.mp4"
+    master = EXPORTS / "silvia-master-v2.mp4"
     audio_filter = """
-[1:a]asplit=8[n1][n2][n3][n4][n5][n6][n7][n8];
-[n1]atrim=start=0:end=1.970333,asetpts=PTS-STARTPTS,adelay=200|200[a1];
-[n2]atrim=start=2.954750:end=7.978167,asetpts=PTS-STARTPTS,adelay=4750|4750[a2];
-[n3]atrim=start=8.717604:end=12.330250,asetpts=PTS-STARTPTS,adelay=10000|10000[a3];
-[n4]atrim=start=12.921875:end=14.843542,asetpts=PTS-STARTPTS,adelay=14350|14350[a4];
-[n5]atrim=start=15.368021:end=20.217354,asetpts=PTS-STARTPTS,adelay=16900|16900[a5];
-[n6]atrim=start=20.714562:end=25.156646,asetpts=PTS-STARTPTS,adelay=21550|21550[a6];
-[n7]atrim=start=25.822021:end=27.168958,asetpts=PTS-STARTPTS,adelay=26250|26250[a7];
-[n8]atrim=start=27.820271:end=30.175875,asetpts=PTS-STARTPTS,adelay=38400|38400[a8];
-[a1][a2][a3][a4][a5][a6][a7][a8]amix=inputs=8:normalize=0:duration=longest,
-highpass=f=75,lowpass=f=12500,volume=1.12,atrim=0:41,
+[1:a]asplit=10[n1][n2][n3][n4][n5][n6][n7][n8][n9][n10];
+[n1]atrim=start=0:end=3.700,asetpts=PTS-STARTPTS,adelay=150|150[a1];
+[n2]atrim=start=4.120:end=7.180,asetpts=PTS-STARTPTS,adelay=4100|4100[a2];
+[n3]atrim=start=7.440:end=11.800,asetpts=PTS-STARTPTS,adelay=9050|9050[a3];
+[n4]atrim=start=11.970:end=15.270,asetpts=PTS-STARTPTS,adelay=13700|13700[a4];
+[n5]atrim=start=15.570:end=17.080,asetpts=PTS-STARTPTS,adelay=18100|18100[a5];
+[n6]atrim=start=17.170:end=18.490,asetpts=PTS-STARTPTS,adelay=20000|20000[a6];
+[n7]atrim=start=18.770:end=23.310,asetpts=PTS-STARTPTS,adelay=21350|21350[a7];
+[n8]atrim=start=23.530:end=29.020,asetpts=PTS-STARTPTS,atempo=1.20,adelay=25950|25950[a8];
+[n9]atrim=start=29.330:end=29.980,asetpts=PTS-STARTPTS,adelay=30200|30200[a9];
+[n10]atrim=start=30.440:end=32.980,asetpts=PTS-STARTPTS,adelay=42150|42150[a10];
+[a1][a2][a3][a4][a5][a6][a7][a8][a9][a10]amix=inputs=10:normalize=0:duration=longest,
+highpass=f=75,lowpass=f=12500,volume=1.12,atrim=0:45,
 aformat=sample_rates=48000:channel_layouts=stereo,asplit=2[voice-sidechain][voice-mix];
-[2:a]atrim=start=0:end=41,asetpts=PTS-STARTPTS,
-afade=t=in:st=0:d=1.2,afade=t=out:st=37.5:d=3.5,volume=0.12[music];
+[2:a]atrim=start=0:end=45,asetpts=PTS-STARTPTS,
+afade=t=in:st=0:d=1.2,afade=t=out:st=41.5:d=3.5,volume=0.12[music];
 [music][voice-sidechain]sidechaincompress=threshold=0.015:ratio=8:attack=18:release=280[ducked];
 [ducked][voice-mix][3:a]amix=inputs=3:normalize=0:duration=longest:dropout_transition=0,
-atrim=0:41,alimiter=limit=0.891,loudnorm=I=-14:TP=-1:LRA=7[aout]
+atrim=0:45,alimiter=limit=0.891,loudnorm=I=-14:TP=-1:LRA=7[aout]
 """.replace("\n", "")
     run(
         "ffmpeg",

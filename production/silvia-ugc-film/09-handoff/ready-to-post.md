@@ -4,21 +4,22 @@ Status: awaiting Gabe's full-film review. Nothing has been posted or submitted.
 
 ## Primary master
 
-- `exports/silvia-master-v1.mp4`
-- 41.000 seconds, 1920×1080, 30 fps
-- Portuguese performance with burned-in English captions
-- SHA-256: `1d247a8d747076e3a4bb4302a03a50a35c824bae92f648cbff8269d2e0ae8e4a`
+- `exports/silvia-master-v2.mp4`
+- 45.000 seconds, 1920×1080, 30 fps
+- English performance with matching burned-in yellow captions
+- SHA-256: `cceb1a29322da554811e975f1c24003adaf726fe0a56e893f134cb6c71763415`
 
 ## Human review
 
 Watch the master from start to finish with sound and confirm:
 
-1. Maria reads as the same person across the five generated scenes.
-2. Every English caption is readable and matches the Portuguese performance.
-3. The five-second real-product proof makes the read-back, R$66.70 total, and confirmation boundary clear.
-4. The `PRODUCT VISION` badge prevents the delivery scene from being mistaken for current live commerce.
-5. Salmon, vegetables, orange juice, and Maria's final relief feel credible.
-6. No frame, sound, or claim should be changed before submission.
+1. Maria reads as the same person across the walking-home opening and the five existing generated scenes.
+2. The English introduction identifies Maria as 72 and living in Brazil.
+3. Every yellow caption is readable, matches the English performance, and has no background plate.
+4. The five-second real-product proof makes the read-back, R$66.70 total, and confirmation boundary clear.
+5. The `PRODUCT VISION` badge prevents the delivery scene from being mistaken for current live commerce.
+6. Salmon, vegetables, orange juice, and Maria's final relief feel credible.
+7. No frame, sound, or claim should be changed before submission.
 
 Timecoded notes are enough if any item fails. The project may move to `qa-passed` only after a named human review.
 

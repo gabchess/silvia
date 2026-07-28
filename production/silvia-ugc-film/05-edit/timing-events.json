@@ -3,81 +3,95 @@
   "fps": 30,
   "events": [
     {
-      "id": "narration-arrival",
-      "time_seconds": 0.2,
-      "frame": 6,
+      "id": "narration-identity",
+      "time_seconds": 0.15,
+      "frame": 5,
       "type": "voice",
-      "text_pt": "Acabei de chegar em casa cansada do trabalho."
+      "text_en": "I'm Maria. I'm 72, and I live in Brazil."
+    },
+    {
+      "id": "narration-arrival",
+      "time_seconds": 4.1,
+      "frame": 123,
+      "type": "voice",
+      "text_en": "I just got home from work, and I'm exhausted."
     },
     {
       "id": "narration-daughter",
-      "time_seconds": 4.75,
-      "frame": 143,
+      "time_seconds": 9.05,
+      "frame": 272,
       "type": "voice",
-      "text_pt": "Minha filha, que sabe mexer nesses aplicativos, não está em casa."
+      "text_en": "My daughter knows how to order food on those apps, but she's not home."
     },
     {
       "id": "narration-independence",
-      "time_seconds": 10.0,
-      "frame": 300,
+      "time_seconds": 13.7,
+      "frame": 411,
       "type": "voice",
-      "text_pt": "Eu só queria pedir a janta sem depender de ninguém."
+      "text_en": "I just want to order dinner without having to ask her for help."
     },
     {
       "id": "meet-silvia",
-      "time_seconds": 14.0,
-      "frame": 420,
+      "time_seconds": 18.0,
+      "frame": 540,
       "type": "graphic",
-      "text_pt": "Conheça a Silvia"
+      "text_en": "Meet Silvia"
     },
     {
       "id": "narration-turn",
-      "time_seconds": 14.35,
-      "frame": 431,
+      "time_seconds": 18.1,
+      "frame": 543,
       "type": "voice",
-      "text_pt": "Foi aí que eu conheci a Silvia."
+      "text_en": "That's when I found Silvia."
+    },
+    {
+      "id": "voice-note-introduction",
+      "time_seconds": 20.0,
+      "frame": 600,
+      "type": "voice",
+      "text_en": "So I send her a voice note."
     },
     {
       "id": "voice-request",
-      "time_seconds": 16.9,
-      "frame": 507,
+      "time_seconds": 21.35,
+      "frame": 641,
       "type": "voice",
-      "text_pt": "Silvia, quero um salmão grelhado com legumes e um suco de laranja."
+      "text_en": "Silvia, I'd like grilled salmon with vegetables and an orange juice."
     },
     {
       "id": "proof-readback",
-      "time_seconds": 21.55,
-      "frame": 647,
+      "time_seconds": 25.95,
+      "frame": 779,
       "type": "voice",
-      "text_pt": "A Silvia lê tudo de volta, mostra o total e espera eu dizer sim."
-    },
-    {
-      "id": "confirmation",
-      "time_seconds": 26.25,
-      "frame": 788,
-      "type": "voice",
-      "text_pt": "Sim."
+      "text_en": "She reads my order back, shows me the total, and waits for me to say yes."
     },
     {
       "id": "few-minutes-later",
-      "time_seconds": 26.0,
-      "frame": 780,
+      "time_seconds": 30.0,
+      "frame": 900,
       "type": "graphic",
-      "text_pt": "Alguns minutos depois"
+      "text_en": "A few minutes later"
+    },
+    {
+      "id": "confirmation",
+      "time_seconds": 30.2,
+      "frame": 906,
+      "type": "voice",
+      "text_en": "Yes."
     },
     {
       "id": "product-vision-label",
-      "time_seconds": 28.0,
-      "frame": 840,
+      "time_seconds": 32.0,
+      "frame": 960,
       "type": "disclosure",
-      "text_pt": "Visão do produto"
+      "text_en": "Product vision"
     },
     {
       "id": "final-line",
-      "time_seconds": 38.4,
-      "frame": 1152,
+      "time_seconds": 42.15,
+      "frame": 1265,
       "type": "voice",
-      "text_pt": "Ela conversa. Eu decido."
+      "text_en": "She talks. I decide."
     }
   ]
 }
