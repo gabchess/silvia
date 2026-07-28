@@ -28,7 +28,7 @@ function OrderReadback({ order }) {
   return (
     <>
       <p className="message-copy">
-        Preparei seu pedido no {order.merchant?.name ?? "restaurante"}.
+        Preparei seu pedido na {order.merchant?.name ?? "cozinha"}.
         Confira cada detalhe:
       </p>
       <ul className="chat-order-list" aria-label="Resumo do pedido">

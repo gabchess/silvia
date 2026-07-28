@@ -73,20 +73,20 @@ describe("Silvia caregiver app", () => {
     });
     const order = {
       id: "order-1",
-      merchant: { name: "Lanche da Praça" },
+      merchant: { name: "Cozinha da Praça" },
       normalized_items: [
         {
-          displayName: "Hambúrguer",
-          quantity: 2,
-          modifiers: ["sem cebola"],
+          displayName: "Salmão grelhado com legumes",
+          quantity: 1,
+          modifiers: [],
         },
         {
-          displayName: "Coca sem açúcar",
+          displayName: "Suco de laranja",
           quantity: 1,
           modifiers: [],
         },
       ],
-      pricing: { fee_cents: 690, total_cents: 5170 },
+      pricing: { fee_cents: 690, total_cents: 6670 },
       address_label: "Casa da Dona Maria",
       connector_mode: "demo",
       payment_mode: "cash_on_delivery",
@@ -125,8 +125,8 @@ describe("Silvia caregiver app", () => {
 
     render(<App />);
 
-    expect(await screen.findByText("Lanche da Praça")).toBeInTheDocument();
-    expect(screen.getByText(/R\$\s*51,70/)).toBeInTheDocument();
+    expect(await screen.findByText("Cozinha da Praça")).toBeInTheDocument();
+    expect(screen.getByText(/R\$\s*66,70/)).toBeInTheDocument();
     expect(screen.getByText(/simulação no navegador/i)).toBeInTheDocument();
 
     fireEvent.click(
@@ -135,11 +135,11 @@ describe("Silvia caregiver app", () => {
     await waitFor(() =>
       expect(sdk.invoke).toHaveBeenCalledWith("rehearse-order", {
         transcript:
-          "Silvia, quero dois hambúrgueres sem cebola e uma coca sem açúcar",
+          "Silvia, quero um salmão grelhado com legumes e um suco de laranja.",
       }),
     );
     expect(
-      await screen.findByText(/preparei seu pedido no lanche da praça/i),
+      await screen.findByText(/preparei seu pedido na cozinha da praça/i),
     ).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: /alterar/i }));

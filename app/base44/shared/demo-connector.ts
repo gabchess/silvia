@@ -10,11 +10,15 @@ import type {
 } from "./contracts.ts";
 
 const catalog = [
-  { match: "hamburguer", displayName: "Hambúrguer", unitPriceCents: 1890 },
   {
-    match: "coca",
-    displayName: "Coca sem açúcar",
-    unitPriceCents: 700,
+    match: "salmao",
+    displayName: "Salmão grelhado com legumes",
+    unitPriceCents: 4990,
+  },
+  {
+    match: "suco de laranja",
+    displayName: "Suco de laranja",
+    unitPriceCents: 990,
   },
   { match: "sopa", displayName: "Sopa de legumes", unitPriceCents: 1590 },
 ];
@@ -47,7 +51,7 @@ export class DemoConnector implements CommerceConnector {
 
     return [
       {
-        merchant: { id: "demo-praca", name: "Lanche da Praça" },
+        merchant: { id: "demo-cozinha-praca", name: "Cozinha da Praça" },
         intent,
       },
     ];

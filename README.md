@@ -31,7 +31,7 @@ rehearsal; they cannot approve a real WhatsApp order for the older adult.
 
 1. Sign in with Google.
 2. Select **Ensaiar pedido por voz**.
-3. Read Silvia's R$51,70 order summary.
+3. Read Silvia's R$66,70 salmon-and-orange-juice order summary.
 4. Select **Confirmar pedido de demonstração**.
 5. Watch the order and audit timeline update in real time.
 
@@ -136,14 +136,15 @@ Secret names are documented in `app/.env.example`. Never commit their values.
 
 ## Current proof
 
-- 32 tests pass across 11 files.
+- 33 tests pass across 12 files.
 - ESLint passes.
 - The Vite production build passes.
 - Deno checks all three backend functions.
 - Base44 deployed four entities, three functions, one agent, auth, visibility,
   and the site.
-- A deployed smoke test completed Google sign-in, draft creation, R$51,70
-  read-back, confirmation, one demo checkout, and the ordered timeline.
+- A deployed smoke test completed Google sign-in, draft creation, R$66,70
+  salmon-and-orange-juice read-back, confirmation, one demo checkout, and the
+  ordered timeline.
 
 See [the proof map](docs/proof-map.md) and
 [the 90-second demo script](docs/demo-script.md).

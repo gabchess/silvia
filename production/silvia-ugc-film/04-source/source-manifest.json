@@ -1,6 +1,25 @@
 {
   "schema_version": 1,
-  "assets": [],
+  "assets": [
+    {
+      "id": "real-product-proof",
+      "path": "04-source/real-product-proof.mp4",
+      "sha256": "e309bd0f843c025a4ff7dc093ce8cede3a5062569f4ddf22120dc94c1ab3b0a5",
+      "rights": "first-party capture of the Silvia project and its synthetic demo data",
+      "provenance": {
+        "kind": "real-product-capture",
+        "source_url": "https://silvia-dec7df73.base44.app",
+        "captured_at": "2026-07-28T17:46:00Z",
+        "states": [
+          "matching Portuguese request",
+          "priced R$66.70 read-back",
+          "confirmation action",
+          "completed demo state"
+        ],
+        "transformation": "1920x1080 authenticated browser states joined into a five-second deterministic proof montage; a yellow outline marks the real Confirmar pedido control"
+      }
+    }
+  ],
   "paid_operations": [
     {
       "id": "HF-CAST-01",

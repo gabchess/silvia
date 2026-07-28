@@ -7,6 +7,10 @@ restaurant, cash on delivery, and a receipt marked `demo_ordered`. The Meta
 WhatsApp and ElevenLabs adapters require the owner's authorized credentials.
 No live iFood connector is deployed.
 
+The film-proof rehearsal uses Cozinha da Praça, salmão grelhado com legumes,
+suco de laranja, a R$6,90 delivery fee, and a R$66,70 total. It remains a
+labelled demo and waits for an order-specific confirmation.
+
 ## Development
 
 Requirements: Node 20.19+, Socket CLI, Deno, and a linked Base44 app.

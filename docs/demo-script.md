@@ -35,11 +35,11 @@ Select **Ensaiar pedido por voz**.
 
 Read the sample phrase:
 
-> Silvia, quero dois hambúrgueres sem cebola e uma coca sem açúcar.
+> Silvia, quero um salmão grelhado com legumes e um suco de laranja.
 
 ### 0:43 to 1:00
 
-Point to the items, R$6,90 delivery fee, R$51,70 total, saved address,
+Point to the items, R$6,90 delivery fee, R$66,70 total, saved address,
 cash-on-delivery mode, and `Demonstração segura` label.
 
 Say:

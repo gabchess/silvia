@@ -13,9 +13,14 @@ describe("demo connector", () => {
       {
         items: [
           {
-            spokenName: "hambúrguer",
-            quantity: 2,
-            modifiers: ["sem cebola"],
+            spokenName: "salmão grelhado com legumes",
+            quantity: 1,
+            modifiers: [],
+          },
+          {
+            spokenName: "suco de laranja",
+            quantity: 1,
+            modifiers: [],
           },
         ],
         category: "food",
@@ -28,7 +33,14 @@ describe("demo connector", () => {
     const draft = await connector.buildDraft(candidates[0], profile);
 
     expect(draft.connectorMode).toBe("demo");
-    expect(draft.totalCents).toBe(4470);
+    expect(draft.merchant.name).toBe("Cozinha da Praça");
+    expect(draft.items.map(({ displayName }) => displayName)).toEqual([
+      "Salmão grelhado com legumes",
+      "Suco de laranja",
+    ]);
+    expect(draft.feeCents).toBe(690);
+    expect(draft.totalCents).toBe(6670);
+    expect(draft.paymentMode).toBe("cash_on_delivery");
     expect((await connector.checkout(draft, "once")).status).toBe(
       "demo_ordered",
     );

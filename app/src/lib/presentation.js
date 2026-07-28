@@ -1,5 +1,5 @@
 export const rehearsalTranscript =
-  "Silvia, quero dois hambúrgueres sem cebola e uma coca sem açúcar";
+  "Silvia, quero um salmão grelhado com legumes e um suco de laranja.";
 
 const statusLabels = {
   received: "Mensagem recebida",

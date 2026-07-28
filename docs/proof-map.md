@@ -5,8 +5,8 @@
 | Fresh Base44 app | Ignored `app/base44/.app.jsonc`; deployed app `6a67c3c8b80c051fdec7df73` | Verified |
 | Custom frontend | `app/src/App.jsx`, `app/src/components`, `app/src/index.css` | Deployed |
 | Base44 backend depth | Four entities, three Deno functions, one agent, auth, real-time subscriptions | Deployed |
-| Portuguese priced draft | `prepareOrder`, `DemoConnector`, deployed R$51,70 rehearsal | Verified live |
-| Full read-back | Deployed UI showed items, R$6,90 fee, R$51,70 total, address, payment | Verified live |
+| Portuguese priced draft | `prepareOrder`, `DemoConnector`, deployed R$66,70 salmon rehearsal | Verified live |
+| Full read-back | Deployed UI shows salmon, orange juice, R$6,90 fee, R$66,70 total, address, payment | Verified live |
 | Signed confirmation | `app/base44/shared/confirmation.ts`; seven negative binding tests | Passed |
 | Exactly one checkout | Compare-and-set claims in `confirmation-service.ts`; race test | Passed |
 | Safe demo receipt | `DemoConnector.checkout()` returns `demo_ordered` | Verified live |
@@ -25,8 +25,8 @@
 
 ```text
 npm test
-  11 files passed
-  32 tests passed
+  12 files passed
+  33 tests passed
 
 npm run lint
   exit 0

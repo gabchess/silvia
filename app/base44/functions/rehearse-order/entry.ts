@@ -5,17 +5,17 @@ import { prepareOrder } from "../../shared/orchestrator.ts";
 import type { OrderIntent } from "../../shared/contracts.ts";
 
 const rehearsalPhrase =
-  "silvia, quero dois hambúrgueres sem cebola e uma coca sem açúcar";
+  "silvia, quero um salmão grelhado com legumes e um suco de laranja.";
 
 const rehearsalIntent: OrderIntent = {
   items: [
     {
-      spokenName: "hambúrguer",
-      quantity: 2,
-      modifiers: ["sem cebola"],
+      spokenName: "salmão grelhado com legumes",
+      quantity: 1,
+      modifiers: [],
     },
     {
-      spokenName: "Coca sem açúcar",
+      spokenName: "suco de laranja",
       quantity: 1,
       modifiers: [],
     },

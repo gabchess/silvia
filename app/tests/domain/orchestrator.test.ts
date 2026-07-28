@@ -8,8 +8,13 @@ describe("prepareOrder", () => {
       intent: {
         items: [
           {
-            spokenName: "hambúrguer",
-            quantity: 2,
+            spokenName: "salmão grelhado com legumes",
+            quantity: 1,
+            modifiers: [],
+          },
+          {
+            spokenName: "suco de laranja",
+            quantity: 1,
             modifiers: [],
           },
         ],
