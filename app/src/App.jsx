@@ -52,6 +52,7 @@ export default function App() {
   const [events, setEvents] = useState([]);
   const [busy, setBusy] = useState(false);
   const [confirming, setConfirming] = useState(false);
+  const [editing, setEditing] = useState(false);
   const [error, setError] = useState("");
   const [rehearsal, setRehearsal] = useState(null);
   const [confirmationMessage, setConfirmationMessage] = useState("");
@@ -160,6 +161,39 @@ export default function App() {
     }
   }
 
+  async function requestEdit() {
+    if (
+      !rehearsal?.orderId ||
+      !rehearsal?.confirmationToken ||
+      !rehearsal?.senderPhoneHash
+    ) {
+      return;
+    }
+    setEditing(true);
+    setError("");
+    try {
+      const response = await base44.functions.invoke("confirm-order", {
+        action: "edit",
+        orderId: rehearsal.orderId,
+        token: rehearsal.confirmationToken,
+        senderPhoneHash: rehearsal.senderPhoneHash,
+        source: "dashboard_rehearsal",
+      });
+      setConfirmationMessage(
+        response.data.kind === "editing"
+          ? "Pedido pausado. Grave uma nova mensagem para mudar os itens."
+          : "Esse pedido já tinha sido processado.",
+      );
+      await loadDashboard();
+    } catch {
+      setError(
+        "Não foi possível abrir a alteração. Nenhum pedido foi enviado.",
+      );
+    } finally {
+      setEditing(false);
+    }
+  }
+
   if (!user) return <Login checking={checking} />;
 
   return (
@@ -172,8 +206,10 @@ export default function App() {
       rehearsal={rehearsal}
       confirmationMessage={confirmationMessage}
       confirming={confirming}
+      editing={editing}
       onRehearse={rehearse}
       onConfirm={confirm}
+      onEdit={requestEdit}
       onLogout={() => base44.auth.logout(window.location.href)}
     />
   );

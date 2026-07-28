@@ -1,22 +1,14 @@
+import { Home, ReceiptText, ShieldCheck } from "lucide-react";
 import { formatMoney, statusLabel } from "../lib/presentation";
 
-export default function OrderCard({
-  order,
-  canConfirm,
-  confirming,
-  onConfirm,
-}) {
+export default function OrderCard({ order }) {
   if (!order) {
     return (
       <section className="order-card empty-card" aria-labelledby="order-title">
-        <div className="empty-mark" aria-hidden="true">
-          S
-        </div>
-        <p className="eyebrow">Tudo tranquilo</p>
-        <h2 id="order-title">Nenhum pedido em aberto</h2>
+        <ReceiptText size={25} aria-hidden="true" />
+        <h3 id="order-title">Aguardando a demonstração</h3>
         <p>
-          Faça o ensaio para ver a Silvia montar, conferir e proteger um
-          pedido do começo ao fim.
+          O pedido, o total e a confirmação vão aparecer aqui.
         </p>
       </section>
     );
@@ -30,24 +22,22 @@ export default function OrderCard({
     <section className="order-card" aria-labelledby="order-title">
       <div className="order-card-heading">
         <div>
-          <p className="eyebrow">Pedido atual</p>
-          <h2 id="order-title">{merchant.name ?? "Restaurante"}</h2>
+          <p>Pedido atual</p>
+          <h3 id="order-title">{merchant.name ?? "Restaurante"}</h3>
         </div>
         <span className="mode-pill">
           <span aria-hidden="true" />
           {order.connector_mode === "demo"
-            ? "Demonstração segura"
+            ? "Demo"
             : "Conector ao vivo"}
         </span>
       </div>
 
       <div className="status-line">
-        <span className="status-icon" aria-hidden="true">
-          ✓
-        </span>
+        <ShieldCheck size={20} aria-hidden="true" />
         <div>
           <strong>{statusLabel(order.status)}</strong>
-          <p>Nada será enviado sem uma confirmação válida.</p>
+          <p>Proteção aplicada pelo backend.</p>
         </div>
       </div>
 
@@ -77,7 +67,7 @@ export default function OrderCard({
       </dl>
 
       <div className="delivery-note">
-        <span aria-hidden="true">⌂</span>
+        <Home size={18} aria-hidden="true" />
         <div>
           <strong>{order.address_label}</strong>
           <small>
@@ -87,23 +77,6 @@ export default function OrderCard({
           </small>
         </div>
       </div>
-
-      {canConfirm ? (
-        <button
-          className="confirm-order-action"
-          type="button"
-          onClick={onConfirm}
-          disabled={confirming}
-        >
-          {confirming
-            ? "Confirmando uma única vez…"
-            : "Confirmar pedido de demonstração"}
-        </button>
-      ) : null}
-      <p className="confirmation-boundary">
-        A Silvia nunca confirma por você. Qualquer mudança no pedido exige uma
-        nova confirmação.
-      </p>
     </section>
   );
 }

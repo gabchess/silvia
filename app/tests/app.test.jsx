@@ -71,30 +71,33 @@ describe("Silvia caregiver app", () => {
       full_name: "Ana",
       email: "ana@example.com",
     });
-    sdk.ordersList.mockResolvedValue([
-      {
-        id: "order-1",
-        merchant: { name: "Lanche da Praça" },
-        normalized_items: [
-          {
-            displayName: "Hambúrguer",
-            quantity: 2,
-            modifiers: ["sem cebola"],
-          },
-          {
-            displayName: "Coca sem açúcar",
-            quantity: 1,
-            modifiers: [],
-          },
-        ],
-        pricing: { fee_cents: 690, total_cents: 5170 },
-        address_label: "Casa da Dona Maria",
-        connector_mode: "demo",
-        payment_mode: "cash_on_delivery",
-        status: "awaiting_confirmation",
-        expires_at: "2026-07-27T22:00:00.000Z",
-      },
-    ]);
+    const order = {
+      id: "order-1",
+      merchant: { name: "Lanche da Praça" },
+      normalized_items: [
+        {
+          displayName: "Hambúrguer",
+          quantity: 2,
+          modifiers: ["sem cebola"],
+        },
+        {
+          displayName: "Coca sem açúcar",
+          quantity: 1,
+          modifiers: [],
+        },
+      ],
+      pricing: { fee_cents: 690, total_cents: 5170 },
+      address_label: "Casa da Dona Maria",
+      connector_mode: "demo",
+      payment_mode: "cash_on_delivery",
+      status: "awaiting_confirmation",
+      expires_at: "2026-07-27T22:00:00.000Z",
+    };
+    const rehearsedOrder = { ...order, id: "order-2" };
+    sdk.ordersList
+      .mockResolvedValueOnce([order])
+      .mockResolvedValueOnce([rehearsedOrder])
+      .mockResolvedValue([{ ...rehearsedOrder, status: "editing" }]);
     sdk.auditsList.mockResolvedValue([
       {
         id: "audit-1",
@@ -104,24 +107,30 @@ describe("Silvia caregiver app", () => {
         occurred_at: "2026-07-27T20:00:00.000Z",
       },
     ]);
-    sdk.invoke.mockResolvedValue({
-      data: {
-        orderId: "order-2",
-        readBack: "Seu pedido está pronto para conferir.",
-        confirmationToken: "token",
-        senderPhoneHash: "a".repeat(64),
-        connectorMode: "demo",
-      },
-    });
+    sdk.invoke
+      .mockResolvedValueOnce({
+        data: {
+          orderId: "order-2",
+          readBack: "Seu pedido está pronto para conferir.",
+          confirmationToken: "token",
+          senderPhoneHash: "a".repeat(64),
+          connectorMode: "demo",
+        },
+      })
+      .mockResolvedValueOnce({
+        data: {
+          kind: "editing",
+        },
+      });
 
     render(<App />);
 
     expect(await screen.findByText("Lanche da Praça")).toBeInTheDocument();
-    expect(screen.getByText(/R\$\s*51,70/)).toBeInTheDocument();
-    expect(screen.getByText(/demonstração segura/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/R\$\s*51,70/)).toHaveLength(2);
+    expect(screen.getByText(/simulação no navegador/i)).toBeInTheDocument();
 
     fireEvent.click(
-      screen.getByRole("button", { name: /ensaiar pedido por voz/i }),
+      screen.getByRole("button", { name: /recomeçar demonstração/i }),
     );
     await waitFor(() =>
       expect(sdk.invoke).toHaveBeenCalledWith("rehearse-order", {
@@ -131,6 +140,20 @@ describe("Silvia caregiver app", () => {
     );
     expect(
       await screen.findByText("Seu pedido está pronto para conferir."),
+    ).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: /alterar/i }));
+    await waitFor(() =>
+      expect(sdk.invoke).toHaveBeenLastCalledWith("confirm-order", {
+        action: "edit",
+        orderId: "order-2",
+        token: "token",
+        senderPhoneHash: "a".repeat(64),
+        source: "dashboard_rehearsal",
+      }),
+    );
+    expect(
+      await screen.findByText(/pedido pausado\. grave uma nova mensagem/i),
     ).toBeInTheDocument();
   });
 });

@@ -1,3 +1,4 @@
+import { Activity } from "lucide-react";
 import { eventLabel, timeLabel } from "../lib/presentation";
 
 export default function Timeline({ events }) {
@@ -5,11 +6,11 @@ export default function Timeline({ events }) {
     <section className="timeline-panel" aria-labelledby="timeline-title">
       <div className="section-heading">
         <div>
-          <p className="eyebrow">Registro claro</p>
-          <h2 id="timeline-title">O que a Silvia fez</h2>
+          <p>Registro claro</p>
+          <h3 id="timeline-title">O que a Silvia fez</h3>
         </div>
         <span className="live-label">
-          <span aria-hidden="true" /> Ao vivo
+          <Activity size={14} aria-hidden="true" /> Ao vivo
         </span>
       </div>
 
@@ -32,8 +33,7 @@ export default function Timeline({ events }) {
         </ol>
       ) : (
         <p className="empty-timeline">
-          As ações aparecem aqui sem telefone, endereço completo ou dados de
-          pagamento.
+          As ações aparecem aqui sem telefone ou dados de pagamento.
         </p>
       )}
     </section>

@@ -1,3 +1,5 @@
+import { LogOut, ShieldCheck } from "lucide-react";
+import ConversationStage from "./ConversationStage";
 import OrderCard from "./OrderCard";
 import Timeline from "./Timeline";
 
@@ -10,19 +12,25 @@ export default function Dashboard({
   rehearsal,
   confirmationMessage,
   confirming,
+  editing,
   onRehearse,
   onConfirm,
+  onEdit,
   onLogout,
 }) {
   const currentOrder = orders[0] ?? null;
   const currentEvents = currentOrder
     ? events.filter((event) => event.order_draft_id === currentOrder.id)
     : events;
+  const canConfirm =
+    currentOrder?.status === "awaiting_confirmation" &&
+    rehearsal?.orderId === currentOrder.id &&
+    Boolean(rehearsal?.confirmationToken);
 
   return (
     <main className="app-shell" lang="pt-BR">
       <header className="topbar">
-        <a className="brand" href="#inicio" aria-label="Silvia, início">
+        <a className="brand" href="#demonstracao" aria-label="Silvia, início">
           <span className="brand-mark" aria-hidden="true">
             S
           </span>
@@ -32,122 +40,76 @@ export default function Dashboard({
           </span>
         </a>
         <div className="user-actions">
-          <span>Olá, {user.full_name?.split(" ")[0] || "familiar"}</span>
+          <span className="environment-label">
+            <span aria-hidden="true" />
+            Demo segura
+          </span>
+          <span>{user.full_name?.split(" ")[0] || "Familiar"}</span>
           <button className="text-button" type="button" onClick={onLogout}>
-            Sair
+            <LogOut size={16} aria-hidden="true" />
+            <span>Sair</span>
           </button>
         </div>
       </header>
 
-      <div className="dashboard" id="inicio">
-        <section className="hero-copy" aria-labelledby="hero-title">
-          <div className="trust-tag">
-            <span aria-hidden="true">✓</span>
-            Feita para a família acompanhar
-          </div>
-          <p className="eyebrow">Assistência pelo WhatsApp</p>
+      <section className="judge-intro" aria-labelledby="hero-title">
+        <div>
+          <p className="eyebrow">Assistência por conversa</p>
           <h1 id="hero-title">
-            Peça falando.
-            <br />
-            <em>Confirme com calma.</em>
+            Ela pede por voz.
+            <em>Silvia espera pelo sim.</em>
           </h1>
-          <p className="hero-lede">
-            A Silvia entende o pedido, lê tudo de volta e só continua depois
-            de uma confirmação clara. O modelo nunca compra sozinho.
+        </div>
+        <div className="intro-proof">
+          <ShieldCheck size={24} aria-hidden="true" />
+          <p>
+            <strong>O modelo não compra sozinho.</strong>
+            Itens, taxa, total e endereço aparecem antes de uma confirmação
+            vinculada ao pedido.
           </p>
+        </div>
+      </section>
 
-          <div className="voice-preview" aria-label="Exemplo de mensagem de voz">
-            <button
-              type="button"
-              className="play-button"
-              aria-label="Exemplo de áudio"
-              disabled
-            >
-              ▶
-            </button>
-            <div className="waveform" aria-hidden="true">
-              {[16, 28, 20, 36, 24, 42, 18, 34, 22, 30, 15, 25].map(
-                (height, index) => (
-                  <span key={index} style={{ height }} />
-                ),
-              )}
-            </div>
-            <span>0:08</span>
-          </div>
-          <p className="spoken-quote">
-            “Silvia, quero dois hambúrgueres sem cebola e uma coca sem
-            açúcar.”
-          </p>
+      <div className="judge-workspace" id="demonstracao">
+        <ConversationStage
+          order={currentOrder}
+          rehearsal={rehearsal}
+          busy={busy}
+          confirming={confirming}
+          editing={editing}
+          error={error}
+          confirmationMessage={confirmationMessage}
+          canConfirm={canConfirm}
+          onRehearse={onRehearse}
+          onConfirm={onConfirm}
+          onEdit={onEdit}
+        />
 
-          <button
-            className="primary-action"
-            type="button"
-            onClick={onRehearse}
-            disabled={busy}
-          >
-            <span aria-hidden="true">{busy ? "…" : "◉"}</span>
-            {busy ? "Montando pedido…" : "Ensaiar pedido por voz"}
-          </button>
-          <p className="demo-disclosure">
-            O ensaio usa um cardápio fictício. Nenhum pedido real é enviado.
-          </p>
-
-          {rehearsal ? (
-            <div className="readback" role="status">
-              <strong>Silvia leu de volta:</strong>
-              <p>{rehearsal.readBack}</p>
-            </div>
-          ) : null}
-          {error ? (
-            <p className="error-message" role="alert">
-              {error}
+        <aside className="safety-rail" aria-label="Proteções e registro ao vivo">
+          <div className="rail-heading">
+            <p className="rail-kicker">
+              <span aria-hidden="true" />
+              Base44 em tempo real
             </p>
-          ) : null}
-        </section>
-
-        <div className="dashboard-side">
+            <h2>O pedido sob controle</h2>
+            <p>
+              O que a conversa promete, o backend precisa provar.
+            </p>
+          </div>
           <OrderCard
             order={currentOrder}
-            canConfirm={
-              currentOrder?.status === "awaiting_confirmation" &&
-              rehearsal?.orderId === currentOrder.id &&
-              Boolean(rehearsal?.confirmationToken)
-            }
-            confirming={confirming}
-            onConfirm={onConfirm}
           />
-          {confirmationMessage ? (
-            <p className="confirmation-result" role="status">
-              {confirmationMessage}
-            </p>
-          ) : null}
           <Timeline events={currentEvents} />
-        </div>
+          <div className="rail-disclosure">
+            <ShieldCheck size={18} aria-hidden="true" />
+            <p>
+              <strong>Limite desta versão</strong>
+              A demonstração usa um conector determinístico. Não acessa iFood
+              nem movimenta dinheiro.
+            </p>
+          </div>
+        </aside>
       </div>
-
-      <section className="safety-strip" aria-label="Proteções da Silvia">
-        <article>
-          <span aria-hidden="true">01</span>
-          <div>
-            <strong>Ela lê tudo de volta</strong>
-            <p>Itens, taxa, total, endereço e forma de pagamento.</p>
-          </div>
-        </article>
-        <article>
-          <span aria-hidden="true">02</span>
-          <div>
-            <strong>Uma confirmação, uma tentativa</strong>
-            <p>Alterou o pedido? A confirmação antiga deixa de valer.</p>
-          </div>
-        </article>
-        <article>
-          <span aria-hidden="true">03</span>
-          <div>
-            <strong>A família enxerga o caminho</strong>
-            <p>Cada passo fica visível, sem guardar dados sensíveis.</p>
-          </div>
-        </article>
-      </section>
     </main>
   );
 }

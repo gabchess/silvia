@@ -22,6 +22,7 @@ const eventLabels = {
   rehearsal_received: "Pedido de demonstração recebido",
   awaiting_confirmation: "Pedido pronto para conferir",
   confirmation_received: "Confirmação recebida",
+  editing_requested: "Alteração solicitada",
   checkout_claimed: "Envio iniciado uma única vez",
   demo_ordered: "Demonstração concluída",
   ordered: "Demonstração concluída",
