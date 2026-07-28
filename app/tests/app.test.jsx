@@ -126,7 +126,7 @@ describe("Silvia caregiver app", () => {
     render(<App />);
 
     expect(await screen.findByText("Lanche da Praça")).toBeInTheDocument();
-    expect(screen.getAllByText(/R\$\s*51,70/)).toHaveLength(2);
+    expect(screen.getByText(/R\$\s*51,70/)).toBeInTheDocument();
     expect(screen.getByText(/simulação no navegador/i)).toBeInTheDocument();
 
     fireEvent.click(
@@ -139,7 +139,7 @@ describe("Silvia caregiver app", () => {
       }),
     );
     expect(
-      await screen.findByText("Seu pedido está pronto para conferir."),
+      await screen.findByText(/preparei seu pedido no lanche da praça/i),
     ).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("button", { name: /alterar/i }));

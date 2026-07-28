@@ -73,7 +73,6 @@ export default function Dashboard({
       <div className="judge-workspace" id="demonstracao">
         <ConversationStage
           order={currentOrder}
-          rehearsal={rehearsal}
           busy={busy}
           confirming={confirming}
           editing={editing}
@@ -104,8 +103,8 @@ export default function Dashboard({
             <ShieldCheck size={18} aria-hidden="true" />
             <p>
               <strong>Limite desta versão</strong>
-              A demonstração usa um conector determinístico. Não acessa iFood
-              nem movimenta dinheiro.
+              Modo demonstração: registra cada estado no Base44 sem enviar
+              pedidos ao iFood ou movimentar dinheiro.
             </p>
           </div>
         </aside>

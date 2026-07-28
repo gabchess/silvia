@@ -256,7 +256,7 @@ a:focus-visible {
 .privacy-note {
   display: block;
   margin-top: 1rem;
-  color: #737b74;
+  color: var(--muted);
 }
 
 /* Judge demo */
@@ -333,7 +333,7 @@ a:focus-visible {
 
 .text-button {
   display: inline-flex;
-  min-height: 2.6rem;
+  min-height: 2.75rem;
   gap: 0.45rem;
   align-items: center;
   padding: 0.52rem 0.8rem;
@@ -409,7 +409,9 @@ a:focus-visible {
 /* Conversation */
 
 .conversation-stage {
+  display: flex;
   min-width: 0;
+  flex-direction: column;
   overflow: hidden;
   border: 1px solid rgba(85, 72, 54, 0.18);
   border-radius: 1.75rem;
@@ -486,10 +488,25 @@ a:focus-visible {
   letter-spacing: 0.03em;
 }
 
+.mobile-demo-copy {
+  display: none;
+}
+
+.conversation-header-meta {
+  display: grid;
+  gap: 0.38rem;
+  justify-items: end;
+}
+
+.mobile-demo-trigger {
+  display: none;
+}
+
 .conversation-canvas {
   position: relative;
   display: flex;
   min-height: 29rem;
+  flex: 1;
   flex-direction: column;
   gap: 0.65rem;
   padding: 1.1rem 1.4rem;
@@ -597,14 +614,14 @@ a:focus-visible {
 .voice-transcript {
   margin: 0.55rem 0 0;
   color: #52655a;
-  font-size: 0.83rem;
+  font-size: 1rem;
   line-height: 1.4;
 }
 
 .message-copy {
   margin: 0;
   color: #3c4740;
-  font-size: 0.93rem;
+  font-size: 1rem;
   line-height: 1.46;
 }
 
@@ -641,13 +658,40 @@ a:focus-visible {
 
 .chat-order-list strong {
   padding-top: 0.1rem;
-  font-size: 0.85rem;
+  font-size: 0.96rem;
 }
 
 .chat-order-list small {
   margin-top: 0.05rem;
   color: var(--muted);
-  font-size: 0.73rem;
+  font-size: 0.82rem;
+}
+
+.chat-delivery-summary {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0.75rem 0;
+  padding: 0.7rem;
+  border-radius: 0.7rem;
+  background: #f6f1e8;
+}
+
+.chat-delivery-summary > div {
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.chat-delivery-summary span,
+.chat-delivery-summary small {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.chat-delivery-summary strong {
+  font-size: 0.88rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .chat-total {
@@ -660,7 +704,7 @@ a:focus-visible {
 
 .chat-total span {
   color: var(--muted);
-  font-size: 0.79rem;
+  font-size: 0.84rem;
 }
 
 .chat-total strong {
@@ -678,7 +722,7 @@ a:focus-visible {
   border-radius: 0.65rem;
   color: #245d45;
   background: #edf5ef;
-  font-size: 0.76rem;
+  font-size: 0.8rem;
   font-weight: 700;
 }
 
@@ -686,11 +730,11 @@ a:focus-visible {
   flex: 0 0 auto;
 }
 
-.conversation-actions {
+.active-footer-actions {
   display: grid;
+  flex: 1;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 0.55rem;
-  margin-top: 0.8rem;
 }
 
 .chat-confirm,
@@ -777,7 +821,7 @@ a:focus-visible {
 
 .conversation-ready {
   display: flex;
-  max-width: 30rem;
+  max-width: 36rem;
   gap: 0.75rem;
   align-items: flex-start;
   margin: auto;
@@ -807,6 +851,29 @@ a:focus-visible {
   margin: 0.2rem 0 0;
   font-size: 0.82rem;
   line-height: 1.4;
+}
+
+.ready-action {
+  display: inline-flex;
+  min-height: 2.75rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  align-self: center;
+  padding: 0.5rem 0.75rem;
+  border: 0;
+  border-radius: 0.7rem;
+  color: var(--surface);
+  background: var(--ink);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.ready-action:disabled {
+  cursor: wait;
+  opacity: 0.65;
 }
 
 .completion-message {
@@ -870,9 +937,38 @@ a:focus-visible {
 
 .conversation-footer p {
   margin: 0;
-  color: #777c76;
-  font-size: 0.72rem;
+  color: var(--muted);
+  font-size: 0.74rem;
   text-align: right;
+}
+
+.conversation-footer-meta {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.restart-link {
+  display: inline-flex;
+  min-height: 2.75rem;
+  gap: 0.35rem;
+  align-items: center;
+  padding: 0.4rem 0.55rem;
+  border: 0;
+  color: var(--muted);
+  background: transparent;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.restart-link:hover:not(:disabled) {
+  color: var(--ink);
+}
+
+.restart-link:disabled {
+  cursor: wait;
+  opacity: 0.65;
 }
 
 /* Safety rail */
@@ -1034,13 +1130,13 @@ a:focus-visible {
 
 .status-line strong {
   color: #eff8f2;
-  font-size: 0.82rem;
+  font-size: 0.86rem;
 }
 
 .status-line p {
   margin: 0.08rem 0 0;
   color: #a8c2b2;
-  font-size: 0.68rem;
+  font-size: 0.72rem;
 }
 
 .item-list {
@@ -1080,13 +1176,13 @@ a:focus-visible {
 .item-list strong {
   padding-top: 0.1rem;
   color: #f2f7f3;
-  font-size: 0.8rem;
+  font-size: 0.84rem;
 }
 
 .item-list small {
   margin-top: 0.05rem;
   color: #a9bdb0;
-  font-size: 0.68rem;
+  font-size: 0.72rem;
 }
 
 .price-list {
@@ -1200,13 +1296,13 @@ a:focus-visible {
 
 .timeline strong {
   color: #eaf4ed;
-  font-size: 0.74rem;
+  font-size: 0.78rem;
 }
 
 .timeline small {
   margin-top: 0.1rem;
   color: #92ad9d;
-  font-size: 0.63rem;
+  font-size: 0.7rem;
 }
 
 .empty-timeline {
@@ -1232,7 +1328,7 @@ a:focus-visible {
 
 .rail-disclosure p {
   margin: 0;
-  font-size: 0.7rem;
+  font-size: 0.74rem;
   line-height: 1.4;
 }
 
@@ -1357,12 +1453,47 @@ a:focus-visible {
   }
 
   .conversation-header {
+    align-items: flex-start;
     padding: 0.8rem 0.9rem;
   }
 
+  .conversation-header-meta {
+    flex: 0 0 7.8rem;
+  }
+
   .browser-demo-label {
-    max-width: 7.2rem;
+    width: 100%;
     text-align: center;
+  }
+
+  .desktop-demo-copy {
+    display: none;
+  }
+
+  .mobile-demo-copy {
+    display: inline;
+  }
+
+  .mobile-demo-trigger {
+    display: inline-flex;
+    width: 100%;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.45rem 0.55rem;
+    border: 0;
+    border-radius: 0.7rem;
+    color: var(--surface);
+    background: var(--ink);
+    cursor: pointer;
+    font-size: 0.77rem;
+    font-weight: 700;
+  }
+
+  .mobile-demo-trigger:disabled {
+    cursor: wait;
+    opacity: 0.65;
   }
 
   .conversation-canvas {
@@ -1370,11 +1501,21 @@ a:focus-visible {
     padding: 1rem 0.8rem;
   }
 
+  .conversation-ready {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .ready-action {
+    display: none;
+  }
+
   .message-row {
     max-width: 94%;
   }
 
-  .conversation-actions {
+  .active-footer-actions {
+    width: 100%;
     grid-template-columns: 1fr;
   }
 
@@ -1391,9 +1532,24 @@ a:focus-visible {
     min-width: 0;
   }
 
+  .conversation-footer-meta {
+    justify-content: space-between;
+  }
+
   .login-card {
     padding: 2.3rem 1.4rem;
     border-radius: 1.5rem;
+  }
+
+  .app-shell {
+    padding-bottom: 6.5rem;
+  }
+}
+
+@media (min-width: 901px) {
+  .rail-disclosure {
+    min-height: 5.2rem;
+    padding-right: 12.5rem;
   }
 }
 
