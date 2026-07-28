@@ -34,7 +34,7 @@ Web app
 
 ### GitHub repo
 
-<https://github.com/gabchess/silvia-whatsapp-assistant>
+<https://github.com/gabchess/silvia>
 
 ### Access instructions
 

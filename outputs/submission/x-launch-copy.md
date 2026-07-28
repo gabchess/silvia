@@ -19,7 +19,7 @@ Live MVP: https://silvia-dec7df73.base44.app
 Demo note: the app flow is live with synthetic data. The delivery scene is
 product vision. No real order was placed. Maria and the voice are AI-generated.
 
-Code: https://github.com/gabchess/silvia-whatsapp-assistant
+Code: https://github.com/gabchess/silvia
 
 ## After posting
 
