@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "shot_id": "S4",
+  "reviewer": "Gemini CLI full-motion review",
+  "reviewed_at": "2026-07-28T18:35:00Z",
+  "status": "pass",
+  "critical_defects": [],
+  "observations": [
+    {
+      "range": "00:00-00:04",
+      "check": "people-and-bag-continuity",
+      "status": "pass",
+      "note": "Maria and the unbranded courier remain stable with exactly one dark insulated bag."
+    },
+    {
+      "range": "00:00-00:04",
+      "check": "ownership-transfer",
+      "status": "pass",
+      "note": "The courier owns the bag at the start, both share contact during the handoff, and Maria owns it clearly by the ending."
+    },
+    {
+      "range": "00:01-00:02",
+      "check": "hands-and-physics",
+      "status": "pass-with-minor-artifact",
+      "note": "Minor finger clipping and rigid bag fabric appear during contact, but the transfer remains readable."
+    },
+    {
+      "range": "00:03-00:04",
+      "check": "emotion",
+      "status": "pass",
+      "note": "Maria ends with a visible nod and relieved smile."
+    },
+    {
+      "range": "00:00-00:04",
+      "check": "geometry-and-marks",
+      "status": "pass",
+      "note": "The static doorway geometry stays stable; no food, cash, text, logos or watermarks are visible."
+    }
+  ],
+  "ending_contract": {
+    "maria_holds_single_bag": true
+  }
+}

@@ -122,6 +122,97 @@
         "job_id": "49a9ad2d-91aa-4d42-9877-d4348e54373b",
         "review": "selected; untouched salmon, vegetables and orange juice pass"
       }
+    },
+    {
+      "id": "start-frame-S5-retry",
+      "path": "04-source/start-frames/S5-retry.png",
+      "sha256": "4f04e52f3992efb163e3852d88d0a06b4419497cddd37b7717516374c0ef0feb",
+      "rights": "synthetic Higgsfield image for this production",
+      "paid_operation_id": "HF-S5-RETRY-01",
+      "provenance": {
+        "kind": "generated",
+        "model": "Nano Banana 2",
+        "job_id": "5079f0a8-6648-47af-8c5c-d98142b45c44",
+        "review": "selected; exactly one loaded fork already in Maria's hand"
+      }
+    },
+    {
+      "id": "shot-S1",
+      "path": "04-source/shots/S1.mp4",
+      "sha256": "2eaaf4e641cb216f53299cae4be357d296500efef4dc5549bf545cb5c778641b",
+      "rights": "synthetic Higgsfield video for this production",
+      "paid_operation_id": "HF-SOURCE-PASS-01",
+      "provenance": {
+        "kind": "generated",
+        "model": "Seedance 2.0",
+        "job_id": "4ba34063-f44c-42c2-9f52-5d2e3fecc708",
+        "review": "selected; contact sheet and full-motion review pass"
+      }
+    },
+    {
+      "id": "shot-S2",
+      "path": "04-source/shots/S2.mp4",
+      "sha256": "6fa5eeedf65db9ad738a95dcbf1d107246296df10a06ba70ef0a6c1e7bfe0d5d",
+      "rights": "synthetic Higgsfield video for this production",
+      "paid_operation_id": "HF-SOURCE-PASS-01",
+      "provenance": {
+        "kind": "generated",
+        "model": "Seedance 2.0",
+        "job_id": "ecb23076-e736-4f5f-b67f-850d2f99c032",
+        "review": "selected; contact sheet and full-motion review pass"
+      }
+    },
+    {
+      "id": "shot-S3",
+      "path": "04-source/shots/S3.mp4",
+      "sha256": "f10bbb950924e09f2b7394a3efa032809641a511f6f8a3ae0682a0ea45420c77",
+      "rights": "synthetic Higgsfield video for this production",
+      "paid_operation_id": "HF-SOURCE-PASS-01",
+      "provenance": {
+        "kind": "generated",
+        "model": "Seedance 2.0",
+        "job_id": "8feb5ea8-59a7-4686-9634-17c2f4587e7d",
+        "review": "selected; contact sheet and full-motion review pass"
+      }
+    },
+    {
+      "id": "shot-S4",
+      "path": "04-source/shots/S4.mp4",
+      "sha256": "59b39135f53203f16cf917340ed886e62e9d1be867bf40750cfb62ffd58cf209",
+      "rights": "synthetic Higgsfield video for this production",
+      "paid_operation_id": "HF-SOURCE-PASS-01",
+      "provenance": {
+        "kind": "generated",
+        "model": "Seedance 2.0",
+        "job_id": "55c799bd-ce50-433e-ac60-01c8f8866533",
+        "review": "selected; contact sheet and full-motion review pass"
+      }
+    },
+    {
+      "id": "shot-S5-rejected",
+      "path": "04-source/shots/S5-rejected-01.mp4",
+      "sha256": "8ba9680f8e66a14b21709759d01d345dc69ad58eef46f4f08834e4bfb1991e8b",
+      "rights": "synthetic Higgsfield video retained as rejected evidence",
+      "paid_operation_id": "HF-SOURCE-PASS-01",
+      "provenance": {
+        "kind": "generated",
+        "model": "Seedance 2.0",
+        "job_id": "302091ff-788d-4a39-a109-bc3b855b3cb5",
+        "review": "rejected; duplicate then vanishing fork"
+      }
+    },
+    {
+      "id": "shot-S5",
+      "path": "04-source/shots/S5.mp4",
+      "sha256": "9bf3cc42fa3cda7efd0535522cf7230d6891545d4353064e7db0bf0e957095c1",
+      "rights": "synthetic Higgsfield video for this production",
+      "paid_operation_id": "HF-S5-RETRY-01",
+      "provenance": {
+        "kind": "generated",
+        "model": "Seedance 2.0",
+        "job_id": "dab23adb-0938-4059-8a64-c1f7eaf48d86",
+        "review": "selected; single fork and emotional ending full-motion review pass"
+      }
     }
   ],
   "paid_operations": [
@@ -180,10 +271,11 @@
       "purpose": "one 720p fast prototype for each of S1 through S5",
       "count": 5,
       "quoted_credits": 105.0,
+      "actual_credits": 105.0,
       "approved": true,
       "approver": "Gabe",
       "approval_checkpoint": "2026-07-28-approved-180-credit-ceiling",
-      "status": "quoted"
+      "status": "completed-with-one-rejected-shot"
     },
     {
       "id": "HF-START-FRAMES-01",
@@ -197,9 +289,21 @@
       "approver": "Gabe",
       "approval_checkpoint": "2026-07-28-approved-180-credit-ceiling",
       "status": "completed"
+    },
+    {
+      "id": "HF-S5-RETRY-01",
+      "model": "Nano Banana 2 and Seedance 2.0",
+      "purpose": "correct S5's single-fork continuity",
+      "count": 2,
+      "quoted_credits": 19.0,
+      "actual_credits": 19.0,
+      "approved": true,
+      "approver": "Gabe",
+      "approval_checkpoint": "2026-07-28-approved-180-credit-ceiling",
+      "status": "completed"
     }
   ],
   "immutable_sources_hashed": true,
   "spend_ceiling_credits": 180.0,
-  "spent_credits": 11.72
+  "spent_credits": 135.72
 }

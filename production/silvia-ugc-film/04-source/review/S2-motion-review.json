@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "shot_id": "S2",
+  "reviewer": "Gemini CLI full-motion review",
+  "reviewed_at": "2026-07-28T18:24:00Z",
+  "status": "pass",
+  "critical_defects": [],
+  "observations": [
+    {
+      "range": "00:00-00:09",
+      "check": "maria-continuity",
+      "status": "pass",
+      "note": "Maria's face, age, hair and muted-guava shirt remain stable."
+    },
+    {
+      "range": "00:00-00:05",
+      "check": "phone-and-hands",
+      "status": "pass",
+      "note": "One black phone remains blank and unreadable; the grip is natural with only minor finger morphing while it rises."
+    },
+    {
+      "range": "00:00-00:09",
+      "check": "action-arc",
+      "status": "pass",
+      "note": "Maria raises the phone, looks toward the kitchen, lowers it and ends resigned."
+    },
+    {
+      "range": "00:00-00:09",
+      "check": "camera-and-geometry",
+      "status": "pass",
+      "note": "The slow push is smooth and the doorway, kitchen and furniture remain stable."
+    },
+    {
+      "range": "00:00-00:09",
+      "check": "marks",
+      "status": "pass",
+      "note": "No text, logos or watermarks."
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "shot_id": "S5",
+  "source": "04-source/shots/S5-rejected-01.mp4",
+  "reviewer": "Gemini CLI full-motion review",
+  "reviewed_at": "2026-07-28T18:45:00Z",
+  "status": "fail",
+  "critical_defects": [
+    {
+      "range": "00:00-00:02",
+      "check": "fork-count",
+      "note": "Two forks are visible: one on the table and one in Maria's hand."
+    },
+    {
+      "range": "00:03",
+      "check": "fork-continuity",
+      "note": "The active fork vanishes from Maria's hand after the bite."
+    }
+  ],
+  "passing_observations": [
+    "Maria's face, age and wardrobe remain stable.",
+    "The bite moves clearly from the plate to Maria's mouth.",
+    "Maria chews, exhales and ends with a genuine smile.",
+    "No logos, text or watermarks are visible."
+  ],
+  "retry_contract": "Change only the fork start state: one fork already in Maria's hand and visible throughout the replacement shot."
+}

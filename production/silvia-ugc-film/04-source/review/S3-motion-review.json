@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "shot_id": "S3",
+  "reviewer": "Gemini CLI full-motion review",
+  "reviewed_at": "2026-07-28T18:29:00Z",
+  "status": "pass",
+  "critical_defects": [],
+  "observations": [
+    {
+      "range": "00:00-00:04",
+      "check": "maria-continuity",
+      "status": "pass",
+      "note": "Maria's face, elderly features and muted-guava blouse remain stable."
+    },
+    {
+      "range": "00:00-00:04",
+      "check": "voice-note-action",
+      "status": "pass",
+      "note": "One blank black phone stays continuous; Maria holds its microphone area near her mouth and speaks naturally."
+    },
+    {
+      "range": "00:00-00:04",
+      "check": "hands-and-mouth",
+      "status": "pass",
+      "note": "No extra digits or physical mutations; only minor edge smoothing where the fingers touch the bezel. Mouth motion is believable."
+    },
+    {
+      "range": "00:00-00:04",
+      "check": "emotion",
+      "status": "pass",
+      "note": "Maria moves from focused speech to a relaxed, confident smile."
+    },
+    {
+      "range": "00:00-00:04",
+      "check": "geometry-and-marks",
+      "status": "pass",
+      "note": "The apartment is rigid and stable with no text, logos or watermarks."
+    }
+  ]
+}

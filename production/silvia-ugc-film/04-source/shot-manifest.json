@@ -67,8 +67,8 @@
       "camera_move": "slow lateral move",
       "focal_point": "relief in Maria's face",
       "duration_seconds": 5,
-      "start_frame_asset_id": "start-frame-S5",
-      "start_frame_job_id": "49a9ad2d-91aa-4d42-9877-d4348e54373b",
+      "start_frame_asset_id": "start-frame-S5-retry",
+      "start_frame_job_id": "5079f0a8-6648-47af-8c5c-d98142b45c44",
       "element_ids": ["maria", "maria-wardrobe", "apartment", "salmon-meal"]
     }
   ]

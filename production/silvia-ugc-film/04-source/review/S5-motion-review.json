@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "shot_id": "S5",
+  "reviewer": "Gemini CLI full-motion review",
+  "reviewed_at": "2026-07-28T18:51:00Z",
+  "status": "pass",
+  "critical_defects": [],
+  "observations": [
+    {
+      "range": "00:00-00:04",
+      "check": "maria-continuity",
+      "status": "pass",
+      "note": "Maria's elderly appearance, dark hair and muted-guava shirt remain stable."
+    },
+    {
+      "range": "00:00-00:04",
+      "check": "meal-and-fork-count",
+      "status": "pass",
+      "note": "Exactly one plate, salmon portion, vegetables, orange juice and fork remain visible; the single fork never duplicates or vanishes."
+    },
+    {
+      "range": "00:01-00:02",
+      "check": "bite-and-hands",
+      "status": "pass",
+      "note": "Maria takes one clear bite with stable hand and fork structure; the lowered fork remains visible."
+    },
+    {
+      "range": "00:02-00:04",
+      "check": "emotional-closure",
+      "status": "pass",
+      "note": "Closed-mouth chewing leads to a brief eyes-closed exhale and a genuine final smile."
+    },
+    {
+      "range": "00:00-00:04",
+      "check": "geometry-and-marks",
+      "status": "pass",
+      "note": "The slow push preserves the apartment geometry; no text, logos or watermarks are visible."
+    }
+  ],
+  "minor_artifacts": [
+    "Slight background softness during the push-in."
+  ],
+  "ending_contract": {
+    "single_fork_visible": true,
+    "genuine_smile": true
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "shot_id": "S1",
+  "reviewer": "Gemini CLI full-motion review",
+  "reviewed_at": "2026-07-28T18:18:00Z",
+  "status": "pass",
+  "critical_defects": [],
+  "observations": [
+    {
+      "range": "00:00-00:04",
+      "check": "maria-continuity",
+      "status": "pass",
+      "note": "Face, age, pink blouse and dark trousers remain stable; minor face texture drift is acceptable."
+    },
+    {
+      "range": "00:00-00:04",
+      "check": "key-and-bag-contact",
+      "status": "pass",
+      "note": "Maria keeps one bag and places the key set on the wooden table with plausible contact."
+    },
+    {
+      "range": "00:00-00:04",
+      "check": "camera-and-geometry",
+      "status": "pass",
+      "note": "Smooth forward push; the apartment remains structurally consistent."
+    },
+    {
+      "range": "00:03-00:04",
+      "check": "background-props",
+      "status": "pass-with-minor-artifact",
+      "note": "A second small dish appears by the basket; it does not affect story causality or the focal action."
+    },
+    {
+      "range": "00:00-00:04",
+      "check": "marks",
+      "status": "pass",
+      "note": "No text, logos or watermarks."
+    }
+  ],
+  "ending_contract": {
+    "keys_visible_on_side_table": true
+  }
+}
