@@ -21,7 +21,11 @@
       "use": "locked apartment and continuity start frames",
       "aspect_ratio": "16:9",
       "apartment_reference_resolution": "2K",
-      "apartment_reference_cost_credits": 2.0
+      "apartment_reference_cost_credits": 2.0,
+      "continuity_frame_resolution": "1K",
+      "continuity_frame_cost_each_credits": 1.5,
+      "continuity_frame_calls": 6,
+      "continuity_frame_actual_cost_credits": 9.0
     },
     {
       "name": "Qwen Audio 3.0 TTS Flash",
@@ -69,11 +73,11 @@
   "spend_contract": {
     "initial_source_pass_credits": 105.0,
     "retry_reserve_credits": 70.0,
-    "casting_voice_and_location_spent_credits": 2.72,
+    "casting_voice_location_and_frames_spent_credits": 11.72,
     "hard_ceiling_credits": 180.0,
     "heygen_credits": 0,
     "chatcut_credits": 0
   },
-  "current_available_credits": 493.2,
-  "production_spent_credits": 2.72
+  "current_available_credits": 484.2,
+  "production_spent_credits": 11.72
 }

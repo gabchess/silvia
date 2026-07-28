@@ -57,6 +57,71 @@
         "voice": "Ines",
         "job_id": "17a399ff-6020-4f05-8ab1-fc5a9d53e5f7"
       }
+    },
+    {
+      "id": "start-frame-S1",
+      "path": "04-source/start-frames/S1.png",
+      "sha256": "518f315b1e71a522abb9c1ac33ca70c200bbb0240db52779d194d6e761ef9088",
+      "rights": "synthetic Higgsfield image for this production",
+      "paid_operation_id": "HF-START-FRAMES-01",
+      "provenance": {
+        "kind": "generated",
+        "model": "Nano Banana 2",
+        "job_id": "feed7f84-cfce-450e-acac-5d74b9e83940",
+        "review": "selected; arrival, work bag and Maria continuity pass"
+      }
+    },
+    {
+      "id": "start-frame-S2",
+      "path": "04-source/start-frames/S2.png",
+      "sha256": "a461c368ae4624ccc26bdf01ed47cee62ec0119a545acc3b690aef619e2653da",
+      "rights": "synthetic Higgsfield image for this production",
+      "paid_operation_id": "HF-START-FRAMES-01",
+      "provenance": {
+        "kind": "generated",
+        "model": "Nano Banana 2",
+        "job_id": "fc90216f-9216-4a75-850e-20d89973223e",
+        "review": "selected; phone hidden, empty table and resignation pass"
+      }
+    },
+    {
+      "id": "start-frame-S3",
+      "path": "04-source/start-frames/S3.png",
+      "sha256": "07c6d5913ec687d75b8ce073f3df08e443263ff60dae07deff21a2fe9fd114cb",
+      "rights": "synthetic Higgsfield image for this production",
+      "paid_operation_id": "HF-START-FRAMES-01",
+      "provenance": {
+        "kind": "generated",
+        "model": "Nano Banana 2",
+        "job_id": "95b08e69-23df-4d5c-9d7c-fefefdae2d97",
+        "review": "selected; phone-side attention and screen-away continuity pass"
+      }
+    },
+    {
+      "id": "start-frame-S4",
+      "path": "04-source/start-frames/S4.png",
+      "sha256": "d7909e2f47ff0ebce0e7b8056600005a5cdd9ab75568392d32b75f25eb572a7a",
+      "rights": "synthetic Higgsfield image for this production",
+      "paid_operation_id": "HF-START-FRAMES-01",
+      "provenance": {
+        "kind": "generated",
+        "model": "Nano Banana 2",
+        "job_id": "ed09bb12-91a9-49fc-855a-71b522a83121",
+        "review": "selected; one unbranded courier and one closed bag pass"
+      }
+    },
+    {
+      "id": "start-frame-S5",
+      "path": "04-source/start-frames/S5.png",
+      "sha256": "a9d2a5b6da5a5bd89a3464bc2cd8c1d20fdf3de9c617a39e43069bea17dec9a4",
+      "rights": "synthetic Higgsfield image for this production",
+      "paid_operation_id": "HF-START-FRAMES-01",
+      "provenance": {
+        "kind": "generated",
+        "model": "Nano Banana 2",
+        "job_id": "49a9ad2d-91aa-4d42-9877-d4348e54373b",
+        "review": "selected; untouched salmon, vegetables and orange juice pass"
+      }
     }
   ],
   "paid_operations": [
@@ -119,9 +184,22 @@
       "approver": "Gabe",
       "approval_checkpoint": "2026-07-28-approved-180-credit-ceiling",
       "status": "quoted"
+    },
+    {
+      "id": "HF-START-FRAMES-01",
+      "model": "Nano Banana 2",
+      "purpose": "create five shot-specific continuity anchors and one controlled repair",
+      "count": 6,
+      "quoted_unit_credits": 1.5,
+      "quoted_credits": 9.0,
+      "actual_credits": 9.0,
+      "approved": true,
+      "approver": "Gabe",
+      "approval_checkpoint": "2026-07-28-approved-180-credit-ceiling",
+      "status": "completed"
     }
   ],
   "immutable_sources_hashed": true,
   "spend_ceiling_credits": 180.0,
-  "spent_credits": 2.72
+  "spent_credits": 11.72
 }

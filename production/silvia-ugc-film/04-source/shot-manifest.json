@@ -11,6 +11,8 @@
       "camera_move": "gentle handheld follow",
       "focal_point": "Maria's tired arrival and the keys",
       "duration_seconds": 5,
+      "start_frame_asset_id": "start-frame-S1",
+      "start_frame_job_id": "feed7f84-cfce-450e-acac-5d74b9e83940",
       "element_ids": ["maria", "maria-wardrobe", "apartment"]
     },
     {
@@ -23,6 +25,8 @@
       "camera_move": "slow push from medium to close",
       "focal_point": "Maria's face",
       "duration_seconds": 10,
+      "start_frame_asset_id": "start-frame-S2",
+      "start_frame_job_id": "fc90216f-9216-4a75-850e-20d89973223e",
       "element_ids": ["maria", "maria-wardrobe", "apartment", "phone"]
     },
     {
@@ -35,6 +39,8 @@
       "camera_move": "restrained over-shoulder drift",
       "focal_point": "Maria's deliberate action",
       "duration_seconds": 5,
+      "start_frame_asset_id": "start-frame-S3",
+      "start_frame_job_id": "95b08e69-23df-4d5c-9d7c-fefefdae2d97",
       "element_ids": ["maria", "maria-wardrobe", "apartment", "phone"]
     },
     {
@@ -47,6 +53,8 @@
       "camera_move": "locked three-quarter doorway",
       "focal_point": "the handoff, not the courier",
       "duration_seconds": 5,
+      "start_frame_asset_id": "start-frame-S4",
+      "start_frame_job_id": "ed09bb12-91a9-49fc-855a-71b522a83121",
       "element_ids": ["maria", "maria-wardrobe", "apartment", "courier", "delivery-bag"]
     },
     {
@@ -59,6 +67,8 @@
       "camera_move": "slow lateral move",
       "focal_point": "relief in Maria's face",
       "duration_seconds": 5,
+      "start_frame_asset_id": "start-frame-S5",
+      "start_frame_job_id": "49a9ad2d-91aa-4d42-9877-d4348e54373b",
       "element_ids": ["maria", "maria-wardrobe", "apartment", "salmon-meal"]
     }
   ]

@@ -319,6 +319,7 @@ Live preflight prices:
 | --- | ---: |
 | Soul Cast candidate | 0.12 credits |
 | Four Soul Cast candidates | 0.48 credits |
+| Nano Banana 2, 1K continuity frame | 1.5 credits |
 | Seedance 2.0, 5s, 720p prototype | 17.5 credits |
 | Seedance 2.0, 10s, 720p prototype | 35 credits |
 | Seedance 2.0, 5s, native 1080p | 45 credits |
@@ -330,6 +331,7 @@ Initial five-shot source pass: 105 credits.
 Controlled retry reserve: 70 credits.
 
 Casting and voice cost: 0.72 credits. Apartment reference cost: 2 credits.
+Five keeper start frames plus one rejected repair cost: 9 credits.
 
 Hard production ceiling: **180 credits**.
 
