@@ -18,6 +18,45 @@
         ],
         "transformation": "1920x1080 authenticated browser states joined into a five-second deterministic proof montage; a yellow outline marks the real Confirmar pedido control"
       }
+    },
+    {
+      "id": "maria-reference",
+      "path": "03-elements/casting/01-ana-mendes.png",
+      "sha256": "d7628c8f588cfc84a470d68dee7e65d6c3b160f45ad6f7ac5e64748d1bf2eb21",
+      "rights": "synthetic Higgsfield character for this production",
+      "paid_operation_id": "HF-CAST-01",
+      "provenance": {
+        "kind": "generated",
+        "model": "Soul Cast",
+        "job_id": "e817e70b-1775-4dec-934f-081d507ca111",
+        "selection": "candidate 01 selected and renamed Maria"
+      }
+    },
+    {
+      "id": "apartment-reference",
+      "path": "03-elements/location/apartment-master.png",
+      "sha256": "7e9bc48bd8d7e40099adfbc64581f1b3798f149ce136777931518456cdb29efa",
+      "rights": "synthetic Higgsfield location for this production",
+      "paid_operation_id": "HF-LOCATION-01",
+      "provenance": {
+        "kind": "generated",
+        "model": "Nano Banana 2",
+        "job_id": "cafc9ab2-ab8b-41ba-9ffd-f19c85eb0ab3",
+        "selection": "first apartment reference approved"
+      }
+    },
+    {
+      "id": "maria-narration",
+      "path": "07-audio/maria-narration.wav",
+      "sha256": "86c60683ed54dc4baa076605b2ea46ea52e8097f8d289f765e902de37d83abe1",
+      "rights": "synthetic Higgsfield voice generated for this production",
+      "paid_operation_id": "HF-NARRATION-01",
+      "provenance": {
+        "kind": "generated",
+        "model": "Qwen Audio 3.0 TTS Flash",
+        "voice": "Ines",
+        "job_id": "17a399ff-6020-4f05-8ab1-fc5a9d53e5f7"
+      }
     }
   ],
   "paid_operations": [
@@ -26,11 +65,25 @@
       "model": "Soul Cast",
       "purpose": "resolve Maria casting",
       "count": 4,
-      "quoted_credits": 0.12,
+      "quoted_unit_credits": 0.12,
+      "quoted_credits": 0.48,
+      "actual_credits": 0.48,
       "approved": true,
       "approver": "Gabe",
       "approval_checkpoint": "2026-07-28-approved-180-credit-ceiling",
-      "status": "quoted"
+      "status": "completed"
+    },
+    {
+      "id": "HF-LOCATION-01",
+      "model": "Nano Banana 2",
+      "purpose": "lock the apartment reference",
+      "count": 1,
+      "quoted_credits": 2.0,
+      "actual_credits": 2.0,
+      "approved": true,
+      "approver": "Gabe",
+      "approval_checkpoint": "2026-07-28-approved-180-credit-ceiling",
+      "status": "completed"
     },
     {
       "id": "HF-VOICE-AUDITIONS-01",
@@ -38,10 +91,23 @@
       "purpose": "compare Ines, Marisol and Mabel",
       "count": 3,
       "quoted_credits": 0.09,
+      "actual_credits": 0.09,
       "approved": true,
       "approver": "Gabe",
       "approval_checkpoint": "2026-07-28-approved-180-credit-ceiling",
-      "status": "quoted"
+      "status": "completed"
+    },
+    {
+      "id": "HF-NARRATION-01",
+      "model": "Qwen Audio 3.0 TTS Flash",
+      "purpose": "generate the locked Portuguese performance",
+      "count": 1,
+      "quoted_credits": 0.15,
+      "actual_credits": 0.15,
+      "approved": true,
+      "approver": "Gabe",
+      "approval_checkpoint": "2026-07-28-approved-180-credit-ceiling",
+      "status": "completed"
     },
     {
       "id": "HF-SOURCE-PASS-01",
@@ -55,7 +121,7 @@
       "status": "quoted"
     }
   ],
-  "immutable_sources_hashed": false,
+  "immutable_sources_hashed": true,
   "spend_ceiling_credits": 180.0,
-  "spent_credits": 0.0
+  "spent_credits": 2.72
 }

@@ -4,21 +4,25 @@
     {
       "id": "maria",
       "kind": "actor",
-      "reference": "generation-contract:maria-face-anchor",
+      "reference": "higgsfield-element:d418124b-2cae-4d68-9503-2d013188bb8d",
+      "source_path": "03-elements/casting/01-ana-mendes.png",
+      "source_sha256": "d7628c8f588cfc84a470d68dee7e65d6c3b160f45ad6f7ac5e64748d1bf2eb21",
       "continuity_lock": "Brazilian woman 68–74, realistic age detail, muted-guava work blouse, dark trousers, practical shoes, no jewellery",
       "rights": "synthetic Higgsfield character for this production"
     },
     {
       "id": "maria-wardrobe",
       "kind": "wardrobe",
-      "reference": "generation-contract:maria-work-clothes",
+      "reference": "higgsfield-element:d418124b-2cae-4d68-9503-2d013188bb8d",
       "continuity_lock": "simple warm-toned blouse, dark trousers, practical shoes, no logos or ornate fasteners",
       "rights": "synthetic unbranded wardrobe"
     },
     {
       "id": "apartment",
       "kind": "location",
-      "reference": "generation-contract:apartment-three-quarter",
+      "reference": "higgsfield-element:0b779584-38ba-43fd-9d2d-73958e246c72",
+      "source_path": "03-elements/location/apartment-master.png",
+      "source_sha256": "7e9bc48bd8d7e40099adfbc64581f1b3798f149ce136777931518456cdb29efa",
       "continuity_lock": "one modest cared-for Brazilian apartment with entrance, small kitchen and dining area",
       "rights": "synthetic Higgsfield location"
     },

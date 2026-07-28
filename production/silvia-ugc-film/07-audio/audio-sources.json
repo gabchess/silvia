@@ -1,6 +1,46 @@
 {
   "schema_version": 1,
-  "voice": [],
+  "voice": [
+    {
+      "id": "voice-audition-ines",
+      "path": "07-audio/voice-auditions/ines.wav",
+      "sha256": "4f45b462badf9ad2653d1341e6be2df6159ac7fe83d79eb724f12d9945956be5",
+      "model": "Qwen Audio 3.0 TTS Flash",
+      "voice": "Ines",
+      "rights": "synthetic Higgsfield voice for this production",
+      "status": "selected"
+    },
+    {
+      "id": "voice-audition-marisol",
+      "path": "07-audio/voice-auditions/marisol.wav",
+      "sha256": "af3298d36b69b13de364b5c16dca83db948b6b5a8c83a937e61b1668a9b99f1b",
+      "model": "Qwen Audio 3.0 TTS Flash",
+      "voice": "Marisol",
+      "rights": "synthetic Higgsfield voice for this production",
+      "status": "rejected-language-fit"
+    },
+    {
+      "id": "voice-audition-mabel",
+      "path": "07-audio/voice-auditions/mabel.wav",
+      "sha256": "807628ca5a1c235cc5dbe891a4782d825ab58130d7aa54cab914c2b8a6d1a552",
+      "model": "Qwen Audio 3.0 TTS Flash",
+      "voice": "Mabel",
+      "rights": "synthetic Higgsfield voice for this production",
+      "status": "rejected-language-fit"
+    },
+    {
+      "id": "maria-narration",
+      "path": "07-audio/maria-narration.wav",
+      "sha256": "86c60683ed54dc4baa076605b2ea46ea52e8097f8d289f765e902de37d83abe1",
+      "model": "Qwen Audio 3.0 TTS Flash",
+      "voice": "Ines",
+      "rights": "synthetic Higgsfield voice for this production",
+      "status": "selected",
+      "duration_seconds": 30.175875,
+      "sample_rate_hz": 48000,
+      "channels": 1
+    }
+  ],
   "music": [],
   "ambience": [],
   "sfx": [],

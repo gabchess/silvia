@@ -13,7 +13,15 @@
       "use": "four Maria candidates",
       "aspect_ratio": "16:9",
       "count": 4,
-      "exact_cost_credits": 0.12
+      "unit_cost_credits": 0.12,
+      "exact_cost_credits": 0.48
+    },
+    {
+      "name": "Nano Banana 2",
+      "use": "locked apartment and continuity start frames",
+      "aspect_ratio": "16:9",
+      "apartment_reference_resolution": "2K",
+      "apartment_reference_cost_credits": 2.0
     },
     {
       "name": "Qwen Audio 3.0 TTS Flash",
@@ -61,9 +69,11 @@
   "spend_contract": {
     "initial_source_pass_credits": 105.0,
     "retry_reserve_credits": 70.0,
-    "casting_and_voice_allowance_credits": 1.0,
+    "casting_voice_and_location_spent_credits": 2.72,
     "hard_ceiling_credits": 180.0,
     "heygen_credits": 0,
     "chatcut_credits": 0
-  }
+  },
+  "current_available_credits": 493.2,
+  "production_spent_credits": 2.72
 }
